@@ -427,7 +427,7 @@ function updatePlayer() {
   $('controls-toggle').innerHTML = ICONS.controls;
   $('controls-toggle').setAttribute('aria-label', controlsHidden ? 'Hiện điều khiển video' : 'Ẩn điều khiển video');
   $('controls-toggle').setAttribute('aria-pressed', String(!controlsHidden));
-  $('controls-toggle').title = controlsHidden ? 'Hiện điều khiển' : 'Ẩn điều khiển';
+  $('controls-toggle').title = (controlsHidden ? 'Hiện điều khiển' : 'Ẩn điều khiển') + ' (nhấn phím K để bật/tắt)';
 }
 function renderFolders() {
   const select = $('recent-folders');
@@ -667,7 +667,8 @@ $('previous').onclick = $('player-previous').onclick = previous;
 $('next').onclick = $('player-next').onclick = next;
 $('play-pause').onclick = togglePlayback;
 $('fullscreen').onclick = toggleFullscreen;
-$('controls-toggle').onclick = () => { frame.classList.toggle('controls-hidden'); updatePlayer(); };
+function toggleControls() { frame.classList.toggle('controls-hidden'); updatePlayer(); }
+$('controls-toggle').onclick = toggleControls;
 $('captions').onclick = () => {
   captionsOn = !captionsOn;
   for (const track of video.textTracks) track.mode = captionsOn ? 'showing' : 'disabled';
@@ -703,12 +704,13 @@ document.addEventListener('fullscreenchange', () => {
 });
 document.addEventListener('keydown', event => {
   if (event.ctrlKey || event.altKey || event.metaKey || ['INPUT', 'SELECT', 'TEXTAREA'].includes(document.activeElement?.tagName)) return;
-  if (!['ArrowLeft', 'ArrowRight', ' ', 'f', 'F'].includes(event.key)) return;
+  if (!['ArrowLeft', 'ArrowRight', ' ', 'f', 'F', 'k', 'K'].includes(event.key)) return;
   if (document.activeElement?.tagName === 'BUTTON') document.activeElement.blur();
   if (event.key === 'ArrowLeft') seekBy(-5);
   if (event.key === 'ArrowRight') seekBy(5);
   if (event.key === ' ') togglePlayback();
   if (event.key === 'f' || event.key === 'F') toggleFullscreen();
+  if (event.key === 'k' || event.key === 'K') toggleControls();
   event.preventDefault();
 });
 window.addEventListener('pagehide', () => {
