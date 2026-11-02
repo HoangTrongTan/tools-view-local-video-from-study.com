@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Góc học tập · Video của bạn</title>
+  <link rel="stylesheet" href="/style.css">
+  <script src="/app.js" defer></script>
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand"><span class="brand-icon">▶</span><strong>Góc học tập</strong></div>
+    <div class="folder-actions">
+      <span id="folder" class="folder-path" title="">Chưa chọn thư mục</span>
+      <select id="recent-folders" aria-label="Mở thư mục gần đây" title="Thư mục gần đây"><option value="">Thư mục gần đây</option></select>
+      <button id="choose" class="button primary">Chọn thư mục</button>
+      <button id="exit-tool" class="button exit-button" type="button" title="Đóng công cụ học">Thoát</button>
+      <button id="change" class="change-button" title="Đổi thư mục" aria-label="Đổi thư mục">＋</button>
+    </div>
+  </header>
+  <main class="layout">
+    <section class="watch" aria-label="Trình phát video">
+      <div class="section-heading"><h1 id="title">Chọn một bài học</h1><span id="counter" class="counter">0 / 0</span></div>
+      <div id="video-frame" class="video-frame">
+        <video id="video" playsinline preload="metadata"></video>
+        <div id="empty" class="empty"><div class="empty-icon">▶</div><h2>Chọn thư mục để bắt đầu</h2><button id="empty-choose" class="button light">Chọn thư mục video</button></div>
+        <button id="controls-toggle" class="controls-toggle" type="button" aria-label="Hiện điều khiển video" aria-pressed="false" title="Hiện điều khiển">☷</button>
+        <button id="drawer-toggle" class="drawer-toggle" type="button" aria-label="Mở danh sách bài học" aria-controls="lesson-drawer" aria-expanded="false" title="Danh sách bài học">☰</button>
+        <aside id="lesson-drawer" class="lesson-drawer" aria-label="Chọn bài học" hidden>
+          <div class="drawer-head"><strong>Danh sách bài học</strong><button id="drawer-close" type="button" aria-label="Đóng danh sách bài học">✕</button></div>
+          <input id="drawer-filter" class="filter-input" type="search" placeholder="Lọc theo tên bài..." aria-label="Lọc bài học trong chế độ toàn màn hình">
+          <div id="drawer-list" class="drawer-list"></div>
+        </aside>
+        <div class="player-controls" aria-label="Điều khiển video">
+          <input id="seek" class="seek" type="range" min="0" max="1000" value="0" aria-label="Tua video">
+          <div class="player-row">
+            <button id="player-previous" class="player-button" title="Bài trước" aria-label="Bài trước">❮</button>
+            <button id="play-pause" class="player-button play-button" title="Phát hoặc tạm dừng" aria-label="Phát video">▶</button>
+            <button id="player-next" class="player-button" title="Bài tiếp" aria-label="Bài tiếp">❯</button>
+            <span id="time" class="time">0:00 / 0:00</span>
+            <span class="spacer"></span>
+            <button id="captions" class="player-button" title="Bật hoặc tắt phụ đề" aria-label="Bật hoặc tắt phụ đề">CC</button>
+            <button id="mute" class="player-button" title="Bật hoặc tắt âm thanh" aria-label="Tắt âm thanh">🔊</button>
+            <input id="volume" class="volume" type="range" min="0" max="1" step="0.05" value="1" aria-label="Âm lượng">
+            <button id="fullscreen" class="player-button" title="Toàn màn hình" aria-label="Toàn màn hình">⛶</button>
+          </div>
+        </div>
+      </div>
+      <div class="below-player"><div class="lesson-buttons"><button id="previous" class="button outline">← Bài trước</button><button id="quiz-open" class="button quiz-button">✦ Trắc nghiệm bài này</button><button id="next" class="button dark">Bài tiếp →</button></div><span id="save-status" class="save-status">Tiến độ được lưu trên máy</span></div>
+    </section>
+    <aside class="playlist"><div class="playlist-tabs" role="tablist" aria-label="Nội dung bên phải"><button id="tab-lessons" role="tab" aria-selected="true" aria-controls="lesson-pane" type="button">Danh sách bài học</button><button id="tab-quiz" role="tab" aria-selected="false" aria-controls="quiz-dialog" type="button">Trắc nghiệm</button><button id="tab-notes" role="tab" aria-selected="false" aria-controls="note-pane" type="button">Ghi chú</button></div><div id="lesson-pane" class="lesson-pane" role="tabpanel"><div class="playlist-head"><h2>Danh sách bài học</h2><span id="total" class="total">0 bài</span></div><div class="filter-wrap"><input id="list-filter" class="filter-input" type="search" placeholder="Lọc theo tên bài..." aria-label="Lọc danh sách bài học"></div><div id="list" class="list"><p class="list-empty">Danh sách bài học sẽ xuất hiện ở đây.</p></div></div>
+  <section id="note-pane" class="note-pane" role="tabpanel" aria-label="Ghi chú" hidden>
+    <div class="note-toolbar">
+      <select id="note-select" aria-label="Chọn file ghi chú"></select>
+      <button id="note-choose" class="button outline" type="button" title="Mở file .md / .txt bất kỳ trên máy">Mở file…</button>
+      <button id="note-new" class="button outline" type="button" title="Tạo file ghi chú cho bài đang học">+ Mới</button>
+    </div>
+    <textarea id="note-editor" class="note-editor" spellcheck="false" placeholder="Chọn một file .md / .txt hoặc tạo ghi chú mới cho bài này…" aria-label="Nội dung ghi chú" disabled></textarea>
+    <div class="note-actions">
+      <button id="note-save" class="button primary" type="button" disabled>Lưu (Ctrl+S)</button>
+      <button id="note-reload" class="button outline" type="button" disabled>Tải lại</button>
+      <button id="note-notepad" class="button outline" type="button" disabled>Mở Notepad</button>
+    </div>
+    <p id="note-status" class="note-status" role="status" aria-live="polite">Ghi chú được lưu thẳng vào file gốc trong thư mục video.</p>
+  </section>
+  <dialog id="quiz-dialog" class="quiz-dialog" hidden aria-labelledby="quiz-title">
+    <div class="quiz-header"><div><span class="quiz-eyebrow">ÔN TẬP SAU BÀI HỌC</span><h2 id="quiz-title">Trắc nghiệm</h2></div><button id="quiz-close" class="quiz-close" type="button" aria-label="Đóng trắc nghiệm">✕</button></div>
+    <p id="quiz-lesson" class="quiz-lesson"></p>
+    <p id="quiz-status" class="quiz-status" role="status" aria-live="polite">AI sẽ tạo số câu phù hợp với nội dung bài học.</p>
+    <progress id="quiz-progress" class="quiz-progress" max="100" aria-label="Tiến độ chuẩn bị trắc nghiệm" hidden></progress>
+    <div id="quiz-questions" class="quiz-questions"></div>
+    <p id="quiz-result" class="quiz-result" role="status" aria-live="polite" hidden></p>
+    <section id="remedial" class="remedial" aria-labelledby="remedial-title" hidden>
+      <h3 id="remedial-title">Ôn lại các câu chưa đúng</h3>
+      <p id="remedial-status" role="status" aria-live="polite"></p>
+      <div id="remedial-questions" class="quiz-questions"></div>
+      <p id="remedial-result" class="quiz-result" hidden></p>
+      <button id="remedial-submit" class="button primary" type="button" hidden>Chấm câu nhắc lại</button>
+      <button id="remedial-retry" class="button outline" type="button" hidden>Tạo lại câu nhắc</button>
+    </section>
+    <div class="quiz-actions"><button id="quiz-generate" class="button primary" type="button" hidden>Thử tạo lại</button><button id="quiz-submit" class="button primary" type="button" hidden>Chấm bài</button><button id="quiz-retry" class="button outline" type="button" hidden>Làm lại</button><button id="quiz-next" class="button dark" type="button" hidden>Bài tiếp →</button></div>
+  </dialog>
+  </aside>
+  </main>
+  <div id="toast" role="status" aria-live="polite"></div>
+</body>
+</html>

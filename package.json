@@ -1,0 +1,8 @@
+{
+  "name": "video-learning-tool",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Local video learning player",
+  "scripts": { "start": "node server.js" },
+  "engines": { "node": ">=18" }
+}
