@@ -552,6 +552,11 @@ const server = http.createServer(async (req, res) => {
       res.writeHead(200, { 'Content-Type': type + '; charset=utf-8', 'Cache-Control': 'no-store', 'X-Content-Type-Options': 'nosniff' });
       return res.end(content);
     }
+    if (req.method === 'GET' && url.pathname === '/favicon.ico') {
+      const content = await fsp.readFile(path.join(__dirname, 'favicon.ico'));
+      res.writeHead(200, { 'Content-Type': 'image/x-icon', 'Cache-Control': 'no-store', 'X-Content-Type-Options': 'nosniff' });
+      return res.end(content);
+    }
     return json(res, 404, { error: 'Không tìm thấy.' });
   } catch (error) {
     if (!res.headersSent) json(res, 400, { error: error.message }); else res.destroy();
