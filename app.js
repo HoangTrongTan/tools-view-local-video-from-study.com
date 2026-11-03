@@ -374,6 +374,7 @@ function gradeQuiz() {
   $('quiz-submit').hidden = true;
   $('quiz-retry').hidden = false;
   setQuizStatus(wrong.length ? 'Đã chấm bài. AI đang soạn câu nhắc lại cho những ý bạn chưa nắm…' : 'Đúng hết! Bạn đã nắm các ý chính của bài.');
+  request('/api/quiz/complete', { video: quizVideo, wrongQuestions: wrong.map(item => item.question) }).catch(error => toast(`Không lưu được kiến thức: ${error.message}`));
   if (wrong.length) generateRemedial(wrong);
 }
 async function generateRemedial(wrong) {
