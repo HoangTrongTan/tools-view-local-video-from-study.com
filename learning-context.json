@@ -105,6 +105,84 @@
               "needsReview": false
             }
           ]
+        },
+        {
+          "video": "19. Dual-write Problem and Outbox Pattern.mp4",
+          "completedAt": "2026-11-05T15:47:33.143Z",
+          "facts": [
+            {
+              "question": "Vấn đề 'ghi kép' (dual-write) trong microservices thường xảy ra khi ứng dụng cần thực hiện thao tác nào?",
+              "answer": "Thay đổi dữ liệu trong cơ sở dữ liệu và gửi tin nhắn tới hệ thống bên ngoài như message broker",
+              "explanation": "Vấn đề ghi kép xảy ra khi ứng dụng cần thay đổi dữ liệu trong hai hệ thống khác nhau (ví dụ: cơ sở dữ liệu và hàng đợi tin nhắn) mà không thể đảm bảo tính nhất quán nếu một trong hai thao tác thất bại.",
+              "needsReview": false
+            },
+            {
+              "question": "Mẫu 'Transactional Outbox' giải quyết vấn đề ghi kép bằng cách nào?",
+              "answer": "Lưu trữ sự kiện vào một bảng 'hộp thư đi' trong cùng một giao dịch với thao tác nghiệp vụ",
+              "explanation": "Mẫu Outbox lưu trữ sự kiện vào một bảng trong cơ sở dữ liệu cùng lúc với dữ liệu nghiệp vụ trong một giao dịch duy nhất, đảm bảo tính nguyên tử (ACID).",
+              "needsReview": false
+            },
+            {
+              "question": "Trong quy trình của mẫu Outbox, ai hoặc cái gì chịu trách nhiệm xuất bản sự kiện từ bảng 'hộp thư đi' lên message broker?",
+              "answer": "Một dịch vụ độc lập hoặc tiến trình chạy định kỳ (background job)",
+              "explanation": "Sau khi sự kiện được lưu vào bảng Outbox, một dịch vụ độc lập hoặc tiến trình riêng biệt sẽ đọc các bản ghi này và xuất bản chúng lên message broker.",
+              "needsReview": false
+            },
+            {
+              "question": "Tại sao việc thực hiện thao tác nghiệp vụ và ghi vào bảng Outbox trong cùng một giao dịch lại quan trọng?",
+              "answer": "Để đảm bảo tuân thủ nguyên tắc ACID, nếu một bước thất bại thì toàn bộ sẽ được khôi phục",
+              "explanation": "Việc nằm trong cùng một giao dịch đảm bảo tính nhất quán: hoặc cả hai cùng thành công, hoặc cả hai cùng thất bại, tránh tình trạng dữ liệu bị lệch giữa các hệ thống.",
+              "needsReview": false
+            }
+          ]
+        },
+        {
+          "video": "20. Ordering Microservices to Subscribe-Consume BasketCheckout event from RabbitMQ.mp4",
+          "completedAt": "2026-11-05T16:06:25.863Z",
+          "facts": [
+            {
+              "question": "Tại sao dự án 'Ordering Application' cần thêm tham chiếu đến thư viện 'Messaging Building Block' trong kiến trúc sạch (Clean Architecture)?",
+              "answer": "Để truy cập các sự kiện được chia sẻ và các tiện ích mở rộng MassTransit nhằm xử lý trường hợp sử dụng (use case)",
+              "explanation": "Trong kiến trúc sạch, lớp Application chịu trách nhiệm thực hiện các trường hợp sử dụng. Việc thêm thư viện Messaging Building Block cho phép lớp này truy cập các sự kiện chia sẻ và tiện ích MassTransit để xử lý sự kiện thanh toán giỏ hàng.",
+              "needsReview": false
+            },
+            {
+              "question": "Quy trình thực hiện việc đăng ký và tiêu thụ sự kiện thanh toán giỏ hàng (BasketCheckout) bao gồm các bước chính nào?",
+              "answer": "Thêm tham chiếu dự án, đăng ký MassTransit/RabbitMQ, phát triển lớp xử lý sự kiện (Consumer)",
+              "explanation": "Bài giảng nêu rõ 3 bước chính: thêm tham chiếu thư viện Messaging, đăng ký MassTransit/RabbitMQ trong Dependency Injection, và phát triển lớp xử lý sự kiện (Consumer) để tạo đơn hàng.",
+              "needsReview": false
+            },
+            {
+              "question": "Việc xuất bản sự kiện 'Order Created' sau khi xử lý sự kiện 'Basket Checkout' được đề cập trong bài giảng nhằm mục đích gì?",
+              "answer": "Để thực hiện mẫu Saga cho các giao dịch kinh doanh phức tạp trải rộng trên nhiều dịch vụ",
+              "explanation": "Bài giảng coi đây là bước thưởng, nhằm hoàn thành quy trình đặt hàng và triển khai mẫu Saga để quản lý các giao dịch phân tán phức tạp.",
+              "needsReview": false
+            }
+          ]
+        },
+        {
+          "video": "21. Register MassTransit RabbitMQ packages into Ordering.Application DI.mp4",
+          "completedAt": "2026-11-05T16:24:29.890Z",
+          "facts": [
+            {
+              "question": "Tại sao cần truyền đối tượng 'IConfiguration' từ 'Ordering API' vào phương thức 'AddApplicationServices' trong 'Ordering Application'?",
+              "answer": "Để cung cấp thông tin cấu hình RabbitMQ cho phương thức 'AddMessageBroker'",
+              "explanation": "Phương thức 'AddMessageBroker' cần thông tin cấu hình (host, username, password) từ tệp appsettings.json, do đó cần truyền 'IConfiguration' từ API xuống lớp Application.",
+              "needsReview": false
+            },
+            {
+              "question": "Mục đích chính của việc truyền 'Assembly' vào phương thức 'AddMessageBroker' trong lớp 'DependencyInjection' là gì?",
+              "answer": "Để đăng ký các lớp Consumer của MassTransit trong ứng dụng",
+              "explanation": "Việc truyền assembly đang thực thi (executing assembly) giúp MassTransit tự động tìm kiếm và đăng ký các lớp Consumer được định nghĩa trong dự án đó.",
+              "needsReview": false
+            },
+            {
+              "question": "Trong quy trình đăng ký MassTransit, tệp tin nào cần được cập nhật để chứa thông tin kết nối RabbitMQ (host, username, password)?",
+              "answer": "appsettings.json",
+              "explanation": "Thông tin cấu hình như host, username và password của Message Broker được lưu trữ trong tệp cấu hình appsettings.json của lớp API.",
+              "needsReview": false
+            }
+          ]
         }
       ]
     }

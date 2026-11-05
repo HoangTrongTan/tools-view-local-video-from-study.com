@@ -82,5 +82,10 @@
 .note-toolbar select{text-overflow:ellipsis;overflow:hidden;white-space:nowrap}
 .note-toolbar .button{flex:none;white-space:nowrap}
 .note-status{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.course-exam{max-width:1050px;margin:16px auto;padding:24px;background:#fff;border:1px solid #e5ebe4;border-radius:12px;min-height:calc(100vh - 110px)}
+.course-exam-head{display:flex;justify-content:space-between;align-items:start;gap:16px;border-bottom:1px solid #e5ebe4;margin-bottom:20px;padding-bottom:14px}
+.course-exam-head h1{font-size:24px;margin:5px 0}.course-exam-head p{font-size:13px;color:#607568}
+.course-exam-actions{position:sticky;bottom:0;background:#fff;padding:14px 0;display:flex;gap:10px}
+@media(max-width:600px){.course-exam{margin:8px;padding:14px}.course-exam-head{flex-wrap:wrap}.topbar{flex-wrap:wrap}#course-exam-open{order:3;width:100%}}
 
 .playlist-tabs button{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
