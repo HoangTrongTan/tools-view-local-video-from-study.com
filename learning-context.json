@@ -1,4 +1,82 @@
 {
   "version": 1,
-  "courses": []
+  "courses": [
+    {
+      "folder": "M:\\ID_PTS\\ASP.NET\\microservices\\18\\drive-download-20261031T140859Z-1-001",
+      "lessons": [
+        {
+          "video": "16. Publish BasketCheckout Event from Basket Microservices.mp4",
+          "completedAt": "2026-11-03T14:57:00.603Z",
+          "facts": [
+            {
+              "question": "Trong bài giảng, bước đầu tiên để xuất bản sự kiện thanh toán giỏ hàng từ microservice giỏ hàng là gì?",
+              "answer": "Thêm tham chiếu dự án BuildingBlocks.Messaging vào Basket API",
+              "explanation": "Bài giảng nêu rõ bước đầu tiên là lấy tham chiếu dự án BuildingBlocks.Messaging vào Basket API để truy cập các sự kiện được chia sẻ và phần mở rộng MassTransit.",
+              "needsReview": false
+            },
+            {
+              "question": "Để đăng ký các gói MassTransit RabbitMQ vào Basket API, dependency injection, bạn cần thực hiện bước nào trong Program.cs?",
+              "answer": "Đăng ký phương thức AddMessageBroker từ thư viện BuildingBlocks.Messaging",
+              "explanation": "Bài giảng chỉ ra rằng sau khi đảm bảo cấu hình MessageBroker trong tệp Application Settings Json, bạn cần đăng ký AddMessageBroker vào dependency injection của Program.cs.",
+              "needsReview": false
+            },
+            {
+              "question": "Sự kiện nào được xuất bản từ microservice giỏ hàng đến RabbitMQ theo bài giảng?",
+              "answer": "Basket Checkout",
+              "explanation": "Bài giảng nêu rõ giỏ hàng sẽ xuất bản sự kiện tích hợp Basket Checkout tới RabbitMQ.",
+              "needsReview": false
+            },
+            {
+              "question": "Trong quá trình xuất bản sự kiện, phía nào của mẫu Publish-Subscribe được microservice giỏ hàng thực hiện?",
+              "answer": "Publisher",
+              "explanation": "Bài giảng khẳng định rằng microservice giỏ hàng là phía publisher trong mẫu Publish-Subscribe để xuất bản sự kiện tới RabbitMQ.",
+              "needsReview": false
+            },
+            {
+              "question": "Để đảm bảo microservice giỏ hàng có thể truy cập sự kiện Basket Checkout, bạn cần làm gì trước khi đăng ký MassTransit?",
+              "answer": "Thêm tham chiếu dự án BuildingBlocks.Messaging",
+              "explanation": "Bài giảng chỉ ra rằng bước đầu tiên là lấy tham chiếu dự án BuildingBlocks.Messaging để đảm bảo microservice giỏ hàng có thể truy cập sự kiện Basket Checkout.",
+              "needsReview": false
+            }
+          ]
+        },
+        {
+          "video": "17. Develop BasketCheckout Feature Folder to Expose POST Endpoint and Publish Event.mp4",
+          "completedAt": "2026-11-05T14:05:49.309Z",
+          "facts": [
+            {
+              "question": "Trong kiến trúc vertical slice, thư mục tính năng nào được tạo để expose phương thức HTTP POST và implement logic xử lý giỏ hàng?",
+              "answer": "Checkout Basket",
+              "explanation": "Bài giảng chỉ ra rằng để expose phương thức HTTP POST và implement logic xử lý giỏ hàng, chúng ta tạo thư mục tính năng mới tên là 'Checkout Basket' trong dự án Basket API, phù hợp với kiến trúc vertical slice.",
+              "needsReview": false
+            },
+            {
+              "question": "Lớp nào trong thư mục Checkout Basket chịu trách nhiệm expose phương thức HTTP POST và sử dụng Carter Library để định nghĩa API?",
+              "answer": "Checkout Basket Endpoint",
+              "explanation": "Bài giảng nêu rõ lớp 'Checkout Basket Endpoint' được tạo để implement interface IEndpoint và expose phương thức HTTP POST bằng cách sử dụng Carter Library.",
+              "needsReview": false
+            },
+            {
+              "question": "Để nhận đối tượng JSON từ client, lớp nào được định nghĩa trong thư mục DTO của Basket API?",
+              "answer": "Basket Checkout DTO",
+              "explanation": "Bài giảng chỉ ra rằng chúng ta tạo một lớp 'Basket Checkout DTO' trong thư mục DTO để chấp nhận đối tượng JSON từ client và chuyển thông tin sang đối tượng event.",
+              "needsReview": false
+            },
+            {
+              "question": "Trong quá trình expose phương thức HTTP POST, lớp nào được sử dụng để chuyển đối tượng request sang mediator?",
+              "answer": "Checkout Basket Command",
+              "explanation": "Bài giảng giải thích rằng sau khi nhận request, lớp 'Checkout Basket Command' được chuyển đến mediator để kích hoạt lớp handler và trả về kết quả.",
+              "needsReview": false
+            },
+            {
+              "question": "Để tránh lặp lại câu lệnh using, vị trí nào được đề xuất để thêm using từ thư mục DTO vào lớp Checkout Basket Endpoint?",
+              "answer": "Trong global Usings",
+              "explanation": "Bài giảng đề xuất di chuyển câu lệnh using vào global Usings của dự án Basket API để tránh lặp lại trong các lớp.",
+              "needsReview": false
+            }
+          ]
+        }
+      ]
+    }
+  ]
 }

@@ -1,7 +1,7 @@
 {
   "folder": "M:\\ID_PTS\\ASP.NET\\microservices\\18\\drive-download-20261031T140859Z-1-001",
-  "current": "16. Publish BasketCheckout Event from Basket Microservices.mp4",
-  "position": 105.514093,
+  "current": "18. Develop Basket Checkout Handler Method to Publish event to RabbitMQ-MassTransit.mp4",
+  "position": 154.790709,
   "pickedNotes": [
     "M:\\ID_PTS\\ASP.NET\\practices\\EShopMicroservices\\note-architext.txt"
   ],

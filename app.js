@@ -284,7 +284,7 @@ async function openQuiz() {
   if (activeQuiz) return renderQuiz();
   $('quiz-progress').hidden = false;
   $('quiz-progress').removeAttribute('value');
-  setQuizStatus(quizBusy ? 'AI đang chuẩn bị bài tập trước đó…' : 'Đang kết nối Ollama và chuẩn bị câu hỏi…');
+  setQuizStatus(quizBusy ? 'AI đang chuẩn bị bài tập trước đó…' : 'Đang kết nối AI và chuẩn bị câu hỏi…');
   if (!quizBusy) generateQuiz();
 }
 async function pollQuizJob(videoName, folder) {
@@ -307,7 +307,7 @@ async function generateQuiz() {
   $('quiz-generate').hidden = true;
   $('quiz-progress').hidden = false;
   $('quiz-progress').removeAttribute('value');
-  setQuizStatus('Đang kết nối Ollama. Nếu chưa có model, tool sẽ tự tải rồi tạo câu hỏi…');
+  setQuizStatus('Đang kết nối AI và chuẩn bị câu hỏi…');
   quizPollTimer = setTimeout(() => pollQuizJob(requestedVideo, requestedFolder), 1200);
   try {
     const result = await request('/api/quiz', { video: requestedVideo });

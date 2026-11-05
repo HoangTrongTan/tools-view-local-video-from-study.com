@@ -4,10 +4,12 @@ Nhấp đúp `Mo hoc video.bat - Shortcut.lnk` để mở mà không hiện cử
 
 ## Trắc nghiệm AI sau bài học
 
-Tool dùng Ollama local và đọc file phụ đề cùng tên video (`_vi.srt`, `.vi.srt` hoặc `.srt`) để tạo câu hỏi. AI tự chọn từ 3–20 câu theo độ khó và số ý cần kiểm tra của bài. Bấm **Trắc nghiệm bài này** một lần: tool tự kết nối Ollama, tải model `qwen3:4b` nếu thiếu, rồi tạo câu hỏi. Lần đầu tải model khoảng 2,5 GB, nên có thể mất vài phút; các lần sau dùng model đã tải. Sau khi xem hết video, phần trắc nghiệm tự mở.
+Tool đọc file phụ đề cùng tên video (`_vi.srt`, `.vi.srt` hoặc `.srt`) để tạo câu hỏi. Khi có API key, tool dùng Gemini `gemini-3.1-flash-lite`. AI tự chọn từ 3–20 câu theo độ khó và số ý cần kiểm tra của bài. Bấm **Trắc nghiệm bài này** để tạo câu hỏi. Sau khi xem hết video, phần trắc nghiệm tự mở.
 
 Câu hỏi tô nổi bật từ khóa chính. Sau khi chấm, câu sai có giải thích và tool tự tạo câu nhắc lại để bạn luyện tiếp. Bạn có thể bấm **Bài tiếp** khi xong.
 
-Ollama cần được cài trên Windows: https://ollama.com/download/windows. Tool chỉ gọi Ollama tại `127.0.0.1:11434`; phụ đề không được gửi lên dịch vụ đám mây. Nếu muốn dùng model local khác, đặt biến môi trường `OLLAMA_MODEL` trước khi mở tool.
+Để dùng Gemini nhanh hơn, tạo API key tại https://aistudio.google.com/apikey, tạo file `gemini-key.txt` trong thư mục tool, dán duy nhất API key vào file rồi lưu và mở lại tool. Khi có key, tool dùng Gemini thay Ollama; phụ đề và một phần kiến thức đã lưu sẽ được gửi đến Google để tạo câu hỏi. Không chia sẻ file key. Có thể dùng biến môi trường `GEMINI_API_KEY` thay cho file; `GEMINI_MODEL` dùng để đổi model (mặc định `gemini-3.1-flash-lite`). Xóa file key và biến môi trường để quay lại Ollama.
+
+Khi không cấu hình Gemini, Ollama cần được cài trên Windows: https://ollama.com/download/windows. Tool gọi Ollama tại `127.0.0.1:11434`. Nếu muốn dùng model local khác, đặt biến môi trường `OLLAMA_MODEL` trước khi mở tool.
 
 Sau khi chấm trắc nghiệm, tool lưu câu hỏi, đáp án đúng và giải thích vào `learning-context.json` ngay trong thư mục VideoLearningTool. File chia riêng kiến thức theo từng thư mục khóa học. Khi tạo trắc nghiệm bài mới, AI đọc một phần kiến thức gần đây, ưu tiên các câu đã trả lời sai để liên hệ và ôn lại nếu phù hợp. Bạn có thể sao lưu hoặc xóa file để bắt đầu lại. Nội dung lưu là kiến thức từ bài đã chấm, không phải đánh giá rằng bạn đã thuộc tất cả kiến thức đó.

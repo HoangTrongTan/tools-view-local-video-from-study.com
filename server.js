@@ -18,6 +18,15 @@ if (!Number.isInteger(ollamaPort) || ollamaPort < 1 || ollamaPort > 65535) throw
 const ollamaUrl = `http://127.0.0.1:${ollamaPort}`;
 const defaultModel = 'qwen3:4b';
 const configuredModel = process.env.OLLAMA_MODEL?.trim() || defaultModel;
+const geminiModel = process.env.GEMINI_MODEL?.trim() || 'gemini-3.1-flash-lite';
+let geminiKey = process.env.GEMINI_API_KEY?.trim() || '';
+if (!geminiKey) {
+  try {
+    const keyFile = fs.readFileSync(path.join(__dirname, 'gemini-key.txt'), 'utf8').trim();
+    geminiKey = keyFile.match(/^\s*(?:GEMINI_)?API_KEY\s*=\s*(\S+)\s*$/mi)?.[1] || keyFile;
+  }
+  catch (error) { if (error.code !== 'ENOENT') throw error; }
+}
 const quizCache = new Map();
 const quizPending = new Map();
 const quizJobs = new Map();
@@ -144,6 +153,7 @@ async function ollamaExecutable() {
   return null;
 }
 async function ollamaStatus() {
+  if (geminiKey) return { available: true, model: geminiModel, provider: 'gemini' };
   try {
     const models = await installedModels();
     return { available: true, model: configuredModel, needsDownload: !models.includes(configuredModel) };
@@ -206,6 +216,7 @@ async function pullModel(model, update) {
   return pullPending;
 }
 async function readyModel(update) {
+  if (geminiKey) { update('connecting', 'Đang kết nối Gemini…'); return `gemini:${geminiModel}`; }
   const models = await ensureOllamaRunning(update);
   if (!models.includes(configuredModel)) await pullModel(configuredModel, update);
   return configuredModel;
@@ -226,6 +237,27 @@ function transcriptChunks(transcript, limit = 10000) {
   return chunks;
 }
 async function generateJson(model, prompt, maxOutput = 2300) {
+  if (model.startsWith('gemini:')) {
+    const name = model.slice('gemini:'.length);
+    let response;
+    try {
+      response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/${encodeURIComponent(name)}:generateContent`, {
+        method: 'POST', headers: { 'Content-Type': 'application/json', 'x-goog-api-key': geminiKey },
+        signal: AbortSignal.timeout(120000),
+        body: JSON.stringify({ contents: [{ parts: [{ text: prompt }] }], generationConfig: {
+          temperature: 0.2, maxOutputTokens: maxOutput, responseMimeType: 'application/json', thinkingConfig: { thinkingBudget: 0 }
+        } })
+      });
+    } catch (error) {
+      throw new Error(error.name === 'TimeoutError' ? 'Gemini phản hồi quá lâu. Hãy thử lại.' : 'Không kết nối được Gemini. Hãy kiểm tra mạng và thử lại.');
+    }
+    if (!response.ok) throw new Error(`Gemini trả lỗi ${response.status}. Hãy kiểm tra API key, quyền truy cập và hạn mức.`);
+    const data = await response.json();
+    const output = data.candidates?.[0]?.content?.parts?.map(part => part.text || '').join('');
+    if (!output) throw new Error('Gemini không trả về nội dung. Hãy thử lại.');
+    try { return JSON.parse(output.trim().replace(/^```(?:json)?\s*|\s*```$/g, '')); }
+    catch { throw new Error('Gemini trả về JSON không hợp lệ. Hãy thử lại.'); }
+  }
   const response = await fetch(`${ollamaUrl}/api/generate`, {
     method: 'POST', headers: { 'Content-Type': 'application/json' }, signal: AbortSignal.timeout(300000),
     body: JSON.stringify({ model, prompt, format: 'json', stream: false, think: false,
@@ -485,7 +517,7 @@ const server = http.createServer(async (req, res) => {
       if (!quizPending.has(key)) {
         const work = (async () => {
           try {
-            update('connecting', 'Đang kết nối Ollama trên máy…');
+            update('connecting', geminiKey ? 'Đang kết nối Gemini…' : 'Đang kết nối Ollama trên máy…');
             const model = await readyModel(update);
             update('generating', 'Đang đọc phụ đề và tạo câu hỏi…');
             const questions = await createQuiz(file, subtitle, model, update);
