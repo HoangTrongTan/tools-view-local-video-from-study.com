@@ -11,6 +11,7 @@
 <body>
   <header class="topbar">
     <div class="brand"><img class="brand-icon" src="/favicon.ico?v=2" alt=""><strong>Góc học tập</strong></div>
+    <button id="course-exam-open" class="button quiz-button" type="button">✦ Bài tập cuối khóa</button>
     <div class="folder-actions">
       <span id="folder" class="folder-path" title="">Chưa chọn thư mục</span>
       <select id="recent-folders" aria-label="Mở thư mục gần đây" title="Thư mục gần đây"><option value="">Thư mục gần đây</option></select>
@@ -83,6 +84,12 @@
   </dialog>
   </aside>
   </main>
+  <section id="course-exam" class="course-exam" hidden aria-labelledby="course-exam-title">
+    <div class="course-exam-head"><div><span class="quiz-eyebrow">ÔN TẬP TỔNG HỢP</span><h1 id="course-exam-title">Bài tập cuối khóa</h1><p id="course-exam-status" role="status">Tổng hợp kiến thức từ các bài đã chấm trong khóa học.</p></div><button id="course-exam-close" class="button outline" type="button">← Quay lại học</button></div>
+    <div id="course-exam-questions" class="quiz-questions"></div>
+    <p id="course-exam-result" class="quiz-result" hidden></p>
+    <div class="course-exam-actions"><button id="course-exam-generate" class="button primary" type="button">Tạo đề tổng hợp</button><button id="course-exam-submit" class="button primary" type="button" hidden>Chấm bài</button><button id="course-exam-retry" class="button outline" type="button" hidden>Làm lại đề</button></div>
+  </section>
   <div id="toast" role="status" aria-live="polite"></div>
 </body>
 </html>

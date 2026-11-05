@@ -145,6 +145,13 @@ function setNoteDirty(value) {
   noteDirty = value;
   $('note-save').textContent = value ? 'Lưu • chưa lưu (Ctrl+S)' : 'Lưu (Ctrl+S)';
 }
+function focusNoteEnd() {
+  const editor = $('note-editor');
+  if (editor.disabled) return;
+  editor.focus({ preventScroll: true });
+  editor.setSelectionRange(editor.value.length, editor.value.length);
+  editor.scrollTop = editor.scrollHeight;
+}
 function resetNotes() {
   noteName = '';
   noteMtime = 0;
@@ -195,6 +202,7 @@ async function openNote(name) {
     $('note-select').value = noteName;
     setNoteDirty(false);
     setNoteStatus(`Đang sửa: ${noteLabel(noteName)}`);
+    focusNoteEnd();
   } catch (error) { setNoteStatus(error.message, true); $('note-select').value = noteName; }
 }
 async function saveNote() {
@@ -260,7 +268,10 @@ function showSidebarTab(tab) {
   $('tab-lessons').setAttribute('aria-selected', String(!quiz && !notes));
   $('tab-quiz').setAttribute('aria-selected', String(quiz));
   $('tab-notes').setAttribute('aria-selected', String(notes));
-  if (notes) showNotes();
+  if (notes) {
+    if (noteName) focusNoteEnd();
+    showNotes();
+  }
   if (!quiz && !notes) scrollToCurrentLesson();
 }
 async function openQuiz() {
@@ -663,6 +674,72 @@ $('quiz-retry').onclick = renderQuiz;
 $('quiz-next').onclick = () => { showSidebarTab('lessons'); next(); };
 $('remedial-submit').onclick = gradeRemedial;
 $('remedial-retry').onclick = () => { if (remedialWrong.length) generateRemedial(remedialWrong); };
+let courseExamQuestions = null;
+let courseExamMilestone = 0;
+const courseExamEncouragement = {
+  20: 'Bạn đã đi được 20% đề rồi. Cứ giữ nhịp nhé!',
+  40: 'Đã hoàn thành 40%. Nỗ lực của bạn đang tích lũy thành kiến thức!',
+  60: 'Qua mốc 60% rồi. Tiếp tục tập trung, bạn làm tốt lắm!',
+  80: 'Đã tới 80%. Chỉ còn một đoạn nữa thôi!',
+  100: 'Bạn đã trả lời hết đề. Giờ hãy chấm bài để xem kết quả!'
+};
+$('course-exam-questions').addEventListener('change', () => {
+  if (!courseExamQuestions || $('course-exam-submit').hidden) return;
+  const answered = $('course-exam-questions').querySelectorAll('fieldset input:checked').length;
+  const milestone = Math.floor(answered / courseExamQuestions.length * 5) * 20;
+  if (milestone > courseExamMilestone && courseExamEncouragement[milestone]) {
+    courseExamMilestone = milestone;
+    toast(courseExamEncouragement[milestone]);
+  }
+});
+$('course-exam-open').onclick = () => {
+  if (!state.folder) return toast('Hãy chọn thư mục khóa học trước.');
+  video.pause();
+  document.querySelector('.layout').hidden = true;
+  $('course-exam').hidden = false;
+  window.scrollTo(0, 0);
+};
+$('course-exam-close').onclick = () => {
+  $('course-exam').hidden = true;
+  document.querySelector('.layout').hidden = false;
+};
+$('course-exam-generate').onclick = async () => {
+  const button = $('course-exam-generate');
+  button.disabled = true;
+  $('course-exam-status').textContent = 'Đang tạo câu hỏi từ toàn bộ kiến thức đã lưu. Khóa nhiều bài sẽ mất vài phút…';
+  try {
+    const result = await request('/api/course-exam', {});
+    if (!validQuestions(result.questions)) throw new Error('Đề tổng hợp chưa hợp lệ.');
+    courseExamQuestions = result.questions;
+    courseExamMilestone = 0;
+    renderQuestionSet($('course-exam-questions'), courseExamQuestions, 'course-exam-question');
+    $('course-exam-status').textContent = `${courseExamQuestions.length} câu từ toàn bộ các bài đã chấm. Hãy làm hết trước khi chấm.`;
+    $('course-exam-result').hidden = true;
+    $('course-exam-submit').hidden = false;
+    $('course-exam-retry').hidden = true;
+    button.hidden = true;
+  } catch (error) { $('course-exam-status').textContent = error.message; }
+  finally { button.disabled = false; }
+};
+$('course-exam-submit').onclick = () => {
+  if (!courseExamQuestions) return;
+  const result = gradeSet($('course-exam-questions'), courseExamQuestions);
+  if (!result) return $('course-exam-status').textContent = 'Hãy chọn đáp án cho tất cả các câu.';
+  $('course-exam-result').textContent = `Bạn đúng ${result.correct}/${courseExamQuestions.length} câu.`;
+  $('course-exam-result').hidden = false;
+  $('course-exam-submit').hidden = true;
+  $('course-exam-retry').hidden = false;
+  $('course-exam-status').textContent = 'Đã chấm bài. Xem đáp án và giải thích dưới từng câu.';
+  window.scrollTo(0, 0);
+};
+$('course-exam-retry').onclick = () => {
+  courseExamMilestone = 0;
+  renderQuestionSet($('course-exam-questions'), courseExamQuestions, 'course-exam-question');
+  $('course-exam-result').hidden = true;
+  $('course-exam-submit').hidden = false;
+  $('course-exam-retry').hidden = true;
+  window.scrollTo(0, 0);
+};
 $('quiz-dialog').addEventListener('close', () => { remedialToken++; });
 $('previous').onclick = $('player-previous').onclick = previous;
 $('next').onclick = $('player-next').onclick = next;
