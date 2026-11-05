@@ -75,6 +75,36 @@
               "needsReview": false
             }
           ]
+        },
+        {
+          "video": "18. Develop Basket Checkout Handler Method to Publish event to RabbitMQ-MassTransit.mp4",
+          "completedAt": "2026-11-05T15:32:47.115Z",
+          "facts": [
+            {
+              "question": "Trong lớp CheckoutBasketCommandHandler, hai dịch vụ nào cần được tiêm (inject) thông qua primary constructor để thực hiện logic nghiệp vụ?",
+              "answer": "IBasketRepository và IPublishEndpoint",
+              "explanation": "Để thực hiện logic, handler cần IBasketRepository để tương tác với cơ sở dữ liệu và IPublishEndpoint (từ MassTransit) để xuất bản sự kiện lên RabbitMQ.",
+              "needsReview": false
+            },
+            {
+              "question": "Thứ tự các bước xử lý chính trong phương thức Handle của CheckoutBasketCommandHandler là gì?",
+              "answer": "Lấy giỏ hàng -> Xuất bản sự kiện -> Xóa giỏ hàng",
+              "explanation": "Theo bài giảng, quy trình là lấy giỏ hàng hiện có, tạo và xuất bản sự kiện Basket Checkout lên RabbitMQ, sau đó mới thực hiện xóa giỏ hàng trong cơ sở dữ liệu.",
+              "needsReview": false
+            },
+            {
+              "question": "Tại sao bài giảng đề cập đến việc sử dụng 'mẫu Outbox' (Outbox pattern) sau khi triển khai phương thức xử lý thanh toán?",
+              "answer": "Để giải quyết vấn đề dual-write khi tương tác với hai hệ thống bên ngoài",
+              "explanation": "Bài giảng chỉ ra rằng việc tương tác với cả cơ sở dữ liệu và RabbitMQ trong cùng một phương thức xử lý dẫn đến vấn đề dual-write, và mẫu Outbox được đề xuất để giải quyết vấn đề này.",
+              "needsReview": false
+            },
+            {
+              "question": "Lớp CheckoutBasketCommand triển khai interface nào và trả về kết quả kiểu gì?",
+              "answer": "ICommand<CheckoutBasketResult>",
+              "explanation": "Trong bài giảng, CheckoutBasketCommand triển khai interface ICommand với generic type là CheckoutBasketResult để xác định kiểu dữ liệu trả về.",
+              "needsReview": false
+            }
+          ]
         }
       ]
     }
