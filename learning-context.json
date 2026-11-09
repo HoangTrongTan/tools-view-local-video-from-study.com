@@ -183,6 +183,36 @@
               "needsReview": false
             }
           ]
+        },
+        {
+          "video": "22. OrderCreated Integration Event How Domain Event leads to Integration Event.mp4",
+          "completedAt": "2026-11-05T16:47:23.356Z",
+          "facts": [
+            {
+              "question": "Sự khác biệt chính giữa 'Sự kiện miền' (Domain Event) và 'Sự kiện tích hợp' (Integration Event) về phạm vi hoạt động là gì?",
+              "answer": "Sự kiện miền hoạt động trong một miền duy nhất (cùng instance), sự kiện tích hợp giữa các microservice khác nhau",
+              "explanation": "Sự kiện miền được xuất bản và tiêu thụ trong cùng một instance ứng dụng (nội bộ), trong khi sự kiện tích hợp dùng để truyền đạt giữa các bounded context hoặc microservice khác nhau.",
+              "needsReview": false
+            },
+            {
+              "question": "Trong quy trình xử lý của microservice đặt hàng, sự kiện nào dẫn đến việc phát sinh 'Sự kiện tích hợp đơn hàng được tạo' (OrderCreated Integration Event)?",
+              "answer": "Sự kiện miền đơn hàng được tạo (OrderCreated Domain Event)",
+              "explanation": "Khi microservice đặt hàng tạo đơn hàng mới, nó phát sinh sự kiện miền 'đơn hàng được tạo'. Sau đó, lớp xử lý sự kiện miền sẽ xuất bản sự kiện tích hợp tương ứng để các dịch vụ khác (vận chuyển, thanh toán) cùng biết.",
+              "needsReview": true
+            },
+            {
+              "question": "Tại sao sự kiện tích hợp (Integration Event) cần được gửi bất đồng bộ qua message broker như RabbitMQ?",
+              "answer": "Để các hệ thống con khác có thể tiêu thụ sự kiện mà không cần kết nối trực tiếp với dịch vụ nguồn",
+              "explanation": "Sự kiện tích hợp được thiết kế để truyền đạt giữa các hệ thống con (microservice) khác nhau, việc sử dụng message broker giúp giao tiếp trở nên bất đồng bộ và tách rời (decoupled).",
+              "needsReview": false
+            },
+            {
+              "question": "Mục đích của việc chuyển đổi từ sự kiện miền sang sự kiện tích hợp trong quy trình thực hiện đơn hàng là gì?",
+              "answer": "Để triển khai mẫu Saga nhằm quản lý các giao dịch phân tán phức tạp",
+              "explanation": "Sự kiện tích hợp đơn hàng được tạo cho phép các dịch vụ như vận chuyển, thanh toán và thông báo phối hợp với nhau, đây là nền tảng để triển khai mẫu Saga cho các quy trình nghiệp vụ phức tạp.",
+              "needsReview": false
+            }
+          ]
         }
       ]
     }

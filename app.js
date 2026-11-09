@@ -93,7 +93,7 @@ function renderQuestionSet(container, questions, prefix) {
     const fieldset = document.createElement('fieldset');
     fieldset.className = 'quiz-question';
     const legend = document.createElement('legend');
-    legend.append(document.createTextNode(`Câu ${questionIndex + 1}. `));
+    legend.append(document.createTextNode(`Câu ${questionIndex + 1}${item.extension ? ' · Mở rộng' : ''}. `));
     appendHighlighted(legend, item.question, item);
     fieldset.append(legend);
     item.options.forEach((option, optionIndex) => {
@@ -675,6 +675,10 @@ $('quiz-next').onclick = () => { showSidebarTab('lessons'); next(); };
 $('remedial-submit').onclick = gradeRemedial;
 $('remedial-retry').onclick = () => { if (remedialWrong.length) generateRemedial(remedialWrong); };
 let courseExamQuestions = null;
+let courseExamPlan = null;
+let courseExamPage = 0;
+let courseExamBusy = false;
+const courseExamCache = new Map();
 let courseExamMilestone = 0;
 const courseExamEncouragement = {
   20: 'Bạn đã đi được 20% đề rồi. Cứ giữ nhịp nhé!',
@@ -689,11 +693,81 @@ $('course-exam-questions').addEventListener('change', () => {
   const milestone = Math.floor(answered / courseExamQuestions.length * 5) * 20;
   if (milestone > courseExamMilestone && courseExamEncouragement[milestone]) {
     courseExamMilestone = milestone;
+    const entry = courseExamCache.get(courseExamPage);
+    if (entry) entry.milestone = milestone;
     toast(courseExamEncouragement[milestone]);
   }
 });
-$('course-exam-open').onclick = () => {
+function saveCourseExamPage() {
+  const entry = courseExamCache.get(courseExamPage);
+  if (!entry || !courseExamQuestions) return;
+  entry.picks = [...$('course-exam-questions').querySelectorAll('fieldset')].map(field =>
+    field.querySelector('input:checked')?.value ?? null);
+}
+function renderCourseExamPage() {
+  const entry = courseExamCache.get(courseExamPage);
+  courseExamQuestions = entry.questions;
+  courseExamMilestone = entry.milestone || 0;
+  renderQuestionSet($('course-exam-questions'), entry.questions, 'course-exam-question');
+  [...$('course-exam-questions').querySelectorAll('fieldset')].forEach((field, index) => {
+    if (entry.picks?.[index] != null) field.querySelector(`input[value="${entry.picks[index]}"]`).checked = true;
+  });
+  if (entry.graded) gradeSet($('course-exam-questions'), entry.questions);
+  $('course-exam-result').hidden = !entry.graded;
+  if (entry.graded) $('course-exam-result').textContent = `Trang này đúng ${entry.correct}/${entry.questions.length} câu.`;
+  $('course-exam-submit').hidden = entry.graded;
+  $('course-exam-retry').hidden = !entry.graded;
+  $('course-exam-generate').hidden = true;
+  $('course-exam-pages').hidden = false;
+  $('course-exam-page-label').textContent = `Trang ${courseExamPage + 1}/${courseExamPlan.pages} · ${entry.questions.length} câu`;
+  $('course-exam-previous').disabled = courseExamPage === 0 || courseExamBusy;
+  $('course-exam-next').disabled = courseExamPage >= courseExamPlan.pages - 1 || courseExamBusy;
+  $('course-exam-status').textContent = entry.graded
+    ? 'Đã chấm trang này. Xem đáp án và giải thích dưới từng câu.'
+    : 'Câu hỏi tăng dần từ khó đến mức senior; câu cuối là phần mở rộng.';
+  window.scrollTo(0, 0);
+}
+async function loadCourseExamPage(page) {
+  if (courseExamBusy || !courseExamPlan || page < 0 || page >= courseExamPlan.pages) return;
+  saveCourseExamPage();
+  courseExamBusy = true;
+  $('course-exam-previous').disabled = $('course-exam-next').disabled = true;
+  $('course-exam-generate').disabled = true;
+  try {
+    if (!courseExamCache.has(page)) {
+      $('course-exam-status').textContent = `Đang tạo trang ${page + 1}/${courseExamPlan.pages} từ kiến thức đã lưu…`;
+      const result = await request('/api/course-exam/page', { page, revision: courseExamPlan.revision });
+      if (!validQuestions(result.questions) || result.questions.length > 20) throw new Error('Trang đề chưa hợp lệ.');
+      courseExamCache.set(page, { questions: result.questions, picks: [], graded: false, milestone: 0 });
+    }
+    courseExamPage = page;
+    renderCourseExamPage();
+  } catch (error) { $('course-exam-status').textContent = error.message; }
+  finally {
+    courseExamBusy = false;
+    $('course-exam-generate').disabled = false;
+    if (courseExamCache.has(courseExamPage)) {
+      $('course-exam-previous').disabled = courseExamPage === 0;
+      $('course-exam-next').disabled = courseExamPage >= courseExamPlan.pages - 1;
+    }
+  }
+}
+$('course-exam-open').onclick = async () => {
   if (!state.folder) return toast('Hãy chọn thư mục khóa học trước.');
+  let latestPlan;
+  try { latestPlan = { ...await request('/api/course-exam/plan'), folder: state.folder }; }
+  catch (error) { return toast(error.message); }
+  if (!courseExamPlan || courseExamPlan.folder !== latestPlan.folder || courseExamPlan.revision !== latestPlan.revision) {
+    courseExamQuestions = null;
+    courseExamCache.clear();
+    $('course-exam-questions').replaceChildren();
+    $('course-exam-pages').hidden = true;
+    $('course-exam-generate').hidden = false;
+    $('course-exam-submit').hidden = true;
+    $('course-exam-retry').hidden = true;
+    $('course-exam-result').hidden = true;
+  }
+  courseExamPlan = latestPlan;
   video.pause();
   document.querySelector('.layout').hidden = true;
   $('course-exam').hidden = false;
@@ -706,26 +780,27 @@ $('course-exam-close').onclick = () => {
 $('course-exam-generate').onclick = async () => {
   const button = $('course-exam-generate');
   button.disabled = true;
-  $('course-exam-status').textContent = 'Đang tạo câu hỏi từ toàn bộ kiến thức đã lưu. Khóa nhiều bài sẽ mất vài phút…';
+  $('course-exam-status').textContent = 'Đang chia kiến thức toàn khóa thành các trang…';
   try {
-    const result = await request('/api/course-exam', {});
-    if (!validQuestions(result.questions)) throw new Error('Đề tổng hợp chưa hợp lệ.');
-    courseExamQuestions = result.questions;
-    courseExamMilestone = 0;
-    renderQuestionSet($('course-exam-questions'), courseExamQuestions, 'course-exam-question');
-    $('course-exam-status').textContent = `${courseExamQuestions.length} câu từ toàn bộ các bài đã chấm. Hãy làm hết trước khi chấm.`;
-    $('course-exam-result').hidden = true;
-    $('course-exam-submit').hidden = false;
-    $('course-exam-retry').hidden = true;
-    button.hidden = true;
+    courseExamPlan = { ...await request('/api/course-exam/plan'), folder: state.folder };
+    courseExamCache.clear();
+    courseExamQuestions = null;
+    courseExamPage = 0;
+    await loadCourseExamPage(0);
   } catch (error) { $('course-exam-status').textContent = error.message; }
   finally { button.disabled = false; }
 };
+$('course-exam-previous').onclick = () => loadCourseExamPage(courseExamPage - 1);
+$('course-exam-next').onclick = () => loadCourseExamPage(courseExamPage + 1);
 $('course-exam-submit').onclick = () => {
   if (!courseExamQuestions) return;
   const result = gradeSet($('course-exam-questions'), courseExamQuestions);
   if (!result) return $('course-exam-status').textContent = 'Hãy chọn đáp án cho tất cả các câu.';
-  $('course-exam-result').textContent = `Bạn đúng ${result.correct}/${courseExamQuestions.length} câu.`;
+  const entry = courseExamCache.get(courseExamPage);
+  saveCourseExamPage();
+  entry.graded = true;
+  entry.correct = result.correct;
+  $('course-exam-result').textContent = `Trang này đúng ${result.correct}/${courseExamQuestions.length} câu.`;
   $('course-exam-result').hidden = false;
   $('course-exam-submit').hidden = true;
   $('course-exam-retry').hidden = false;
@@ -734,6 +809,10 @@ $('course-exam-submit').onclick = () => {
 };
 $('course-exam-retry').onclick = () => {
   courseExamMilestone = 0;
+  const entry = courseExamCache.get(courseExamPage);
+  entry.graded = false;
+  entry.picks = [];
+  entry.milestone = 0;
   renderQuestionSet($('course-exam-questions'), courseExamQuestions, 'course-exam-question');
   $('course-exam-result').hidden = true;
   $('course-exam-submit').hidden = false;

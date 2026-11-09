@@ -86,6 +86,7 @@
 .course-exam-head{display:flex;justify-content:space-between;align-items:start;gap:16px;border-bottom:1px solid #e5ebe4;margin-bottom:20px;padding-bottom:14px}
 .course-exam-head h1{font-size:24px;margin:5px 0}.course-exam-head p{font-size:13px;color:#607568}
 .course-exam-actions{position:sticky;bottom:0;background:#fff;padding:14px 0;display:flex;gap:10px}
+.course-exam-pages{display:flex;align-items:center;justify-content:center;gap:14px;margin:0 0 18px;font-size:13px;color:#315c50}.course-exam-pages button:disabled{opacity:.45;cursor:default}
 @media(max-width:600px){.course-exam{margin:8px;padding:14px}.course-exam-head{flex-wrap:wrap}.topbar{flex-wrap:wrap}#course-exam-open{order:3;width:100%}}
 
 .playlist-tabs button{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
