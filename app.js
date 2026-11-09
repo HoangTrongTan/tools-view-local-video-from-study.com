@@ -768,6 +768,10 @@ $('course-exam-open').onclick = async () => {
     $('course-exam-result').hidden = true;
   }
   courseExamPlan = latestPlan;
+  toast(courseExamEncouragement[milestone]);
+};
+$('course-exam-open').onclick = () => {
+  if (!state.folder) return toast('Hãy chọn thư mục khóa học trước.');
   video.pause();
   document.querySelector('.layout').hidden = true;
   $('course-exam').hidden = false;
@@ -780,18 +784,21 @@ $('course-exam-close').onclick = () => {
 $('course-exam-generate').onclick = async () => {
   const button = $('course-exam-generate');
   button.disabled = true;
-  $('course-exam-status').textContent = 'Đang chia kiến thức toàn khóa thành các trang…';
+  $('course-exam-status').textContent = 'Đang tạo câu hỏi từ toàn bộ kiến thức đã lưu. Khóa nhiều bài sẽ mất vài phút…';
   try {
-    courseExamPlan = { ...await request('/api/course-exam/plan'), folder: state.folder };
-    courseExamCache.clear();
-    courseExamQuestions = null;
-    courseExamPage = 0;
-    await loadCourseExamPage(0);
+    const result = await request('/api/course-exam', {});
+    if (!validQuestions(result.questions)) throw new Error('Đề tổng hợp chưa hợp lệ.');
+    courseExamQuestions = result.questions;
+    courseExamMilestone = 0;
+    renderQuestionSet($('course-exam-questions'), courseExamQuestions, 'course-exam-question');
+    $('course-exam-status').textContent = `${courseExamQuestions.length} câu từ toàn bộ các bài đã chấm. Hãy làm hết trước khi chấm.`;
+    $('course-exam-result').hidden = true;
+    $('course-exam-submit').hidden = false;
+    $('course-exam-retry').hidden = true;
+    button.hidden = true;
   } catch (error) { $('course-exam-status').textContent = error.message; }
   finally { button.disabled = false; }
 };
-$('course-exam-previous').onclick = () => loadCourseExamPage(courseExamPage - 1);
-$('course-exam-next').onclick = () => loadCourseExamPage(courseExamPage + 1);
 $('course-exam-submit').onclick = () => {
   if (!courseExamQuestions) return;
   const result = gradeSet($('course-exam-questions'), courseExamQuestions);
