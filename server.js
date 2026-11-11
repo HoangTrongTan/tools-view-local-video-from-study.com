@@ -22,10 +22,13 @@ const configuredModel = process.env.OLLAMA_MODEL?.trim() || defaultModel;
 const geminiModels = [...new Set([
   process.env.GEMINI_MODEL?.trim(),
   'gemini-3.1-flash-lite',
+  'gemma-4-31b-it',
+  'gemini-3.6-flash',
+  'gemini-3-flash-preview',
   'gemini-3.5-flash-lite',
   'gemini-flash-latest',
-  'gemini-2.5-flash',
-  'gemini-3.7-flash'
+  'gemini-3.7-flash',
+  'gemini-2.5-flash'
 ].filter(Boolean))];
 let activeGeminiModel = geminiModels[0];
 const geminiUnavailableUntil = new Map();
@@ -254,17 +257,19 @@ async function generateJson(model, prompt, maxOutput = 2300) {
     const failures = [];
     for (const name of attempts) {
       try {
+        const generationConfig = { temperature: 0.2, maxOutputTokens: maxOutput,
+          ...(name.startsWith('gemma-') ? { thinkingConfig: { thinkingLevel: 'minimal' } }
+            : { responseMimeType: 'application/json',
+              ...(name === 'gemini-3.1-flash-lite' ? { thinkingConfig: { thinkingBudget: 0 } } : {}) }) };
         const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/${encodeURIComponent(name)}:generateContent`, {
           method: 'POST', headers: { 'Content-Type': 'application/json', 'x-goog-api-key': geminiKey },
           signal: AbortSignal.timeout(maxOutput > 3000 ? 60000 : 30000),
-          body: JSON.stringify({ contents: [{ parts: [{ text: prompt }] }], generationConfig: {
-            temperature: 0.2, maxOutputTokens: maxOutput, responseMimeType: 'application/json', thinkingConfig: { thinkingBudget: 0 }
-          } })
+          body: JSON.stringify({ contents: [{ parts: [{ text: prompt }] }], generationConfig })
         });
         if (response.status === 401) throw Object.assign(new Error('API key Gemini không hợp lệ.'), { fatal: true });
         if (!response.ok) throw Object.assign(new Error('Gemini HTTP error'), { httpStatus: response.status });
         const data = await response.json();
-        const output = data.candidates?.[0]?.content?.parts?.map(part => part.text || '').join('');
+        const output = data.candidates?.[0]?.content?.parts?.filter(part => !part.thought).map(part => part.text || '').join('');
         if (!output) throw new Error('Không có nội dung');
         const result = JSON.parse(output.trim().replace(/^```(?:json)?\s*|\s*```$/g, ''));
         activeGeminiModel = name;
