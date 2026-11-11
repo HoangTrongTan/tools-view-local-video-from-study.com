@@ -213,6 +213,96 @@
               "needsReview": false
             }
           ]
+        },
+        {
+          "video": "24. Develop Basket Checkout Event Consumer integration event handler class - 2.mp4",
+          "completedAt": "2026-11-09T17:05:50.661Z",
+          "facts": [
+            {
+              "question": "Trong lớp xử lý sự kiện (Consumer) của BasketCheckout, tại sao cần sử dụng 'ISender' và 'IMediator'?",
+              "answer": "Để gửi lệnh (Command) tạo đơn hàng đến trình xử lý tương ứng trong kiến trúc CQRS",
+              "explanation": "Trong mẫu CQRS, lớp Consumer sử dụng ISender (từ Mediator) để gửi lệnh tạo đơn hàng, từ đó kích hoạt trình xử lý lệnh (Command Handler) để thực hiện logic nghiệp vụ.",
+              "needsReview": false
+            },
+            {
+              "question": "Quy trình xử lý từ sự kiện thanh toán giỏ hàng (BasketCheckout) đến khi tạo đơn hàng diễn ra như thế nào?",
+              "answer": "Consumer nhận sự kiện -> Gửi lệnh tạo đơn hàng -> Mediator kích hoạt Handler -> Tạo thực thể Order",
+              "explanation": "Quy trình bắt đầu từ việc tiêu thụ sự kiện, chuyển đổi thành lệnh (Command), sử dụng Mediator để gọi Handler, và cuối cùng là tạo thực thể Order trong hệ thống.",
+              "needsReview": false
+            },
+            {
+              "question": "Tại sao phương thức 'Order.Create' trong lớp Domain lại quan trọng trong quy trình này?",
+              "answer": "Vì nó chịu trách nhiệm tạo thực thể đơn hàng và phát ra sự kiện miền 'OrderCreated'",
+              "explanation": "Phương thức Order.Create nằm trong Domain Aggregate, chịu trách nhiệm khởi tạo thực thể và phát ra sự kiện miền (Domain Event) để các thành phần khác trong hệ thống phản ứng.",
+              "needsReview": false
+            },
+            {
+              "question": "Mục đích của việc phát hành 'Sự kiện tích hợp đơn hàng được tạo' (OrderCreated Integration Event) sau khi xử lý xong sự kiện miền là gì?",
+              "answer": "Để thông báo cho các microservice khác như vận chuyển, thanh toán và thông báo bắt đầu quy trình",
+              "explanation": "Sự kiện tích hợp được phát hành để các microservice khác (vận chuyển, thanh toán, thông báo) biết và thực hiện các tác vụ liên quan, hỗ trợ quy trình thực hiện đơn hàng tổng thể.",
+              "needsReview": false
+            }
+          ]
+        },
+        {
+          "video": "25. Saga Pattern for Distributed Transactions.mp4",
+          "completedAt": "2026-11-09T17:37:53.719Z",
+          "facts": [
+            {
+              "question": "Mục đích chính của việc sử dụng mẫu Saga trong kiến trúc microservice là gì?",
+              "answer": "Để quản lý tính nhất quán dữ liệu giữa các microservice trong các giao dịch phân tán",
+              "explanation": "Mẫu Saga được thiết kế để quản lý tính nhất quán dữ liệu trong các giao dịch phân tán bằng cách phối hợp các giao dịch cục bộ giữa các microservice.",
+              "needsReview": false
+            },
+            {
+              "question": "Điều gì xảy ra khi một bước trong chuỗi giao dịch của mẫu Saga bị thất bại?",
+              "answer": "Mẫu Saga kích hoạt các giao dịch bù trừ để hoàn tác các thay đổi đã thực hiện",
+              "explanation": "Khi một bước thất bại, mẫu Saga thực hiện các giao dịch bù trừ (compensating transactions) để đảo ngược các thay đổi trước đó, khôi phục trạng thái ban đầu.",
+              "needsReview": false
+            },
+            {
+              "question": "Trong ví dụ về quy trình thực hiện đơn hàng, nếu microservice kho hàng báo lỗi không thể giữ hàng, microservice thực hiện đơn hàng sẽ làm gì?",
+              "answer": "Thực hiện giao dịch bù trừ để hoàn tác các thay đổi và hủy đơn hàng",
+              "explanation": "Nếu kho hàng thất bại, microservice thực hiện đơn hàng sẽ thực thi giao dịch bù trừ để hoàn tác các thao tác đã thực hiện, đảm bảo tính nhất quán.",
+              "needsReview": false
+            },
+            {
+              "question": "Mối quan hệ giữa 'giao dịch cục bộ' và 'mẫu Saga' là gì?",
+              "answer": "Saga là một tập hợp các giao dịch cục bộ được phối hợp tuần tự để đạt được mục tiêu end-to-end",
+              "explanation": "Mẫu Saga nhóm các giao dịch cục bộ của từng microservice lại với nhau và gọi chúng tuần tự để hoàn thành một quy trình nghiệp vụ end-to-end.",
+              "needsReview": false
+            }
+          ]
+        },
+        {
+          "video": "26. Publish OrderCreated Integration event for Order Fullfiment microservices.mp4",
+          "completedAt": "2026-11-11T14:57:03.614Z",
+          "facts": [
+            {
+              "question": "Trong trình xử lý sự kiện miền (Domain Event Handler) 'OrderCreated', interface nào của MassTransit được tiêm vào để thực hiện việc xuất bản sự kiện tích hợp?",
+              "answer": "IPublishEndpoint",
+              "explanation": "Để xuất bản một sự kiện tích hợp từ lớp xử lý sự kiện miền, chúng ta cần tiêm interface IPublishEndpoint từ thư viện MassTransit vào constructor.",
+              "needsReview": false
+            },
+            {
+              "question": "Tại sao cần phải chuyển đổi thực thể 'Order' sang 'OrderDto' trước khi xuất bản sự kiện tích hợp?",
+              "answer": "Tất cả các phương án trên đều đúng",
+              "explanation": "Việc ánh xạ sang DTO giúp tách biệt cấu trúc dữ liệu giữa các microservice, đảm bảo tính đóng gói và tối ưu hóa dữ liệu truyền tải qua RabbitMQ.",
+              "needsReview": true
+            },
+            {
+              "question": "Tại sao việc xuất bản sự kiện tích hợp 'OrderCreated' ngay trong quá trình seeding dữ liệu (Database Seeding) lại là một vấn đề cần được quản lý?",
+              "answer": "Vì nó tạo ra các thông điệp sự kiện không cần thiết khi hệ thống chưa sẵn sàng",
+              "explanation": "Khi gieo dữ liệu (seeding), hệ thống tự động tạo đơn hàng, nếu không kiểm soát, nó sẽ kích hoạt sự kiện tích hợp không mong muốn tới các microservice khác.",
+              "needsReview": true
+            },
+            {
+              "question": "Để giải quyết vấn đề xuất bản sự kiện không mong muốn trong quá trình seeding, bài giảng đề xuất sử dụng kỹ thuật nào?",
+              "answer": "Sử dụng ASP.Net Feature Management để bật/tắt tính năng xuất bản sự kiện",
+              "explanation": "Bài giảng đề xuất sử dụng ASP.Net Feature Management để quản lý việc bật/tắt tính năng xuất bản sự kiện tích hợp, tránh việc kích hoạt không cần thiết.",
+              "needsReview": false
+            }
+          ]
         }
       ]
     }
