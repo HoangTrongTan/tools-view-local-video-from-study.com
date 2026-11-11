@@ -49,6 +49,7 @@
 .quiz-setup[hidden]{display:none}
 .quiz-setup a{color:#245b3d;font-weight:700}
 .quiz-setup code{font-family:Consolas,monospace;font-size:12px;white-space:nowrap}
+.quiz-manual{margin:12px 14px 20px;padding:14px;border:1px solid #d8e6cf;border-radius:10px;background:#f5faf1;font-size:12px;line-height:1.5}.quiz-manual h3{margin:0 0 6px;font-size:15px}.quiz-manual p{margin:5px 0 10px}.quiz-manual label{display:block;margin:12px 0 5px;font-weight:700}.quiz-manual textarea{display:block;width:100%;min-height:130px;padding:10px;border:1px solid #cbdccc;border-radius:7px;background:#fff;color:#24382c;font:12px/1.5 Consolas,monospace;resize:vertical}.quiz-manual textarea[readonly]{min-height:150px}.quiz-manual button{margin-top:9px}.quiz-manual #quiz-manual-status{color:#a14537}
 .quiz-questions{display:grid;gap:14px;margin-bottom:20px}
 .quiz-question{border:1px solid #e0e9df;border-radius:10px;padding:14px;background:white;min-width:0}
 .quiz-question legend{font-size:14px;font-weight:700;line-height:1.5;padding:0 5px;white-space:normal}
@@ -90,3 +91,6 @@
 @media(max-width:600px){.course-exam{margin:8px;padding:14px}.course-exam-head{flex-wrap:wrap}.topbar{flex-wrap:wrap}#course-exam-open{order:3;width:100%}}
 
 .playlist-tabs button{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.lesson.completed .lesson-number{background:#dcefe1;color:#276843}
+.lesson-done{flex:none;border-radius:12px;background:#e3f4e6;color:#276843;padding:3px 6px;font-size:10px;font-weight:700;white-space:nowrap}
+.lesson-done[hidden]{display:none}

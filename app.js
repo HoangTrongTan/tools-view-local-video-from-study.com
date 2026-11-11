@@ -2,7 +2,7 @@
 const $ = id => document.getElementById(id);
 const video = $('video');
 const frame = $('video-frame');
-let state = { folder: '', files: [], current: '', position: 0, recentFolders: [] };
+let state = { folder: '', files: [], current: '', position: 0, recentFolders: [], completedVideos: [] };
 let loaded = '';
 let lastSaved = 0;
 let pendingRestore = 0;
@@ -14,6 +14,7 @@ let quizVideo = '';
 let activeQuiz = null;
 let quizBusy = false;
 let quizPollTimer = null;
+let manualQuizToken = 0;
 let remedialQuestions = null;
 let remedialWrong = [];
 let remedialToken = 0;
@@ -123,6 +124,7 @@ function resetRemedial() {
 }
 function renderQuiz() {
   if (!activeQuiz) return;
+  $('quiz-manual').hidden = true;
   resetRemedial();
   renderQuestionSet($('quiz-questions'), activeQuiz, 'quiz-question');
   $('quiz-generate').hidden = true;
@@ -280,6 +282,8 @@ async function openQuiz() {
   if (document.fullscreenElement === frame) await document.exitFullscreen();
   if (quizVideo === state.current && $('quiz-dialog').open) { showSidebarTab('quiz'); return; }
   quizVideo = state.current;
+  manualQuizToken++;
+  $('quiz-manual').hidden = true;
   $('quiz-lesson').textContent = state.current.replace(/\.[^.]+$/, '');
   const index = files().findIndex(entry => fileName(entry) === state.current);
   $('quiz-next').hidden = index < 0 || index >= files().length - 1;
@@ -315,6 +319,7 @@ async function generateQuiz() {
   const requestedVideo = quizVideo;
   const requestedFolder = state.folder;
   quizBusy = true;
+  $('quiz-manual').hidden = true;
   $('quiz-generate').hidden = true;
   $('quiz-progress').hidden = false;
   $('quiz-progress').removeAttribute('value');
@@ -335,6 +340,7 @@ async function generateQuiz() {
       setQuizStatus(error.message, true);
       $('quiz-progress').hidden = true;
       $('quiz-generate').hidden = false;
+      showManualQuiz(requestedVideo, requestedFolder);
     }
   } finally {
     quizBusy = false;
@@ -346,6 +352,22 @@ async function generateQuiz() {
       $('quiz-generate').textContent = 'Bắt đầu tạo trắc nghiệm';
       $('quiz-generate').hidden = false;
     }
+  }
+}
+async function showManualQuiz(videoName, folder) {
+  const token = ++manualQuizToken;
+  $('quiz-manual').hidden = false;
+  $('quiz-manual-prompt').value = '';
+  $('quiz-manual-copy').disabled = true;
+  $('quiz-manual-status').textContent = 'Đang chuẩn bị prompt từ phụ đề bài học…';
+  try {
+    const result = await request(`/api/quiz/manual?video=${encodeURIComponent(videoName)}`);
+    if (token !== manualQuizToken || quizVideo !== videoName || state.folder !== folder) return;
+    $('quiz-manual-prompt').value = result.prompt;
+    $('quiz-manual-copy').disabled = false;
+    $('quiz-manual-status').textContent = 'Prompt đã sẵn sàng để copy.';
+  } catch (error) {
+    if (token === manualQuizToken) $('quiz-manual-status').textContent = error.message;
   }
 }
 function gradeSet(container, questions) {
@@ -385,7 +407,15 @@ function gradeQuiz() {
   $('quiz-submit').hidden = true;
   $('quiz-retry').hidden = false;
   setQuizStatus(wrong.length ? 'Đã chấm bài. AI đang soạn câu nhắc lại cho những ý bạn chưa nắm…' : 'Đúng hết! Bạn đã nắm các ý chính của bài.');
-  request('/api/quiz/complete', { video: quizVideo, wrongQuestions: wrong.map(item => item.question) }).catch(error => toast(`Không lưu được kiến thức: ${error.message}`));
+  const completedVideo = quizVideo, completedFolder = state.folder;
+  request('/api/quiz/complete', { video: completedVideo, wrongQuestions: wrong.map(item => item.question) })
+    .then(() => {
+      if (state.folder !== completedFolder) return;
+      state.completedVideos ||= [];
+      if (!state.completedVideos.includes(completedVideo)) state.completedVideos.push(completedVideo);
+      renderLists();
+    })
+    .catch(error => toast(`Không lưu được kiến thức: ${error.message}`));
   if (wrong.length) generateRemedial(wrong);
 }
 async function generateRemedial(wrong) {
@@ -465,6 +495,7 @@ function closeDrawer(restoreFocus = true) {
 }
 function renderLists() {
   const all = files();
+  const completedVideos = new Set(state.completedVideos || []);
   const needle = searchable(filterText.trim());
   const matching = all.map((entry, index) => ({ name: fileName(entry), index }))
     .filter(({ name }) => searchable(name).includes(needle));
@@ -480,7 +511,8 @@ function renderLists() {
     }
     for (const { name, index } of matching) {
       const button = document.createElement('button');
-      button.className = 'lesson' + (name === state.current ? ' active' : '');
+      const completed = completedVideos.has(name);
+      button.className = 'lesson' + (name === state.current ? ' active' : '') + (completed ? ' completed' : '');
       if (name === state.current) button.setAttribute('aria-current', 'true');
       const number = document.createElement('span');
       number.className = 'lesson-number';
@@ -488,10 +520,14 @@ function renderLists() {
       const label = document.createElement('span');
       label.className = 'lesson-name';
       label.textContent = name.replace(/\.[^.]+$/, '');
+      const done = document.createElement('span');
+      done.className = 'lesson-done';
+      done.textContent = '✓ Đã làm';
+      done.hidden = !completed;
       const play = document.createElement('span');
       play.className = 'lesson-play';
       play.innerHTML = name === state.current ? ICONS.play : ICONS.next;
-      button.append(number, label, play);
+      button.append(number, label, done, play);
       button.addEventListener('click', () => { select(name, true); closeDrawer(); });
       target.append(button);
     }
@@ -669,6 +705,31 @@ $('note-editor').addEventListener('keydown', event => {
 });
 window.addEventListener('beforeunload', event => { if (noteDirty) { event.preventDefault(); event.returnValue = ''; } });
 $('quiz-generate').onclick = generateQuiz;
+$('quiz-manual-copy').onclick = async () => {
+  const prompt = $('quiz-manual-prompt').value;
+  if (!prompt) return;
+  try { await navigator.clipboard.writeText(prompt); $('quiz-manual-status').textContent = 'Đã copy prompt.'; }
+  catch {
+    $('quiz-manual-prompt').select();
+    $('quiz-manual-status').textContent = 'Hãy bấm Ctrl+C để copy prompt đang được chọn.';
+  }
+};
+$('quiz-manual-import').onclick = async () => {
+  const button = $('quiz-manual-import');
+  const requestedVideo = quizVideo, requestedFolder = state.folder;
+  button.disabled = true;
+  $('quiz-manual-status').textContent = 'Đang kiểm tra và nhập câu hỏi…';
+  try {
+    const result = await request('/api/quiz/manual', { video: requestedVideo, response: $('quiz-manual-response').value });
+    if (!validQuestions(result.questions)) throw new Error('JSON chưa có bộ câu hỏi hợp lệ.');
+    quizCache.set(`${requestedFolder}\u0000${requestedVideo}`, result.questions);
+    if (quizVideo === requestedVideo && state.folder === requestedFolder) {
+      activeQuiz = result.questions;
+      renderQuiz();
+    }
+  } catch (error) { $('quiz-manual-status').textContent = error.message; }
+  finally { button.disabled = false; }
+};
 $('quiz-submit').onclick = gradeQuiz;
 $('quiz-retry').onclick = renderQuiz;
 $('quiz-next').onclick = () => { showSidebarTab('lessons'); next(); };

@@ -70,6 +70,17 @@
     <p id="quiz-lesson" class="quiz-lesson"></p>
     <p id="quiz-status" class="quiz-status" role="status" aria-live="polite">AI sẽ tạo số câu phù hợp với nội dung bài học.</p>
     <progress id="quiz-progress" class="quiz-progress" max="100" aria-label="Tiến độ chuẩn bị trắc nghiệm" hidden></progress>
+    <section id="quiz-manual" class="quiz-manual" hidden aria-label="Tạo trắc nghiệm thủ công">
+      <h3>Tạo bằng AI khác</h3>
+      <p>Nếu các model trong app đều lỗi, copy prompt này sang AI bạn dùng. Dán lại toàn bộ JSON từ dấu { đầu đến dấu } cuối; không copy dấu \, mã HTML hay câu trả lời bị cắt dở.</p>
+      <label for="quiz-manual-prompt">Prompt cho bài này</label>
+      <textarea id="quiz-manual-prompt" readonly></textarea>
+      <button id="quiz-manual-copy" class="button outline" type="button" disabled>Copy prompt</button>
+      <label for="quiz-manual-response">JSON câu hỏi từ AI</label>
+      <textarea id="quiz-manual-response" placeholder='{"questions":[{"question":"...","options":["...","...","...","..."],"answerIndex":0,"explanation":"...","source":"current"}]}'></textarea>
+      <button id="quiz-manual-import" class="button primary" type="button">Nhập bài tập</button>
+      <p id="quiz-manual-status" role="status"></p>
+    </section>
     <div id="quiz-questions" class="quiz-questions"></div>
     <p id="quiz-result" class="quiz-result" role="status" aria-live="polite" hidden></p>
     <section id="remedial" class="remedial" aria-labelledby="remedial-title" hidden>

@@ -4,9 +4,15 @@ Nhấp đúp `Mo hoc video.bat - Shortcut.lnk` để mở mà không hiện cử
 
 ## Trắc nghiệm AI sau bài học
 
-Tool đọc file phụ đề cùng tên video (`_vi.srt`, `.vi.srt` hoặc `.srt`) để tạo câu hỏi. Khi có API key, tool dùng Gemini `gemini-3.1-flash-lite`. AI tự chọn từ 3–20 câu theo độ khó và số ý cần kiểm tra của bài. Bấm **Trắc nghiệm bài này** để tạo câu hỏi. Sau khi xem hết video, phần trắc nghiệm tự mở.
+Tool đọc file phụ đề cùng tên video (`_vi.srt`, `.vi.srt` hoặc `.srt`) để tạo câu hỏi. Khi có API key, tool dùng Gemini và các model dự phòng đã cấu hình. App ấn định số câu cho bài hiện tại theo độ dài phụ đề và số ý tóm tắt, rồi yêu cầu AI trả đúng số câu đó trong một object JSON `{"questions":[...]}`; bài có thêm một câu mở rộng và, khi đủ dữ liệu, ba câu ôn bài cũ (tối đa 20 câu tổng cộng). Bấm **Trắc nghiệm bài này** để tạo câu hỏi. Sau khi xem hết video, phần trắc nghiệm tự mở.
 
 Câu hỏi tô nổi bật từ khóa chính. Mỗi bài có thêm một câu vận dụng mở rộng liên quan nhưng không được dạy trực tiếp trong video; phần giải thích đánh dấu rõ kiến thức mở rộng. Sau khi chấm, câu sai có giải thích và tool tự tạo câu nhắc lại để bạn luyện tiếp. Bạn có thể bấm **Bài tiếp** khi xong.
+
+Trong danh sách bài học và danh sách ở chế độ toàn màn hình, video đã chấm trắc nghiệm và lưu kiến thức có dấu **✓ Đã làm**. Dấu này được giữ khi mở lại app và tách theo từng thư mục khóa học.
+
+Nếu tất cả model đều lỗi, tab Trắc nghiệm hiện mục **Tạo bằng AI khác**. Bấm **Copy prompt**, dán vào AI bạn dùng, rồi dán JSON câu hỏi trả về vào app và bấm **Nhập bài tập**. App kiểm tra định dạng, hiển thị đề và vẫn lưu kiến thức sau khi chấm như bình thường. Mỗi lần gọi Gemini được ghi vào `ai-debug.jsonl` tại thư mục tool và in ra console server, gồm thời gian, tên model, mã HTTP và toàn bộ phản hồi hoặc lý do lỗi; file này không được đưa vào Git và API key được che nếu vô tình xuất hiện trong phản hồi. Mở bằng `Mo hoc video.bat` để thấy console trực tiếp.
+
+Khi dùng AI ngoài, hãy copy **toàn bộ JSON thô** từ `{` đầu đến `}` cuối. Prompt yêu cầu không dùng dấu `\` nối dòng, mã HTML như `&#x20;` hoặc lời dẫn. Ô nhập tự bỏ các dấu nối dòng và mã khoảng trắng thường gặp, nhưng JSON bị cắt dở vẫn cần lấy lại phần còn thiếu.
 
 ## Bài tập cuối khóa
 

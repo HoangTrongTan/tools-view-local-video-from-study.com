@@ -303,6 +303,54 @@
               "needsReview": false
             }
           ]
+        },
+        {
+          "video": "27. Aspnet Feature Management Develop Feature Flag for OrderCreated Event.mp4",
+          "completedAt": "2026-11-11T16:32:27.852Z",
+          "facts": [
+            {
+              "question": "Tại sao việc cài đặt gói NuGet 'Microsoft.FeatureManagement.AspNetCore' nên được thực hiện trong 'building blocks' thay vì từng microservice riêng lẻ?",
+              "answer": "Để tập trung hóa việc quản lý tính năng và tái sử dụng cấu hình cho tất cả các microservice",
+              "explanation": "Việc cài đặt trong building blocks giúp tập trung hóa quản lý tính năng, đảm bảo tính nhất quán và khả năng tái sử dụng cho các microservice trong hệ thống.",
+              "needsReview": false
+            },
+            {
+              "question": "Trong lớp xử lý sự kiện 'OrderCreatedDomainEventHandler', interface nào được sử dụng để kiểm tra trạng thái của cờ tính năng trước khi xuất bản sự kiện tích hợp?",
+              "answer": "IFeatureManager",
+              "explanation": "Interface IFeatureManager được tiêm vào constructor của trình xử lý sự kiện để sử dụng phương thức 'IsEnabledAsync', giúp kiểm tra trạng thái cờ tính năng trước khi thực hiện logic xuất bản.",
+              "needsReview": false
+            },
+            {
+              "question": "Liên quan đến việc seeding dữ liệu đã đề cập ở bài trước, tại sao việc sử dụng cờ tính năng (Feature Flag) lại quan trọng đối với sự kiện 'OrderCreated'?",
+              "answer": "Để ngăn chặn việc xuất bản các sự kiện tích hợp không mong muốn khi hệ thống chưa sẵn sàng",
+              "explanation": "Khi seeding dữ liệu, hệ thống tự động tạo đơn hàng. Nếu không có cờ tính năng, các sự kiện tích hợp sẽ bị kích hoạt không cần thiết tới các microservice khác khi chúng chưa sẵn sàng.",
+              "needsReview": false
+            }
+          ]
+        },
+        {
+          "video": "23. Develop Basket Checkout Event Consumer integration event handler class.mp4",
+          "completedAt": "2026-11-11T16:37:38.410Z",
+          "facts": [
+            {
+              "question": "Trong kiến trúc của ứng dụng đặt hàng, tại sao cần phải tách thư mục 'EventHandlers' thành hai thư mục con là 'Domain' và 'Integration'?",
+              "answer": "Để phân loại và quản lý trình xử lý sự kiện theo loại sự kiện (miền và tích hợp)",
+              "explanation": "Việc tách thư mục giúp tổ chức mã nguồn rõ ràng hơn, phân biệt giữa các sự kiện miền (Domain Events) và sự kiện tích hợp (Integration Events) trong hệ thống.",
+              "needsReview": false
+            },
+            {
+              "question": "Để phát triển lớp xử lý sự kiện tích hợp 'BasketCheckout' trong MassTransit, interface nào cần được triển khai?",
+              "answer": "IConsumer",
+              "explanation": "Để xử lý một sự kiện tích hợp trong MassTransit, lớp xử lý phải triển khai interface IConsumer<T>, trong đó T là kiểu sự kiện cần tiêu thụ.",
+              "needsReview": false
+            },
+            {
+              "question": "Phương thức 'Consume' trong lớp xử lý sự kiện tích hợp nhận tham số nào để truy cập vào dữ liệu sự kiện?",
+              "answer": "ConsumeContext<T>",
+              "explanation": "Phương thức Consume nhận một đối số kiểu ConsumeContext<T>, cho phép truy cập vào dữ liệu sự kiện và các tính năng ngữ cảnh tin nhắn khác.",
+              "needsReview": false
+            }
+          ]
         }
       ]
     }
