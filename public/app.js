@@ -231,7 +231,8 @@ async function createNote() {
     $('note-editor').focus();
   } catch (error) { setNoteStatus(error.message, true); }
 }
-async function chooseNote() {
+async function chooseNote() { await withDialog(chooseNoteFile); }
+async function chooseNoteFile() {
   try {
     const result = await request('/api/note/choose', {});
     if (!result.path) return;
@@ -688,12 +689,29 @@ async function applyFolder(result) {
   else if (files().length) await select(fileName(files()[0]));
   else render();
 }
+let dialogBusy = false;
+const dialogButtons = ['choose', 'change', 'empty-choose', 'note-choose'];
+/** Chỉ cho mở một hộp thoại Windows mỗi lần; khóa các nút chọn tới khi hộp thoại đóng. */
+async function withDialog(task) {
+  if (dialogBusy) return toast('Hộp thoại chọn đang mở, hãy chọn hoặc đóng nó trước.');
+  dialogBusy = true;
+  for (const id of dialogButtons) $(id).disabled = true;
+  try { return await task(); }
+  finally {
+    dialogBusy = false;
+    for (const id of dialogButtons) $(id).disabled = false;
+  }
+}
 async function choose() {
-  try {
-    if (loaded) await save();
-    const result = await request('/api/choose', {});
-    if (result) await applyFolder(result);
-  } catch (error) { toast(error.message); }
+  await withDialog(async () => {
+    try {
+      if (loaded) await save();
+      $('choose').textContent = 'Đang mở hộp thoại…';
+      const result = await request('/api/choose', {});
+      if (result) await applyFolder(result);
+    } catch (error) { toast(error.message); }
+    finally { $('choose').textContent = 'Chọn thư mục'; }
+  });
 }
 async function switchFolder(folder) {
   if (!folder) return;
