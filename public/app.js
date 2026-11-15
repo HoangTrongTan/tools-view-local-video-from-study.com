@@ -2,7 +2,7 @@
 const $ = id => document.getElementById(id);
 const video = $('video');
 const frame = $('video-frame');
-let state = { folder: '', files: [], current: '', position: 0, recentFolders: [], completedVideos: [] };
+let state = { folder: '', files: [], current: '', position: 0, recentFolders: [], completedVideos: [], contexts: [], contextId: '' };
 let loaded = '';
 let lastSaved = 0;
 let pendingRestore = 0;
@@ -414,6 +414,12 @@ function gradeQuiz() {
       state.completedVideos ||= [];
       if (!state.completedVideos.includes(completedVideo)) state.completedVideos.push(completedVideo);
       renderLists();
+      // Cập nhật số bài / thời gian sửa cuối (và bộ mới tự tạo nếu trước đó chưa chọn bộ nào).
+      return request('/api/contexts').then(({ contexts, selected }) => {
+        state.contexts = contexts;
+        state.contextId = selected;
+        renderContexts();
+      }, () => {});
     })
     .catch(error => toast(`Không lưu được kiến thức: ${error.message}`));
   if (wrong.length) generateRemedial(wrong);
@@ -487,6 +493,86 @@ function renderFolders() {
   select.value = '';
   select.hidden = !(state.recentFolders || []).length;
 }
+const CONTEXT_TYPES = ['Lập trình', 'Ngoại ngữ', 'Toán', 'Khoa học', 'Kinh tế', 'Kỹ năng', 'Khác'];
+let contextDialogMode = 'create';
+const formatDate = value => {
+  const date = new Date(value);
+  return value && !Number.isNaN(date.getTime()) ? date.toLocaleString('vi-VN', { dateStyle: 'short', timeStyle: 'short' }) : 'không rõ';
+};
+const activeContext = () => (state.contexts || []).find(item => item.id === state.contextId) || null;
+function contextDetails(item) {
+  return `Loại: ${item.type}\nTạo lúc: ${formatDate(item.createdAt)}\nSửa cuối: ${formatDate(item.updatedAt)}\n${item.lessons} bài · ${item.facts} ý kiến thức${item.description ? `\n${item.description}` : ''}`;
+}
+function renderContexts() {
+  const select = $('context-select');
+  const contexts = state.contexts || [];
+  select.replaceChildren();
+  if (!state.contextId || !contexts.some(item => item.id === state.contextId)) {
+    const placeholder = document.createElement('option');
+    placeholder.value = '';
+    placeholder.textContent = contexts.length ? 'Chọn bộ kiến thức…' : 'Chưa có bộ kiến thức';
+    select.append(placeholder);
+  }
+  for (const item of contexts) {
+    const option = document.createElement('option');
+    option.value = item.id;
+    option.textContent = `${item.name} · ${item.type}`;
+    option.title = contextDetails(item);
+    select.append(option);
+  }
+  select.value = activeContext() ? state.contextId : '';
+  const current = activeContext();
+  select.title = current ? contextDetails(current) : 'Tạo bộ kiến thức cho môn/chủ đề bạn đang học';
+  $('context-edit').disabled = !current;
+}
+/** Áp dụng phần trạng thái liên quan đến bộ kiến thức trả về từ server. */
+function applyContextState(snapshot) {
+  if (!snapshot) return;
+  state.contexts = snapshot.contexts || [];
+  state.contextId = snapshot.contextId || '';
+  if (snapshot.folder === state.folder) state.completedVideos = snapshot.completedVideos || [];
+  renderContexts();
+  renderLists();
+}
+async function switchContext(id) {
+  if (!id || id === state.contextId) return renderContexts();
+  try {
+    applyContextState(await request('/api/contexts/select', { id }));
+    toast(`Đang dùng bộ kiến thức: ${activeContext()?.name || id}`);
+  } catch (error) { renderContexts(); toast(error.message); }
+}
+function openContextDialog(mode) {
+  const current = activeContext();
+  if (mode === 'edit' && !current) return;
+  contextDialogMode = mode;
+  const types = [...new Set([...CONTEXT_TYPES, ...(state.contexts || []).map(item => item.type)])];
+  $('context-types').replaceChildren(...types.map(type => Object.assign(document.createElement('option'), { value: type })));
+  $('context-dialog-title').textContent = mode === 'edit' ? 'Sửa bộ kiến thức' : 'Bộ kiến thức mới';
+  $('context-save').textContent = mode === 'edit' ? 'Lưu thay đổi' : 'Tạo và chọn';
+  $('context-name').value = mode === 'edit' ? current.name : '';
+  $('context-type').value = mode === 'edit' ? current.type : '';
+  $('context-description').value = mode === 'edit' ? current.description : '';
+  $('context-dates').hidden = mode !== 'edit';
+  $('context-dates').textContent = mode === 'edit' ? `Tạo lúc ${formatDate(current.createdAt)} · Sửa cuối ${formatDate(current.updatedAt)} · ${current.lessons} bài, ${current.facts} ý kiến thức` : '';
+  $('context-error').textContent = '';
+  $('context-dialog').showModal();
+  $('context-name').focus();
+}
+async function submitContextDialog(event) {
+  event.preventDefault();
+  const payload = { name: $('context-name').value, type: $('context-type').value, description: $('context-description').value };
+  const button = $('context-save');
+  button.disabled = true;
+  try {
+    const { context, state: snapshot } = contextDialogMode === 'edit'
+      ? await request('/api/contexts/update', { id: state.contextId, ...payload })
+      : await request('/api/contexts', payload);
+    applyContextState(snapshot);
+    $('context-dialog').close();
+    toast(contextDialogMode === 'edit' ? 'Đã lưu bộ kiến thức.' : `Đã tạo và chọn bộ kiến thức "${context.name}".`);
+  } catch (error) { $('context-error').textContent = error.message; }
+  finally { button.disabled = false; }
+}
 function closeDrawer(restoreFocus = true) {
   if ($('lesson-drawer').hidden) return;
   $('lesson-drawer').hidden = true;
@@ -537,6 +623,7 @@ function render() {
   $('folder').textContent = state.folder || 'Chưa chọn thư mục';
   $('folder').title = state.folder || '';
   renderFolders();
+  renderContexts();
   const all = files();
   const index = all.findIndex(x => fileName(x) === state.current);
   $('counter').textContent = `${index < 0 ? 0 : index + 1} / ${all.length}`;
@@ -641,6 +728,11 @@ async function toggleFullscreen() {
 }
 $('choose').onclick = $('change').onclick = $('empty-choose').onclick = choose;
 $('recent-folders').addEventListener('change', event => switchFolder(event.target.value));
+$('context-select').addEventListener('change', event => switchContext(event.target.value));
+$('context-new').onclick = () => openContextDialog('create');
+$('context-edit').onclick = () => openContextDialog('edit');
+$('context-cancel').onclick = () => $('context-dialog').close();
+$('context-form').addEventListener('submit', submitContextDialog);
 for (const input of [$('list-filter'), $('drawer-filter')]) {
   input.addEventListener('input', () => {
     filterText = input.value;
@@ -921,7 +1013,7 @@ document.addEventListener('fullscreenchange', () => {
   if (document.fullscreenElement !== frame) closeDrawer(false);
 });
 document.addEventListener('keydown', event => {
-  if (event.ctrlKey || event.altKey || event.metaKey || ['INPUT', 'SELECT', 'TEXTAREA'].includes(document.activeElement?.tagName)) return;
+  if (event.ctrlKey || event.altKey || event.metaKey || $('context-dialog').open || ['INPUT', 'SELECT', 'TEXTAREA'].includes(document.activeElement?.tagName)) return;
   if (!['ArrowLeft', 'ArrowRight', ' ', 'f', 'F', 'k', 'K'].includes(event.key)) return;
   if (document.activeElement?.tagName === 'BUTTON') document.activeElement.blur();
   if (event.key === 'ArrowLeft') seekBy(-5);

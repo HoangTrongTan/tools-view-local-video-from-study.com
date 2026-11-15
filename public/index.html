@@ -12,6 +12,12 @@
   <header class="topbar">
     <div class="brand"><img class="brand-icon" src="/favicon.ico?v=2" alt=""><strong>Góc học tập</strong></div>
     <button id="course-exam-open" class="button quiz-button" type="button">✦ Bài tập cuối khóa</button>
+    <div class="context-picker" role="group" aria-label="Bộ kiến thức">
+      <span class="context-label" aria-hidden="true">Kiến thức</span>
+      <select id="context-select" aria-label="Chọn bộ kiến thức AI dùng để học"><option value="">Chưa có bộ kiến thức</option></select>
+      <button id="context-edit" class="context-icon" type="button" title="Sửa tên / loại bộ kiến thức" aria-label="Sửa bộ kiến thức đang chọn">✎</button>
+      <button id="context-new" class="context-icon" type="button" title="Tạo bộ kiến thức mới cho môn/chủ đề khác" aria-label="Tạo bộ kiến thức mới">＋</button>
+    </div>
     <div class="folder-actions">
       <span id="folder" class="folder-path" title="">Chưa chọn thư mục</span>
       <select id="recent-folders" aria-label="Mở thư mục gần đây" title="Thư mục gần đây"><option value="">Thư mục gần đây</option></select>
@@ -102,6 +108,25 @@
     <p id="course-exam-result" class="quiz-result" hidden></p>
     <div class="course-exam-actions"><button id="course-exam-generate" class="button primary" type="button">Tạo trang đầu tiên</button><button id="course-exam-submit" class="button primary" type="button" hidden>Chấm trang này</button><button id="course-exam-retry" class="button outline" type="button" hidden>Làm lại trang này</button></div>
   </section>
+  <dialog id="context-dialog" class="context-dialog" aria-labelledby="context-dialog-title">
+    <form id="context-form" class="context-form">
+      <h2 id="context-dialog-title">Bộ kiến thức mới</h2>
+      <p class="context-hint">Mỗi môn/chủ đề nên có một bộ riêng. AI chỉ đọc kiến thức của bộ đang chọn khi tạo câu hỏi, và kết quả chấm bài được lưu vào bộ đó.</p>
+      <label for="context-name">Tên bộ kiến thức</label>
+      <input id="context-name" maxlength="80" required placeholder="VD: ASP.NET Microservices" autocomplete="off">
+      <label for="context-type">Loại</label>
+      <input id="context-type" maxlength="40" list="context-types" placeholder="VD: Lập trình" autocomplete="off">
+      <datalist id="context-types"></datalist>
+      <label for="context-description">Mô tả (không bắt buộc)</label>
+      <textarea id="context-description" maxlength="300" rows="3"></textarea>
+      <p id="context-dates" class="context-dates" hidden></p>
+      <p id="context-error" class="context-error" role="alert"></p>
+      <div class="context-actions">
+        <button id="context-cancel" class="button outline" type="button">Hủy</button>
+        <button id="context-save" class="button primary" type="submit">Tạo và chọn</button>
+      </div>
+    </form>
+  </dialog>
   <div id="toast" role="status" aria-live="polite"></div>
 </body>
 </html>

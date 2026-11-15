@@ -2,7 +2,7 @@
   "version": 1,
   "courses": [
     {
-      "folder": "M:\\ID_PTS\\ASP.NET\\microservices\\18\\drive-download-20261031T140859Z-1-001",
+      "folder": "M:\\ID_PTS\\ASP.NET\\microservices\\18",
       "lessons": [
         {
           "video": "16. Publish BasketCheckout Event from Basket Microservices.mp4",
@@ -348,6 +348,539 @@
               "question": "Phương thức 'Consume' trong lớp xử lý sự kiện tích hợp nhận tham số nào để truy cập vào dữ liệu sự kiện?",
               "answer": "ConsumeContext<T>",
               "explanation": "Phương thức Consume nhận một đối số kiểu ConsumeContext<T>, cho phép truy cập vào dữ liệu sự kiện và các tính năng ngữ cảnh tin nhắn khác.",
+              "needsReview": false
+            }
+          ]
+        },
+        {
+          "video": "28. Setup RabbitMQ for Async Communication using Docker-compose file.mp4",
+          "completedAt": "2026-11-11T16:52:05.467Z",
+          "facts": [
+            {
+              "question": "Trong kiến trúc microservices được mô tả, RabbitMQ đóng vai trò gì trong giao tiếp giữa microservice 'basket' và 'ordering'?",
+              "answer": "Là message broker đóng vai trò dịch vụ hạ tầng để truyền tải sự kiện không đồng bộ",
+              "explanation": "RabbitMQ được sử dụng như một message broker để lưu trữ và chuyển tiếp các sự kiện tích hợp (như basket checkout) giữa các microservice một cách không đồng bộ.",
+              "needsReview": false
+            },
+            {
+              "question": "Khi cấu hình RabbitMQ trong tệp docker-compose, tại sao việc sử dụng image 'rabbitmq:management' lại được ưu tiên trong bài giảng?",
+              "answer": "Vì nó cung cấp giao diện quản lý trực quan bên cạnh các tính năng message broker tiêu chuẩn",
+              "explanation": "Image 'rabbitmq:management' bao gồm các plugin quản lý giúp người dùng theo dõi và quản trị RabbitMQ thông qua giao diện web, bên cạnh chức năng message broker cơ bản.",
+              "needsReview": false
+            },
+            {
+              "question": "Cấu hình kết nối RabbitMQ trong tệp 'appsettings.json' của các microservice cần phải khớp với thông số nào trong tệp 'docker-compose.override.yml'?",
+              "answer": "Tên máy chủ (host), tên người dùng (username) và mật khẩu (password)",
+              "explanation": "Để các microservice có thể kết nối thành công tới RabbitMQ chạy trong Docker, các thông tin xác thực như host, username và password phải đồng nhất giữa cấu hình ứng dụng và cấu hình container.",
+              "needsReview": false
+            }
+          ]
+        },
+        {
+          "video": "29. Run Docker-Compose on Visual Studio to setup RabbitMQ on Docker.mp4",
+          "completedAt": "2026-11-11T16:57:19.420Z",
+          "facts": [
+            {
+              "question": "Trong Visual Studio, thao tác nào được thực hiện để chạy Docker Compose mà không cần đính kèm trình gỡ lỗi (debugger)?",
+              "answer": "Sử dụng tùy chọn 'Start without debugging' bên cạnh profile Docker Compose",
+              "explanation": "Bài giảng hướng dẫn chọn tùy chọn 'Start without debugging' ngay bên cạnh profile Docker Compose trong Visual Studio để khởi chạy các container mà không cần debug.",
+              "needsReview": true
+            },
+            {
+              "question": "Tại sao image 'rabbitmq:management' lại được sử dụng thay vì image RabbitMQ cơ bản trong cấu hình Docker Compose?",
+              "answer": "Vì nó tích hợp sẵn Erlang và dashboard quản lý trong cùng một image",
+              "explanation": "Image 'rabbitmq:management' được chọn vì nó bao gồm cả image cơ bản (Erlang) và dashboard quản lý, giúp người dùng theo dõi hệ thống dễ dàng hơn.",
+              "needsReview": false
+            },
+            {
+              "question": "Khi truy cập vào dashboard quản lý RabbitMQ qua cổng 15672, thông tin đăng nhập mặc định được sử dụng là gì?",
+              "answer": "guest / guest",
+              "explanation": "Theo bài giảng, sau khi khởi chạy thành công, người dùng có thể truy cập dashboard tại cổng 15672 và đăng nhập bằng thông tin mặc định là 'guest' cho cả tên người dùng và mật khẩu.",
+              "needsReview": true
+            }
+          ]
+        },
+        {
+          "video": "30. TEST- Publish BasketCheckout Event in Basket.API Microservices.mp4",
+          "completedAt": "2026-11-12T14:59:15.014Z",
+          "facts": [
+            {
+              "question": "Trong quy trình thanh toán giỏ hàng (Checkout), thành phần nào đóng vai trò điều phối các lệnh xử lý từ HTTP POST request?",
+              "answer": "Mediator",
+              "explanation": "Mediator là thành phần được sử dụng để điều phối các lệnh (commands) trong microservices, giúp tách biệt logic xử lý yêu cầu HTTP khỏi các nghiệp vụ cụ thể.",
+              "needsReview": false
+            },
+            {
+              "question": "Sau khi sự kiện thanh toán được xuất bản thành công tới RabbitMQ, hành động nào tiếp theo được thực hiện đối với dữ liệu giỏ hàng?",
+              "answer": "Xóa giỏ hàng khỏi cơ sở dữ liệu và Redis cache",
+              "explanation": "Theo quy trình, sau khi sự kiện đã được xuất bản thành công qua MassTransit, hệ thống sẽ thực hiện xóa giỏ hàng khỏi cơ sở dữ liệu và Redis cache để hoàn tất giao dịch.",
+              "needsReview": false
+            },
+            {
+              "question": "Trong kiến trúc microservices của bài giảng, thư viện nào được sử dụng để đăng ký các dịch vụ message broker vào Dependency Injection?",
+              "answer": "MassTransit",
+              "explanation": "Phương thức mở rộng AddMessageBroker được sử dụng để đăng ký các dịch vụ của MassTransit vào hệ thống Dependency Injection của ứng dụng.",
+              "needsReview": false
+            },
+            {
+              "question": "Khi kiểm tra RabbitMQ qua bảng điều khiển quản lý (cổng 15672), trạng thái nào cho thấy sự kiện đã được gửi đi nhưng chưa có dịch vụ nào xử lý?",
+              "answer": "Sự kiện nằm trong Exchange nhưng chưa có Consumer tiêu thụ",
+              "explanation": "Bài giảng lưu ý rằng sau khi xuất bản, sự kiện sẽ xuất hiện trong Exchange của RabbitMQ, nhưng nếu chưa có subscriber (consumer) nào đăng ký, nó sẽ nằm chờ tại đó.",
+              "needsReview": false
+            },
+            {
+              "question": "Tại sao Basket API cần tương tác với Discount gRPC trong luồng xử lý tạo giỏ hàng?",
+              "answer": "Để tính toán giảm giá cho từng mặt hàng trước khi lưu trữ",
+              "explanation": "Basket API phụ thuộc vào Discount gRPC để lấy thông tin giảm giá áp dụng cho các mặt hàng trong giỏ trước khi thực hiện các bước tiếp theo.",
+              "needsReview": false
+            },
+            {
+              "question": "Đối tượng nào chứa thông tin như tên người dùng, ID khách hàng và tổng giá trị để truyền tải trong sự kiện thanh toán?",
+              "answer": "BasketCheckoutDTO",
+              "explanation": "BasketCheckoutDTO là đối tượng truyền dữ liệu (Data Transfer Object) được sử dụng để đóng gói thông tin thanh toán trước khi xuất bản sự kiện.",
+              "needsReview": false
+            }
+          ]
+        },
+        {
+          "video": "31. TEST- SubscribeConsume BasketCheckout Event in Ordering.API Microservices.mp4",
+          "completedAt": "2026-11-12T16:12:43.708Z",
+          "facts": [
+            {
+              "question": "Trong luồng xử lý end-to-end, điều gì xảy ra sau khi Basket Microservice xuất bản sự kiện BasketCheckout lên RabbitMQ?",
+              "answer": "Ordering Microservice tiêu thụ BasketCheckout, chuyển thành lệnh tạo đơn hàng và xử lý thông qua Command Handler",
+              "explanation": "Basket Microservice xuất bản sự kiện tích hợp BasketCheckout lên RabbitMQ. Ordering Microservice đăng ký tiêu thụ sự kiện này, ánh xạ dữ liệu thành lệnh CreateOrder và gửi đến Command Handler để tạo đơn hàng. Đây là luồng giao tiếp bất đồng bộ giữa hai microservice được kiểm thử trong bài.",
+              "needsReview": false
+            },
+            {
+              "question": "Để kiểm thử toàn bộ luồng BasketCheckout đến Ordering trong Visual Studio, cần cấu hình những gì?",
+              "answer": "Chọn Multiple Startup Projects để chạy Basket, Discount gRPC và Ordering API cục bộ, đồng thời sử dụng RabbitMQ trên Docker",
+              "explanation": "Bài giảng sử dụng Multiple Startup Projects trong Solution Properties để chạy đồng thời Basket, Discount gRPC và Ordering API. Basket cần Discount gRPC để tính toán chiết khấu, trong khi Ordering API tiêu thụ BasketCheckout từ RabbitMQ đang chạy trên Docker.",
+              "needsReview": false
+            },
+            {
+              "question": "Khi gỡ lỗi phương thức AddMessageBroker, sự khác biệt chính giữa đăng ký MassTransit của Ordering và Basket Microservice là gì?",
+              "answer": "Ordering truyền thông tin assembly để đăng ký Consumer, còn Basket không truyền assembly Consumer vì chỉ thực hiện publish sự kiện trong luồng này",
+              "explanation": "Trong bài giảng, Ordering Application truyền thông tin assembly vào cấu hình Message Broker để MassTransit tìm và đăng ký các Consumer. Basket Microservice cũng đăng ký MassTransit nhưng không truyền assembly Consumer trong cấu hình được minh họa vì nó đóng vai trò Publisher của BasketCheckout.",
+              "needsReview": false
+            },
+            {
+              "question": "Theo quy trình kiểm thử bằng Postman trong bài, thứ tự các thao tác nào là chính xác?",
+              "answer": "Gửi POST để tạo hoặc lưu Basket, thực hiện tính toán chiết khấu qua Discount gRPC, sau đó gửi POST Checkout Basket để publish sự kiện lên RabbitMQ",
+              "explanation": "Giảng viên đầu tiên gửi HTTP POST đến endpoint lưu Basket. Basket Microservice lấy thông tin chiết khấu từ Discount gRPC và lưu giỏ hàng. Sau đó, giảng viên gửi HTTP POST đến Checkout Basket. Checkout Handler lấy giỏ hàng hiện có, tạo DTO sự kiện BasketCheckout, publish lên RabbitMQ và thực hiện thao tác xóa giỏ hàng.",
+              "needsReview": false
+            },
+            {
+              "question": "Trong BasketCheckout Event Consumer của Ordering Application, thông điệp nhận từ RabbitMQ được xử lý như thế nào?",
+              "answer": "Consumer ghi log, ánh xạ thông điệp BasketCheckout thành CreateOrderCommand và gửi qua Mediator để kích hoạt CreateOrderCommandHandler",
+              "explanation": "Trong phương thức Consume, BasketCheckout Consumer ghi log thông điệp nhận được, ánh xạ dữ liệu sang CreateOrderCommand rồi sử dụng Mediator để gửi lệnh. Mediator chuyển lệnh đến CreateOrderCommandHandler, nơi thực hiện nghiệp vụ tạo đơn hàng bằng phương thức tạo đối tượng Order trong Domain Layer.",
+              "needsReview": false
+            },
+            {
+              "question": "Sau khi CreateOrderCommandHandler tạo thành công một Order, chuỗi xử lý tiếp theo được mô tả như thế nào?",
+              "answer": "Domain Layer phát sinh OrderCreatedDomainEvent, Ordering Application xử lý Domain Event và có thể publish OrderCreatedIntegrationEvent nếu Feature Flag được bật",
+              "explanation": "Khi phương thức tạo Order được thực thi, một OrderCreatedDomainEvent được thêm vào Domain Entity. Sự kiện miền được phân phát đến OrderCreatedDomainEventHandler trong Application Layer. Handler kiểm tra Feature Flag OrderFulfillment và nếu được bật thì xuất bản OrderCreatedIntegrationEvent lên RabbitMQ. Trong lần kiểm thử này, sự kiện tích hợp thứ hai chưa có Consumer.",
+              "needsReview": false
+            },
+            {
+              "question": "Trong lần kiểm thử đầu tiên, tại sao Ordering Microservice gặp ArgumentOutOfRangeException khi tạo Order và giảng viên đã xử lý thế nào để tiếp tục demo?",
+              "answer": "Tên Order được ánh xạ từ username chỉ có 3 ký tự, không đáp ứng yêu cầu độ dài tối thiểu 5 ký tự; giảng viên tạm comment dòng throw exception trong OrderName",
+              "explanation": "Tên đơn hàng được ánh xạ từ username trong BasketCheckout Event. Dữ liệu thử nghiệm chỉ có 3 ký tự trong khi OrderName Value Object yêu cầu độ dài tối thiểu là 5, dẫn đến ArgumentOutOfRangeException. Trong video, giảng viên tạm comment dòng ném ngoại lệ rồi chạy lại để hoàn thành demo. Đây chỉ là cách xử lý được trình bày trong bài, không phải phương án phù hợp cho production vì làm mất ràng buộc nghiệp vụ. Trong thực tế nên sửa dữ liệu đầu vào hoặc điều chỉnh quy tắc validation theo yêu cầu nghiệp vụ.",
+              "needsReview": false
+            },
+            {
+              "question": "Sau khi kiểm thử thành công, cách nào giúp xác minh cả kết quả tạo Order lẫn giao tiếp bất đồng bộ giữa Basket và Ordering Microservice?",
+              "answer": "Gọi GET Orders có phân trang trên Ordering API để kiểm tra đơn hàng mới và xem RabbitMQ Management Dashboard để kiểm tra Connections, Channels, Exchanges và Queues",
+              "explanation": "Bài giảng xác minh kết quả bằng hai cách. Thứ nhất, gọi GET Orders có phân trang qua Postman để kiểm tra đơn hàng vừa tạo trong cơ sở dữ liệu Ordering. Thứ hai, mở RabbitMQ Management Dashboard để quan sát kết nối của Basket Publisher và Ordering Consumer, các Channels, Exchanges, Queues, bao gồm hàng đợi BasketCheckout Consumer và hàng đợi lỗi. Việc quan sát những thành phần này giúp theo dõi quá trình trao đổi sự kiện, nhưng chỉ có kết nối hoặc hàng đợi không đủ chứng minh toàn bộ nghiệp vụ đã hoàn tất.",
+              "needsReview": false
+            }
+          ]
+        },
+        {
+          "video": "32. TEST- Set OrderFullfilment feature = false. Re-Test Publish - SubscribeConsume.mp4",
+          "completedAt": "2026-11-12T16:20:29.640Z",
+          "facts": [
+            {
+              "question": "Mục đích chính của việc đặt cờ tính năng 'Order Fulfillment' thành false trong bài giảng này là gì?",
+              "answer": "Để ngăn chặn việc phát hành sự kiện tích hợp (Integration Event) không cần thiết khi chưa có subscriber xử lý",
+              "explanation": "Vì microservice xử lý đơn hàng tiếp theo đang được phát triển và chưa có subscriber, việc đặt cờ false giúp tránh tạo ra các thông điệp hàng đợi không cần thiết trên RabbitMQ.",
+              "needsReview": false
+            },
+            {
+              "question": "Điểm mạnh của ASP.Net Feature Management được minh họa như thế nào trong quá trình kiểm thử?",
+              "answer": "Cho phép thay đổi hành vi của ứng dụng (từ true sang false) ngay khi đang chạy mà không cần khởi động lại",
+              "explanation": "Giảng viên đã thay đổi cấu hình tính năng xử lý đơn hàng từ true sang false trong tệp appsettings.json khi ứng dụng đang chạy và hệ thống lập tức áp dụng thay đổi này mà không cần khởi động lại.",
+              "needsReview": false
+            },
+            {
+              "question": "Khi tính năng 'Order Fulfillment' được đặt là false, luồng xử lý sự kiện trong Ordering API diễn ra như thế nào?",
+              "answer": "Hệ thống vẫn tiêu thụ BasketCheckout và tạo Order, nhưng câu lệnh if kiểm tra Feature Flag sẽ ngăn chặn việc publish OrderCreatedIntegrationEvent",
+              "explanation": "Luồng xử lý vẫn diễn ra: tiêu thụ BasketCheckout -> tạo Order -> phát sinh OrderCreatedDomainEvent. Tuy nhiên, tại OrderCreatedDomainEventHandler, câu lệnh if kiểm tra Feature Flag là false nên sẽ không thực hiện publish sự kiện tích hợp lên RabbitMQ.",
+              "needsReview": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "folder": "M:\\ID_PTS\\ASP.NET\\microservices\\19",
+      "lessons": [
+        {
+          "video": "01. Introduction - API Gateways with Yarp Reverse Proxy.mp4",
+          "completedAt": "2026-11-14T06:39:45.700Z",
+          "facts": [
+            {
+              "question": "Trong kiến trúc microservice, vai trò chính của API Gateway sử dụng YARP là gì?",
+              "answer": "Là điểm đầu vào duy nhất để định tuyến yêu cầu, tổng hợp kết quả và gửi lại cho client",
+              "explanation": "API Gateway đóng vai trò là điểm đầu vào (entry point), thực hiện định tuyến các yêu cầu đến microservice phù hợp và tổng hợp kết quả trả về.",
+              "needsReview": false
+            },
+            {
+              "question": "Quy trình triển khai API Gateway với YARP trong dự án .NET bao gồm các bước chính nào theo đúng thứ tự?",
+              "answer": "Tạo dự án ASP.NET Core -> Cài đặt gói NuGet YARP -> Cấu hình Route -> Kiểm tra và áp dụng Rate Limiting -> Container hóa",
+              "explanation": "Quy trình bắt đầu từ việc tạo dự án, cài đặt thư viện, cấu hình định tuyến, sau đó mới đến các bước nâng cao như giới hạn tốc độ và đóng gói container.",
+              "needsReview": false
+            },
+            {
+              "question": "Mẫu thiết kế nào được đề cập để tùy chỉnh phản hồi từ backend sao cho phù hợp với nhu cầu của các loại frontend khác nhau?",
+              "answer": "Backend for Frontend (BFF) pattern",
+              "explanation": "Mẫu BFF (Backend for Frontend) giúp tùy chỉnh dữ liệu trả về từ backend để tối ưu hóa cho từng loại giao diện người dùng cụ thể.",
+              "needsReview": false
+            }
+          ]
+        },
+        {
+          "video": "02. Gateway Routing Pattern.mp4",
+          "completedAt": "2026-11-14T07:03:23.713Z",
+          "facts": [
+            {
+              "question": "Mục đích chính của mẫu thiết kế Gateway Routing là gì trong kiến trúc microservice?",
+              "answer": "Lộ ra một điểm cuối duy nhất để định tuyến yêu cầu tới nhiều microservice nội bộ",
+              "explanation": "Gateway Routing cho phép client gửi yêu cầu tới một điểm cuối duy nhất, sau đó gateway sẽ định tuyến các yêu cầu này tới các microservice backend tương ứng.",
+              "needsReview": false
+            },
+            {
+              "question": "Lợi ích của việc sử dụng API Gateway trong việc trừu tượng hóa các microservice backend đối với ứng dụng client là gì?",
+              "answer": "Client không cần biết về sự thay đổi hoặc thay thế của các microservice backend",
+              "explanation": "API Gateway trừu tượng hóa backend, giúp client không cần thay đổi mã nguồn khi các microservice bên trong bị thay đổi hoặc thay thế, chỉ cần cập nhật cấu hình định tuyến tại gateway.",
+              "needsReview": false
+            },
+            {
+              "question": "Mẫu Gateway Routing hỗ trợ như thế nào trong việc triển khai các chiến lược như Blue-green hoặc Canary?",
+              "answer": "Cho phép chuyển hướng yêu cầu dần dần sang các phiên bản API mới thông qua cấu hình",
+              "explanation": "Gateway Routing cho phép linh hoạt chuyển hướng yêu cầu tới các phiên bản API khác nhau, hỗ trợ triển khai Canary hoặc Blue-green và dễ dàng hoàn nguyên bằng cách thay đổi cấu hình.",
+              "needsReview": false
+            }
+          ]
+        },
+        {
+          "video": "03. API Gateway Pattern.mp4",
+          "completedAt": "2026-11-14T07:13:32.020Z",
+          "facts": [
+            {
+              "question": "Trong thiết kế hướng đối tượng, mẫu hình nào được coi là tương tự với API Gateway vì cùng cung cấp một điểm đầu vào duy nhất và đóng gói kiến trúc hệ thống?",
+              "answer": "Facade pattern",
+              "explanation": "API Gateway được so sánh với mẫu Facade trong thiết kế hướng đối tượng vì nó cung cấp một giao diện thống nhất (điểm đầu vào duy nhất) và ẩn đi sự phức tạp của hệ thống bên dưới.",
+              "needsReview": true
+            },
+            {
+              "question": "Tại sao việc sử dụng một API Gateway duy nhất cho toàn bộ hệ thống microservice phức tạp có thể trở thành một 'phản mẫu hình' (anti-pattern)?",
+              "answer": "Vì nó gây ra rủi ro điểm lỗi đơn và trở nên quá phức tạp khi logic kinh doanh tăng lên",
+              "explanation": "Việc tập trung quá nhiều logic vào một API Gateway duy nhất tạo ra rủi ro điểm lỗi đơn (single point of failure) và làm cho gateway trở nên cồng kềnh, khó bảo trì khi hệ thống mở rộng.",
+              "needsReview": false
+            },
+            {
+              "question": "Ngoài việc định tuyến yêu cầu, API Gateway còn đảm nhận các 'mối quan tâm xuyên suốt' (cross-cutting concerns) nào sau đây?",
+              "answer": "Xác thực, ủy quyền, giới hạn tốc độ, ghi nhật ký và cân bằng tải",
+              "explanation": "API Gateway đóng vai trò trung gian xử lý nhiều mối quan tâm xuyên suốt như xác thực, ủy quyền, giới hạn tốc độ, ghi nhật ký, giám sát và cân bằng tải để giảm tải cho các microservice nội bộ.",
+              "needsReview": false
+            }
+          ]
+        },
+        {
+          "video": "04. Main features in the API Gateway Pattern.mp4",
+          "completedAt": "2026-11-14T07:29:14.420Z",
+          "facts": [
+            {
+              "question": "Tính năng nào của API Gateway giúp giảm thiểu sự giao tiếp rời rạc (chatty communication) giữa ứng dụng client và các microservice backend?",
+              "answer": "Tổng hợp yêu cầu (Gateway Aggregation)",
+              "explanation": "Mẫu tổng hợp gateway cho phép API Gateway nhận một yêu cầu từ client, phân phối đến nhiều microservice, sau đó tổng hợp kết quả trả về trong một phản hồi duy nhất, giúp giảm số lượng yêu cầu qua lại.",
+              "needsReview": true
+            },
+            {
+              "question": "Trong bài giảng, việc sử dụng API Gateway để xử lý các vấn đề như xác thực, bộ nhớ đệm và chính sách thử lại được gọi là gì?",
+              "answer": "Mẫu giảm tải gateway (Gateway Offloading)",
+              "explanation": "Việc tập trung các chức năng xuyên suốt (cross-cutting concerns) như xác thực, bộ nhớ đệm, và chính sách thử lại tại API Gateway được gọi là mẫu giảm tải gateway (Gateway Offloading).",
+              "needsReview": false
+            },
+            {
+              "question": "Tại sao việc sử dụng API Gateway làm lớp trừu tượng lại giúp ứng dụng client không cần cập nhật khi các microservice backend thay đổi?",
+              "answer": "Vì chỉ cần thay đổi file cấu hình tại API Gateway để định tuyến đến dịch vụ mới",
+              "explanation": "API Gateway che giấu các hoạt động nội bộ bằng cách cung cấp một lớp trừu tượng; khi backend thay đổi, ta chỉ cần cập nhật cấu hình định tuyến tại gateway mà không cần thay đổi ứng dụng client.",
+              "needsReview": false
+            }
+          ]
+        },
+        {
+          "video": "05. BFF Backend for Frontend Pattern.mp4",
+          "completedAt": "2026-11-14T07:49:23.588Z",
+          "facts": [
+            {
+              "question": "Tại sao việc sử dụng một API Gateway duy nhất cho nhiều loại ứng dụng khách (web, di động, desktop) lại được coi là một rủi ro trong kiến trúc microservice?",
+              "answer": "Vì nó tạo ra một điểm yếu duy nhất và trở thành nút thắt cổ chai",
+              "explanation": "Việc tập trung quá nhiều logic vào một cổng API duy nhất tạo ra rủi ro điểm lỗi đơn (single point of failure) và trở thành nút thắt cổ chai khi hệ thống mở rộng.",
+              "needsReview": false
+            },
+            {
+              "question": "Mục đích chính của việc áp dụng mẫu Backend for Frontend (BFF) là gì?",
+              "answer": "Để tách các cổng API theo từng ứng dụng giao diện cụ thể nhằm tối ưu hóa dữ liệu",
+              "explanation": "Mẫu BFF tách các cổng API theo từng ứng dụng giao diện (web, di động, desktop) để cung cấp giao diện tập trung phù hợp nhất với nhu cầu riêng của từng loại client.",
+              "needsReview": false
+            },
+            {
+              "question": "Trong bài giảng, ví dụ nào minh họa rõ nhất cho việc cần thiết phải sử dụng nhiều cổng API Backend for Frontend?",
+              "answer": "Khi nhu cầu tiêu thụ dữ liệu của ứng dụng di động khác với trình duyệt web",
+              "explanation": "Bài giảng nêu ví dụ rằng dữ liệu tiêu thụ bởi giao diện di động có thể khác với trình duyệt web, do đó cần các BFF riêng biệt để biểu diễn dữ liệu tối ưu cho từng loại.",
+              "needsReview": false
+            }
+          ]
+        },
+        {
+          "video": "06. YARP Reverse Proxy for API Gateway.mp4",
+          "completedAt": "2026-11-14T08:17:22.483Z",
+          "facts": [
+            {
+              "question": "Trong kiến trúc hệ thống, vai trò chính của một Reverse Proxy đứng trước các máy chủ web là gì?",
+              "answer": "Đóng vai trò trung gian chuyển tiếp yêu cầu, cân bằng tải và thực hiện các tác vụ dỡ tải (offloading)",
+              "explanation": "Reverse proxy hoạt động như một trung gian đứng trước các máy chủ web, thực hiện định tuyến, cân bằng tải và các tác vụ dỡ tải như xác thực, mã hóa SSL và lưu đệm.",
+              "needsReview": false
+            },
+            {
+              "question": "YARP (Yet Another Reverse Proxy) được thiết kế đặc biệt cho hệ sinh thái nào và hỗ trợ các giao thức mạng hiện đại nào?",
+              "answer": "Dành cho .NET và hỗ trợ gRPC, HTTP/2, WebSockets",
+              "explanation": "YARP là giải pháp reverse proxy nhẹ do Microsoft phát triển cho các ứng dụng .NET, hỗ trợ các giao thức hiện đại như gRPC, HTTP/2 và WebSockets.",
+              "needsReview": false
+            },
+            {
+              "question": "Khi cấu hình YARP, các thành phần chính nào thường được định nghĩa trong tệp cấu hình để quản lý việc định tuyến yêu cầu?",
+              "answer": "Routes, Clusters và Destinations",
+              "explanation": "Tài liệu của YARP hướng dẫn cấu hình các thành phần như Routes (tuyến đường), Clusters (cụm dịch vụ) và Destinations (điểm đến) để điều hướng yêu cầu tới các dịch vụ backend.",
+              "needsReview": false
+            }
+          ]
+        },
+        {
+          "video": "07. YARP Architecture with pipeline and Extensibility.mp4",
+          "completedAt": "2026-11-14T09:00:28.177Z",
+          "facts": [
+            {
+              "question": "Trong kiến trúc YARP (IRB), cách thức hoạt động nào được sử dụng để tải các tuyến đường nhằm khớp các yêu cầu đến với các tuyến đường cụ thể?",
+              "answer": "Tải tuyến đường từ các nguồn cấu hình với tệp Json ASP.Net là mặc định vào bảng định tuyến ASP.Net",
+              "explanation": "Bài giảng nêu rõ các tuyến đường được tải từ các nguồn cấu hình, với tệp Json ASP.Net là mặc định, sau đó được tải vào bảng định tuyến ASP.Net để YARP khớp các yêu cầu đến.",
+              "needsReview": false
+            },
+            {
+              "question": "Thuật toán cân bằng tải nào được YARP sử dụng bằng cách chọn ngẫu nhiên hai điểm đến và chọn điểm nào ít tải nhất trong số chúng?",
+              "answer": "Power of Two Choices",
+              "explanation": "YARP sử dụng thuật toán \"Power of Two Choices\" để cân bằng tải, bằng cách chọn ngẫu nhiên hai điểm đến và chọn điểm ít tải nhất.",
+              "needsReview": true
+            },
+            {
+              "question": "YARP hỗ trợ các hình thức kiểm tra sức khỏe (health checks) nào đối với các dịch vụ back-end?",
+              "answer": "Hỗ trợ cả kiểm tra sức khỏe chủ động và thụ động",
+              "explanation": "Bài giảng xác nhận YARP hỗ trợ cả kiểm tra sức khỏe chủ động (ping các điểm cuối) và thụ động (quan sát mã phản hồi khi lưu lượng được chuyển tiếp).",
+              "needsReview": false
+            }
+          ]
+        },
+        {
+          "video": "08. Domain Analysis of YarpApiGateway Microservices Models, UCs, Rest Apis,Database.mp4",
+          "completedAt": "2026-11-14T09:22:07.918Z",
+          "facts": [
+            {
+              "question": "Trong quá trình phân tích miền cho YarpApiGateway, tại sao API Gateway lại không có các mô hình miền (domain models) hay thực thể truyền thống như các microservice khác?",
+              "answer": "Vì nó chủ yếu xử lý cấu hình cho định tuyến và reverse proxy",
+              "explanation": "Bài giảng nêu rõ API Gateway không có mô hình miền truyền thống vì vai trò chính của nó là cấu hình định tuyến và reverse proxy thay vì quản lý trạng thái hay dữ liệu nghiệp vụ.",
+              "needsReview": false
+            },
+            {
+              "question": "Khi công khai các endpoint từ YarpApiGateway đến ứng dụng khách, quy tắc đặt tên URL nào được áp dụng để phân tách các microservice nội bộ?",
+              "answer": "Sử dụng tên microservice làm tiền tố của URL nội bộ",
+              "explanation": "YarpApiGateway công khai dịch vụ bằng cách đặt tên microservice làm tiền tố (ví dụ: /catalog, /shopping-cart, /ordering) trước URL nội bộ để phân tách các yêu cầu đến.",
+              "needsReview": false
+            },
+            {
+              "question": "Xét về cấu trúc dữ liệu và cơ sở hạ tầng, YarpApiGateway tương tác như thế nào với cơ sở dữ liệu trong kiến trúc microservice?",
+              "answer": "Nó không có cơ sở dữ liệu và không tương tác trực tiếp với việc quản lý trạng thái",
+              "explanation": "Bài giảng khẳng định YarpApiGateway không có cơ sở dữ liệu và không tương tác trực tiếp với việc quản lý trạng thái, trọng tâm là định tuyến hiệu quả các yêu cầu đến các dịch vụ backend.",
+              "needsReview": false
+            }
+          ]
+        },
+        {
+          "video": "09. Technical Analysis of YarpApiGateway Microservices Architectures, Patterns.mp4",
+          "completedAt": "2026-11-14T09:32:32.333Z",
+          "facts": [
+            {
+              "question": "Trong kiến trúc của YarpApiGateway, tại sao nó được coi là không tuân theo bất kỳ kiến trúc ứng dụng phức tạp nào?",
+              "answer": "Vì nó chủ yếu dựa trên cấu hình để thực hiện định tuyến yêu cầu",
+              "explanation": "YarpApiGateway không có kiến trúc ứng dụng phức tạp mà tập trung vào cách tiếp cận dựa trên cấu hình (configuration-based) để định tuyến yêu cầu tới các microservices.",
+              "needsReview": false
+            },
+            {
+              "question": "Tệp tin nào đóng vai trò là trung tâm cho chức năng của YarpApiGateway và chứa các cấu hình định tuyến cho các microservices?",
+              "answer": "appsettings.json",
+              "explanation": "Tệp appsettings.json là trung tâm cấu hình của YarpApiGateway, nơi định nghĩa các routes, cân bằng tải và kiểm tra trạng thái cho các microservices như catalog, basket và ordering.",
+              "needsReview": true
+            },
+            {
+              "question": "Nhắc lại kiến thức về thuật toán cân bằng tải đã học, YarpApiGateway sử dụng thuật toán nào để chọn điểm đến ít tải nhất trong số hai lựa chọn ngẫu nhiên?",
+              "answer": "Power of Two Choices",
+              "explanation": "Như đã đề cập trong các bài trước (needsReview: true), Yarp sử dụng thuật toán 'Power of Two Choices' để cân bằng tải bằng cách chọn ngẫu nhiên hai điểm đến và chọn điểm có tải thấp hơn.",
+              "needsReview": false
+            }
+          ]
+        },
+        {
+          "video": "10. Create YarpApiGateway Microservices into ECommerce Solution.mp4",
+          "completedAt": "2026-11-14T09:54:27.861Z",
+          "facts": [
+            {
+              "question": "Khi tạo dự án YarpApiGateway trong giải pháp microservices, loại dự án ASP.NET Core nào được chọn để bắt đầu?",
+              "answer": "ASP.NET Core Empty",
+              "explanation": "Bài giảng hướng dẫn chọn mẫu dự án 'ASP.NET Core Empty' để tạo YarpApiGateway, cho phép thiết lập cấu hình tối giản trước khi thêm các middleware cần thiết.",
+              "needsReview": false
+            },
+            {
+              "question": "Trong quá trình cấu hình dự án YarpApiGateway, tại sao cần chỉnh sửa tệp 'launchSettings.json'?",
+              "answer": "Để thiết lập các cổng HTTP và HTTPS cố định cho môi trường phát triển",
+              "explanation": "Tệp 'launchSettings.json' được chỉnh sửa để thiết lập các cổng cụ thể (5004 cho HTTP và 5054 cho HTTPS) nhằm đảm bảo tính nhất quán trong môi trường phát triển.",
+              "needsReview": false
+            },
+            {
+              "question": "Khi thiết lập dự án YarpApiGateway, cấu hình nào sau đây được thực hiện trong 'Program.cs' để duy trì tính tối giản?",
+              "answer": "Sử dụng cấu trúc Minimal APIs để thêm dịch vụ và cấu hình middleware",
+              "explanation": "Dự án sử dụng thiết lập tối giản trong 'Program.cs' bằng cách thêm các dịch vụ vào dependency injection và cấu hình đường ống HTTP sau khi xây dựng ứng dụng.",
+              "needsReview": true
+            }
+          ]
+        },
+        {
+          "video": "11. Develop Yarp Reverse Proxy in YarpApiGateway Microservices.mp4",
+          "completedAt": "2026-11-14T10:23:41.088Z",
+          "facts": [
+            {
+              "question": "Để tích hợp Yarp vào dự án ASP.NET Core làm reverse proxy, hai phương thức mở rộng nào cần được gọi trong Program.cs để đăng ký dịch vụ và cấu hình middleware?",
+              "answer": "builder.Services.AddReverseProxy() và app.MapReverseProxy()",
+              "explanation": "Để thiết lập Yarp, cần sử dụng builder.Services.AddReverseProxy() để đăng ký dịch vụ vào container và app.MapReverseProxy() để cấu hình pipeline xử lý yêu cầu HTTP.",
+              "needsReview": false
+            },
+            {
+              "question": "Trong cấu hình của Yarp, khái niệm nào được sử dụng để định nghĩa các mẫu yêu cầu đến và khái niệm nào đại diện cho các dịch vụ đích để chuyển tiếp yêu cầu?",
+              "answer": "Routes và Clusters",
+              "explanation": "Yarp sử dụng 'Routes' để biểu diễn các mẫu yêu cầu (như catch-all) và 'Clusters' để đại diện cho các dịch vụ backend đích mà yêu cầu sẽ được chuyển tiếp tới.",
+              "needsReview": false
+            },
+            {
+              "question": "Tại sao trong môi trường Docker, địa chỉ đích của microservice catalog trong cấu hình Yarp lại sử dụng giao thức HTTP thay vì HTTPS?",
+              "answer": "Để tránh ngoại lệ chứng chỉ SSL khi chuyển hướng yêu cầu",
+              "explanation": "Việc sử dụng HTTP cho địa chỉ đích trong Docker giúp tránh các ngoại lệ liên quan đến chứng chỉ SSL khi chuyển hướng yêu cầu từ API Gateway đến các microservice nội bộ.",
+              "needsReview": false
+            }
+          ]
+        },
+        {
+          "video": "12. Implement API Gateway using Yarp Reverse Proxy in YarpApiGateway Microservices.mp4",
+          "completedAt": "2026-11-14T15:58:18.497Z",
+          "facts": [
+            {
+              "question": "Trong cấu hình Yarp, cú pháp nào được sử dụng trong 'path' để bắt tất cả các yêu cầu có tiền tố cụ thể và chuyển tiếp chúng đến microservice đích?",
+              "answer": "{**catch-all}",
+              "explanation": "Cú pháp {**catch-all} được sử dụng trong định nghĩa route của Yarp để khớp tất cả các yêu cầu có tiền tố đường dẫn nhất định và chuyển tiếp toàn bộ phần còn lại của URL cùng query string đến dịch vụ đích.",
+              "needsReview": false
+            },
+            {
+              "question": "Khi triển khai API Gateway với Yarp, tại sao cần định nghĩa các 'cluster' riêng biệt cho từng microservice như catalog, basket và ordering?",
+              "answer": "Để ánh xạ mỗi route đến một địa chỉ đích (destination) cụ thể của microservice nội bộ",
+              "explanation": "Mỗi cluster trong Yarp đại diện cho một nhóm các dịch vụ đích. Việc định nghĩa cluster riêng cho từng microservice cho phép API Gateway ánh xạ các route cụ thể đến đúng địa chỉ đích (destination) của microservice đó.",
+              "needsReview": false
+            },
+            {
+              "question": "Theo quy tắc đặt tên URL trong bài giảng, nếu một yêu cầu từ client có dạng '/catalog/products', Yarp sẽ xử lý như thế nào?",
+              "answer": "Loại bỏ tiền tố và gửi yêu cầu đến microservice catalog nội bộ",
+              "explanation": "API Gateway sử dụng tên microservice (như /catalog) làm tiền tố để phân tách yêu cầu, sau đó chuyển tiếp phần còn lại của URL đến microservice nội bộ tương ứng thông qua cấu hình route và cluster.",
+              "needsReview": false
+            }
+          ]
+        },
+        {
+          "video": "13. Implement API Gateway using Yarp Reverse Proxy in YarpApiGateway Microservices-2.mp4",
+          "completedAt": "2026-11-14T16:08:12.921Z",
+          "facts": [
+            {
+              "question": "Trong cấu hình Yarp, tại sao việc sử dụng giao thức HTTP cho các địa chỉ đích (destination) của microservices trong môi trường Docker lại được ưu tiên?",
+              "answer": "Để tránh các ngoại lệ liên quan đến chứng chỉ SSL khi chuyển hướng yêu cầu",
+              "explanation": "Bài giảng nêu rõ việc sử dụng cổng HTTP cho các microservices (catalog, basket, ordering) trong môi trường Docker giúp tránh các ngoại lệ chứng chỉ SSL khi Yarp thực hiện chuyển hướng yêu cầu.",
+              "needsReview": false
+            },
+            {
+              "question": "Khi cấu hình nhiều microservices như catalog, basket và ordering trong Yarp, mối quan hệ giữa 'route' và 'cluster' được thiết lập như thế nào?",
+              "answer": "Mỗi route được ánh xạ tới một ID cluster cụ thể để xác định đích đến",
+              "explanation": "Trong cấu hình Yarp, mỗi microservice có một route chuyên dụng, và route đó được ánh xạ tới một ID cluster tương ứng, nơi chứa địa chỉ đích (destination) của dịch vụ đó.",
+              "needsReview": false
+            },
+            {
+              "question": "Trong ví dụ về chuyển hướng yêu cầu, nếu client gửi yêu cầu đến '/catalog/service/products', Yarp sẽ xử lý như thế nào để chuyển tiếp đến microservice đích?",
+              "answer": "Loại bỏ tiền tố '/catalog/service' và chuyển tiếp phần còn lại '/products' đến địa chỉ đích",
+              "explanation": "Yarp sử dụng cấu hình route và transform để loại bỏ tiền tố (như /catalog/service) và chuyển tiếp phần còn lại của đường dẫn (như /products) đến địa chỉ đích của microservice tương ứng.",
+              "needsReview": false
+            }
+          ]
+        },
+        {
+          "video": "14. TEST - Yarp Reverse Proxy as an API Gateway in YarpApiGateway Microservices.mp4",
+          "completedAt": "2026-11-14T16:30:09.881Z",
+          "facts": [
+            {
+              "question": "Trong quá trình kiểm thử (test) được mô tả trong bài giảng, API Gateway Yarp và các microservices nội bộ (Catalog, Basket, Ordering) được triển khai như thế nào?",
+              "answer": "API Gateway chạy cục bộ (localhost) trên máy tính, trong khi các microservices chạy bên trong mạng Docker.",
+              "explanation": "Bài giảng hướng dẫn sử dụng Docker Compose để kích hoạt các microservices nội bộ trong mạng Docker, sau đó chạy dự án API Gateway Yarp trực tiếp từ Visual Studio trên máy tính cục bộ (localhost) để thực hiện chuyển hướng yêu cầu.",
+              "needsReview": false
+            },
+            {
+              "question": "Khi gửi yêu cầu GET đến API Gateway với đường dẫn '/catalog-service/products', nhật ký console của Yarp xác nhận việc chuyển hướng yêu cầu đến microservice Catalog nội bộ như thế nào?",
+              "answer": "Loại bỏ tiền tố '/catalog-service' và chuyển tiếp phần còn lại (ví dụ: '/products') đến địa chỉ đích của microservice.",
+              "explanation": "Dựa trên nhật ký console trong video, Yarp thực hiện loại bỏ tiền tố định danh dịch vụ (như /catalog-service) và chuyển tiếp phần còn lại của URL cùng các tham số phân trang đến địa chỉ đích của microservice nội bộ (ví dụ: http://localhost:6000/products).",
+              "needsReview": false
+            },
+            {
+              "question": "Để xác minh quy trình giao tiếp bất đồng bộ (asynchronous communication) thông qua API Gateway, bài giảng đã thực hiện các bước kiểm thử nào?",
+              "answer": "Gửi yêu cầu Checkout đến Basket service qua Gateway, kiểm tra hàng đợi RabbitMQ, sau đó lấy đơn hàng từ Ordering service qua Gateway.",
+              "explanation": "Quy trình kiểm thử bao gồm: gửi yêu cầu POST Checkout đến Basket service qua Gateway, xác nhận sự kiện được kích hoạt trong bảng điều khiển RabbitMQ, và cuối cùng gửi yêu cầu GET đến Ordering service qua Gateway để xác nhận đơn hàng đã được tiêu thụ và tạo mới thành công.",
+              "needsReview": false
+            }
+          ]
+        },
+        {
+          "video": "15. Rate Limiting to Yarp Reverse Proxy as an API Gateway in YarpApiGateway.mp4",
+          "completedAt": "2026-11-14T16:46:23.258Z",
+          "facts": [
+            {
+              "question": "Trong cấu hình Yarp API Gateway, thứ tự gọi middleware nào là bắt buộc để tính năng Rate Limiting hoạt động chính xác trong Program.cs?",
+              "answer": "Gọi app.UseRateLimiter() trước khi gọi app.MapReverseProxy()",
+              "explanation": "Để middleware Rate Limiter có thể chặn các yêu cầu trước khi chúng được xử lý bởi Yarp, phương thức app.UseRateLimiter() phải được gọi trong pipeline trước khi gọi app.MapReverseProxy().",
+              "needsReview": true
+            },
+            {
+              "question": "Khi cấu hình chính sách 'fixed' cho Rate Limiter trong Yarp, tham số nào xác định giới hạn số lượng yêu cầu tối đa trong một khoảng thời gian cụ thể?",
+              "answer": "PermitLimit",
+              "explanation": "Trong cấu hình AddFixedWindowLimiter, 'PermitLimit' là tham số quy định số lượng yêu cầu tối đa được phép thực hiện trong khoảng thời gian (Window) đã định nghĩa.",
+              "needsReview": false
+            },
+            {
+              "question": "Khi một client vượt quá giới hạn tốc độ đã cấu hình trên API Gateway Yarp, phản hồi HTTP nào sẽ được trả về cho client?",
+              "answer": "503 Service Unavailable",
+              "explanation": "Theo bài giảng, khi vượt quá giới hạn tốc độ (Rate Limiting) đã thiết lập, hệ thống sẽ trả về mã lỗi 503 Service Unavailable để thông báo rằng dịch vụ hiện không thể xử lý thêm yêu cầu.",
               "needsReview": false
             }
           ]

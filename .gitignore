@@ -2,3 +2,6 @@ gemini-key.txt
 ai-debug.jsonl
 config.bat
 node_modules
+data/logs/
+data/legacy/
+*.tmp

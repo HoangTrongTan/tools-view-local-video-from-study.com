@@ -1,12 +1,13 @@
 {
-  "folder": "M:\\ID_PTS\\ASP.NET\\microservices\\18\\drive-download-20261031T140859Z-1-001",
-  "current": "28. Setup RabbitMQ for Async Communication using Docker-compose file.mp4",
-  "position": 333.902925,
+  "folder": "M:\\ID_PTS\\ASP.NET\\microservices\\19",
+  "current": "16. Move Local Test Configuration to Local appsettings.json file-Yarp Reverse Proxy.mp4",
+  "position": 210.419184,
   "pickedNotes": [
     "M:\\ID_PTS\\ASP.NET\\practices\\EShopMicroservices\\note-architext.txt"
   ],
   "lastNote": "M:\\ID_PTS\\ASP.NET\\practices\\EShopMicroservices\\note-architext.txt",
   "recentFolders": [
-    "M:\\ID_PTS\\ASP.NET\\microservices\\18\\drive-download-20261031T140859Z-1-001"
+    "M:\\ID_PTS\\ASP.NET\\microservices\\19",
+    "M:\\ID_PTS\\ASP.NET\\microservices\\18"
   ]
 }
