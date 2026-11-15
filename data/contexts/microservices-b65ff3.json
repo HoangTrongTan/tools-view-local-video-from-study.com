@@ -1,5 +1,11 @@
 {
-  "version": 1,
+  "schema": 1,
+  "id": "microservices-b65ff3",
+  "name": "microservices",
+  "type": "Khác",
+  "description": "Chuyển tự động từ learning-context.json cũ.",
+  "createdAt": "2026-11-03T14:57:00.603Z",
+  "updatedAt": "2026-11-14T16:46:23.258Z",
   "courses": [
     {
       "folder": "M:\\ID_PTS\\ASP.NET\\microservices\\18",
