@@ -5,7 +5,7 @@
   "type": "Khác",
   "description": "Chuyển tự động từ learning-context.json cũ.",
   "createdAt": "2026-11-03T14:57:00.603Z",
-  "updatedAt": "2026-11-14T16:46:23.258Z",
+  "updatedAt": "2026-11-20T15:09:49.990Z",
   "courses": [
     {
       "folder": "M:\\ID_PTS\\ASP.NET\\microservices\\18",
@@ -887,6 +887,2208 @@
               "question": "Khi một client vượt quá giới hạn tốc độ đã cấu hình trên API Gateway Yarp, phản hồi HTTP nào sẽ được trả về cho client?",
               "answer": "503 Service Unavailable",
               "explanation": "Theo bài giảng, khi vượt quá giới hạn tốc độ (Rate Limiting) đã thiết lập, hệ thống sẽ trả về mã lỗi 503 Service Unavailable để thông báo rằng dịch vụ hiện không thể xử lý thêm yêu cầu.",
+              "needsReview": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "folder": "M:\\ID_PTS\\ASP.NET\\microservices\\02",
+      "lessons": [
+        {
+          "video": "01. What are Microservices.mp4",
+          "completedAt": "2026-11-15T08:35:03.813Z",
+          "facts": [
+            {
+              "question": "Đặc điểm nào sau đây mô tả đúng nhất về tính độc lập của các microservices trong kiến trúc hệ thống?",
+              "answer": "Các microservice có thể được triển khai độc lập mà không cần xây dựng lại toàn bộ ứng dụng.",
+              "explanation": "Microservices cho phép triển khai độc lập, nghĩa là một nhóm có thể cập nhật một dịch vụ mà không cần xây dựng lại toàn bộ ứng dụng, đồng thời mỗi dịch vụ có cơ sở dữ liệu riêng.",
+              "needsReview": false
+            },
+            {
+              "question": "Trong kiến trúc microservices, các dịch vụ giao tiếp với nhau thông qua phương thức nào?",
+              "answer": "Sử dụng các API được xác định rõ ràng qua mạng.",
+              "explanation": "Các microservice là các dịch vụ kết nối lỏng lẻo, giao tiếp với nhau qua mạng bằng cách sử dụng các API được xác định rõ ràng, trong khi chi tiết triển khai nội bộ được ẩn đi.",
+              "needsReview": true
+            },
+            {
+              "question": "Nhắc lại kiến thức về API Gateway (như Yarp đã học), tại sao việc tách biệt cơ sở dữ liệu trong microservices lại quan trọng khi kết hợp với Gateway?",
+              "answer": "Để đảm bảo mỗi dịch vụ tự chủ về lưu trữ, giúp Gateway chuyển hướng yêu cầu mà không gây xung đột dữ liệu.",
+              "explanation": "Microservices có cơ sở dữ liệu riêng biệt để đảm bảo tính tự chủ. Khi dùng API Gateway (như Yarp), việc tách biệt này giúp Gateway chuyển hướng yêu cầu đến đúng dịch vụ mà không làm ảnh hưởng đến cấu trúc dữ liệu của các dịch vụ khác.",
+              "needsReview": false
+            }
+          ]
+        },
+        {
+          "video": "02. What is Microservices Architecture.mp4",
+          "completedAt": "2026-11-15T08:47:00.933Z",
+          "facts": [
+            {
+              "question": "Theo định nghĩa của Martin Fowler, các microservices trong một ứng dụng giao tiếp với nhau thông qua cơ chế nào?",
+              "answer": "Sử dụng các cơ chế nhẹ nhàng như API HTTP hoặc gRPC",
+              "explanation": "Microservices được mô tả là các dịch vụ nhỏ chạy trong tiến trình riêng, giao tiếp thông qua các cơ chế nhẹ nhàng như API HTTP hoặc gRPC.",
+              "needsReview": false
+            },
+            {
+              "question": "Trong kiến trúc microservices, khái niệm 'ngữ cảnh giới hạn' (bounded context) đóng vai trò gì trong việc tổ chức hệ thống?",
+              "answer": "Là ranh giới phân tách các dịch vụ dựa trên khả năng nghiệp vụ",
+              "explanation": "Microservices được tổ chức theo khả năng nghiệp vụ, với ranh giới phân tách giữa các dịch vụ được gọi là ngữ cảnh giới hạn (bounded context).",
+              "needsReview": false
+            },
+            {
+              "question": "Nhắc lại kiến thức về tính độc lập (như đã học ở bài 01), đặc điểm nào sau đây mô tả đúng về khả năng quản lý công nghệ trong kiến trúc microservices?",
+              "answer": "Các dịch vụ có thể sử dụng các ngôn ngữ lập trình và công nghệ lưu trữ khác nhau",
+              "explanation": "Microservices cho phép sự linh hoạt cao, nơi các dịch vụ có thể được viết bằng các ngôn ngữ lập trình khác nhau và sử dụng các công nghệ lưu trữ dữ liệu riêng biệt.",
+              "needsReview": false
+            }
+          ]
+        },
+        {
+          "video": "03. Microservices Characteristics.mp4",
+          "completedAt": "2026-11-15T08:58:34.679Z",
+          "facts": [
+            {
+              "question": "Trong kiến trúc microservices, triết lý 'products, not projects' (sản phẩm, không phải dự án) của Amazon nhấn mạnh điều gì đối với đội ngũ phát triển?",
+              "answer": "Đội ngũ phát triển chịu trách nhiệm hoàn toàn cho phần mềm từ lúc xây dựng đến khi vận hành trong môi trường sản xuất.",
+              "explanation": "Triết lý 'you built, you run it' của Amazon yêu cầu nhóm phát triển phải chịu trách nhiệm toàn diện cho phần mềm của họ trong suốt vòng đời, bao gồm cả giai đoạn vận hành.",
+              "needsReview": false
+            },
+            {
+              "question": "Nhắc lại kiến thức về quản lý dữ liệu (như đã học ở bài 01 và 02), đặc điểm 'decentralized data management' trong microservices dẫn đến cách tiếp cận nào về lưu trữ?",
+              "answer": "Polyglot persistence, cho phép mỗi dịch vụ quản lý cơ sở dữ liệu riêng biệt phù hợp với nhu cầu.",
+              "explanation": "Quản lý dữ liệu phi tập trung (decentralized data management) cho phép mỗi microservice tự quản lý cơ sở dữ liệu riêng, gọi là polyglot persistence, giúp tăng tính tự chủ.",
+              "needsReview": false
+            },
+            {
+              "question": "Đặc điểm 'smart endpoints and dumb pipes' trong microservices có ý nghĩa gì đối với cách thức giao tiếp giữa các dịch vụ?",
+              "answer": "Các dịch vụ thông minh tự xử lý logic nghiệp vụ và giao tiếp qua các API RESTful đơn giản.",
+              "explanation": "Microservices hướng tới việc tách rời bằng cách đặt logic nghiệp vụ vào các dịch vụ (smart endpoints) và sử dụng các cơ chế giao tiếp đơn giản (dumb pipes) như API RESTful.",
+              "needsReview": false
+            }
+          ]
+        },
+        {
+          "video": "04. Benefits of Microservices Architecture.mp4",
+          "completedAt": "2026-11-15T09:08:13.375Z",
+          "facts": [
+            {
+              "question": "Tại sao kiến trúc microservices giúp tăng tốc độ đưa tính năng mới ra thị trường so với ứng dụng nguyên khối?",
+              "answer": "Vì microservices cho phép triển khai độc lập từng dịch vụ mà không cần xây dựng lại toàn bộ ứng dụng.",
+              "explanation": "Microservices cho phép triển khai độc lập, giúp việc cập nhật hoặc sửa lỗi một dịch vụ không bị chặn bởi quy trình phát hành của toàn bộ ứng dụng như trong kiến trúc nguyên khối.",
+              "needsReview": false
+            },
+            {
+              "question": "Nhắc lại kiến thức về tính độc lập (như đã học ở bài 01), lợi ích nào của microservices liên quan trực tiếp đến việc tối ưu hóa tài nguyên hạ tầng?",
+              "answer": "Khả năng mở rộng độc lập các dịch vụ cụ thể cần thiết thay vì mở rộng toàn bộ ứng dụng.",
+              "explanation": "Microservices cho phép mở rộng chính xác những dịch vụ cần thiết, giúp sử dụng tài nguyên hạ tầng hiệu quả hơn so với việc phải mở rộng toàn bộ ứng dụng nguyên khối.",
+              "needsReview": false
+            },
+            {
+              "question": "Tại sao việc tổ chức các nhóm nhỏ và tập trung (cross-functional teams) lại là một lợi ích quan trọng của microservices?",
+              "answer": "Vì nhóm nhỏ tăng tính linh hoạt và giảm chi phí quản lý so với các nhóm lớn.",
+              "explanation": "Các nhóm lớn thường kém hiệu quả do giao tiếp chậm và chi phí quản lý cao, trong khi các nhóm nhỏ xoay quanh microservices giúp tăng tính linh hoạt và hiệu quả vận hành.",
+              "needsReview": false
+            }
+          ]
+        },
+        {
+          "video": "05. Challenges of Microservices Architecture.mp4",
+          "completedAt": "2026-11-15T09:19:20.867Z",
+          "facts": [
+            {
+              "question": "Tại sao việc chuyển đổi từ kiến trúc nguyên khối sang microservices lại làm tăng độ phức tạp của hệ thống dù mỗi dịch vụ riêng lẻ đều đơn giản hơn?",
+              "answer": "Vì hệ thống có nhiều bộ phận chuyển động hơn và việc quản lý triển khai, phiên bản trở nên khó khăn.",
+              "explanation": "Mặc dù mỗi microservice đơn giản hơn, nhưng tổng thể hệ thống trở nên phức tạp do số lượng dịch vụ lớn, khó khăn trong việc quản lý triển khai và phiên bản so với ứng dụng nguyên khối.",
+              "needsReview": false
+            },
+            {
+              "question": "Nhắc lại kiến thức về giao tiếp (như đã học ở bài 01), thách thức nào liên quan đến mạng và độ trễ khi các microservice giao tiếp với nhau?",
+              "answer": "Việc gọi chuỗi các dịch vụ làm tăng độ trễ và yêu cầu thiết kế API hoặc mẫu giao tiếp bất đồng bộ.",
+              "explanation": "Giao tiếp liên dịch vụ qua mạng làm phát sinh độ trễ, đặc biệt khi yêu cầu đi qua chuỗi nhiều dịch vụ, đòi hỏi các chiến lược như mẫu bất đồng bộ (publish-subscribe) để tối ưu.",
+              "needsReview": false
+            },
+            {
+              "question": "Trong kiến trúc microservices, tại sao việc kiểm thử end-to-end lại trở nên khó khăn hơn so với kiến trúc nguyên khối?",
+              "answer": "Vì khó khăn trong việc phối hợp các dịch vụ hoạt động như một ứng dụng thống nhất và quản lý các phụ thuộc.",
+              "explanation": "Kiểm thử end-to-end khó khăn vì yêu cầu nghiệp vụ thường xuyên đi qua nhiều microservice, đòi hỏi sự phối hợp phức tạp và các công cụ kiểm thử hiện tại thường chưa tối ưu cho các phụ thuộc này.",
+              "needsReview": false
+            }
+          ]
+        },
+        {
+          "video": "06. When to Use Microservices Architecture - Best Practices.mp4",
+          "completedAt": "2026-11-15T09:24:12.303Z",
+          "facts": [
+            {
+              "question": "Theo Sam Newman và Martin Fowler, chiến lược tiếp cận nào được khuyến nghị trước khi chuyển đổi hoàn toàn sang kiến trúc microservices?",
+              "answer": "Bắt đầu với kiến trúc monolithic mô-đun và tái cấu trúc dần dần.",
+              "explanation": "Các chuyên gia đề xuất bắt đầu với monolithic mô-đun để tận dụng lợi ích của sự phân tách mà không gặp phải sự phức tạp của microservices, sau đó mới tách dần từng mô-đun.",
+              "needsReview": false
+            },
+            {
+              "question": "Nhắc lại kiến thức về tính độc lập (như đã học ở bài 01), yếu tố nào sau đây là lý do chính đáng để ưu tiên sử dụng kiến trúc microservices?",
+              "answer": "Để có thể mở rộng quy mô các phần cụ thể của ứng dụng một cách độc lập.",
+              "explanation": "Khả năng mở rộng độc lập các dịch vụ cụ thể là một trong những lý do chính đáng nhất để chọn microservices, giúp tối ưu hóa tài nguyên thay vì mở rộng toàn bộ ứng dụng.",
+              "needsReview": false
+            },
+            {
+              "question": "Trong bối cảnh triển khai phần mềm, lợi ích nào của microservices giúp giảm thiểu rủi ro cho toàn bộ hệ thống khi có lỗi xảy ra?",
+              "answer": "Lỗi trong một microservice chỉ ảnh hưởng đến dịch vụ đó thay vì toàn bộ ứng dụng.",
+              "explanation": "Tính độc lập của các microservice đảm bảo rằng sự cố ở một dịch vụ không lan rộng ra toàn bộ hệ thống, giúp tăng tính ổn định và khả năng phục hồi.",
+              "needsReview": false
+            }
+          ]
+        },
+        {
+          "video": "07. When Not to Use Microservices - Anti-Patterns of Microservices.mp4",
+          "completedAt": "2026-11-15T09:28:46.398Z",
+          "facts": [
+            {
+              "question": "Tại sao việc thiết kế các dịch vụ có sự kết nối chặt chẽ (tightly coupled) lại dẫn đến mô hình chống đối 'kiến trúc nguyên khối phân tán'?",
+              "answer": "Vì nó làm tăng độ phức tạp của hệ thống mà không mang lại lợi ích về sự tự chủ và linh hoạt.",
+              "explanation": "Kết nối chặt chẽ khiến các dịch vụ phụ thuộc lẫn nhau, làm mất đi tính tự chủ và linh hoạt, tạo ra độ phức tạp của hệ thống phân tán mà không có lợi ích của microservices.",
+              "needsReview": false
+            },
+            {
+              "question": "Dựa trên bài giảng, tại sao việc thiếu DevOps hoặc các dịch vụ đám mây lại là một mô hình chống đối khi triển khai microservices?",
+              "answer": "Vì microservices dựa trên các phương pháp phân tán gốc đám mây, thiếu chúng sẽ làm mất đi khả năng tối ưu hóa lợi ích của kiến trúc.",
+              "explanation": "Microservices được xây dựng dựa trên các nguyên tắc gốc đám mây; thiếu DevOps, CI/CD và các công cụ hỗ trợ sẽ khiến hệ thống trở nên phức tạp và khó quản lý.",
+              "needsReview": false
+            },
+            {
+              "question": "Nhắc lại kiến thức về giao tiếp (đã học ở bài 05), giải pháp nào được đề xuất trong bài để phá vỡ các phụ thuộc chặt chẽ giữa các microservices?",
+              "answer": "Sử dụng giao tiếp không đồng bộ thông qua nhắn tin hoặc truyền phát sự kiện.",
+              "explanation": "Để tránh kết nối chặt chẽ, bài giảng khuyến nghị sử dụng giao tiếp không đồng bộ qua nhắn tin hoặc sự kiện, giúp các dịch vụ hoạt động độc lập hơn.",
+              "needsReview": false
+            }
+          ]
+        },
+        {
+          "video": "08. Monolithic vs Microservices Architecture Comparison.mp4",
+          "completedAt": "2026-11-15T09:33:17.005Z",
+          "facts": [
+            {
+              "question": "So với kiến trúc nguyên khối (monolithic), khả năng mở rộng của kiến trúc microservices mang lại lợi ích gì cho doanh nghiệp?",
+              "answer": "Cho phép mở rộng độc lập các dịch vụ cụ thể, giúp tiết kiệm thời gian và tài nguyên.",
+              "explanation": "Microservices cho phép mở rộng độc lập các thành phần, giúp tối ưu hóa tài nguyên thay vì phải mở rộng toàn bộ ứng dụng như kiến trúc nguyên khối.",
+              "needsReview": false
+            },
+            {
+              "question": "Trong bối cảnh triển khai phần mềm, sự khác biệt chính giữa quy trình triển khai của kiến trúc nguyên khối và microservices là gì?",
+              "answer": "Nguyên khối triển khai toàn bộ hệ thống qua một pipeline duy nhất, còn microservices cho phép triển khai độc lập từng thành phần.",
+              "explanation": "Kiến trúc nguyên khối sử dụng một pipeline duy nhất cho toàn bộ hệ thống, trong khi microservices cho phép triển khai độc lập các thành phần với các pipeline riêng biệt, hỗ trợ CI/CD hiệu quả.",
+              "needsReview": false
+            },
+            {
+              "question": "Dựa trên bài giảng, yếu tố nào về đội ngũ phát triển cần được cân nhắc khi lựa chọn giữa kiến trúc nguyên khối và microservices?",
+              "answer": "Kinh nghiệm của nhóm với microservices và hệ thống container là yếu tố quan trọng để quyết định tính khả thi.",
+              "explanation": "Bài giảng nhấn mạnh rằng nếu nhóm không có kinh nghiệm với microservices và container, việc xây dựng hệ thống này sẽ rất khó khăn; nguyên khối thường ưu tiên cho nhóm nhỏ.",
+              "needsReview": true
+            }
+          ]
+        },
+        {
+          "video": "09. The Database-per-Service Pattern - Polyglot Persistence.mp4",
+          "completedAt": "2026-11-15T09:44:05.458Z",
+          "facts": [
+            {
+              "question": "Trong kiến trúc microservices, tại sao mẫu 'Database-per-Service' lại yêu cầu các dịch vụ không được truy cập trực tiếp vào cơ sở dữ liệu của nhau?",
+              "answer": "Để đảm bảo tính kết nối lỏng lẻo và đóng gói dữ liệu miền bên trong mỗi dịch vụ.",
+              "explanation": "Việc cấm truy cập trực tiếp vào cơ sở dữ liệu của dịch vụ khác giúp duy trì tính kết nối lỏng lẻo (loose coupling) và đảm bảo dữ liệu miền được đóng gói, chỉ có thể truy cập thông qua Rest API.",
+              "needsReview": false
+            },
+            {
+              "question": "Khái niệm 'Polyglot Persistence' trong kiến trúc microservices mang lại lợi ích gì cho việc lưu trữ dữ liệu?",
+              "answer": "Cho phép chọn loại cơ sở dữ liệu tối ưu nhất cho nhu cầu cụ thể của từng microservice.",
+              "explanation": "Polyglot persistence cho phép mỗi microservice chọn công nghệ lưu trữ phù hợp nhất với đặc thù dữ liệu của nó, ví dụ như NoSQL cho sản phẩm hay Key-value cho giỏ hàng.",
+              "needsReview": false
+            },
+            {
+              "question": "Dựa trên ví dụ về ứng dụng thương mại điện tử trong bài giảng, microservice nào thường sử dụng cơ sở dữ liệu quan hệ và tại sao?",
+              "answer": "Microservice đặt hàng, vì dữ liệu có cấu trúc quan hệ phức tạp.",
+              "explanation": "Trong ví dụ, microservice đặt hàng sử dụng cơ sở dữ liệu quan hệ để xử lý các cấu trúc dữ liệu phức tạp, trong khi sản phẩm dùng NoSQL và giỏ hàng dùng key-value.",
+              "needsReview": true
+            }
+          ]
+        },
+        {
+          "video": "10. Decomposition of Ecommerce Microservices Catalog, Basket, Discount and Ordering.mp4",
+          "completedAt": "2026-11-15T09:51:00.005Z",
+          "facts": [
+            {
+              "question": "Trong phân tích yêu cầu bằng câu chuyện người dùng cho ứng dụng thương mại điện tử, các 'danh từ' (được đánh dấu đen) thường đại diện cho điều gì?",
+              "answer": "Các đối tượng chính hoặc miền (domain) của hệ thống.",
+              "explanation": "Trong video, giảng viên giải thích rằng khi phân tích câu chuyện người dùng, các danh từ (ví dụ: khách hàng, đơn hàng, sản phẩm, giỏ hàng) được trích xuất để trở thành các đối tượng chính (domain) giúp xác định các miền phụ và ngữ cảnh giới hạn.",
+              "needsReview": false
+            },
+            {
+              "question": "Theo video, sai lầm phổ biến nào cần tránh khi thiết kế biểu đồ tương tác đối tượng và phân công trách nhiệm?",
+              "answer": "Đẩy quá nhiều trách nhiệm lên đối tượng tác nhân (ví dụ: khách hàng).",
+              "explanation": "Video chỉ ra rằng một trong những sai lầm phổ biến nhất khi suy nghĩ về trách nhiệm của đối tượng là đẩy trách nhiệm lên đối tượng tác nhân (như khách hàng). Thay vào đó, các đối tượng phải tự quản lý chính mình và giao tiếp qua các hàm.",
+              "needsReview": false
+            },
+            {
+              "question": "Dựa trên quá trình phân tách được trình bày, các microservice nào sau đây được phân loại vào nhóm 'microservice chính' cho ứng dụng thương mại điện tử?",
+              "answer": "Khách hàng/Người dùng, Sản phẩm, Giỏ hàng, Chiết khấu, Đơn hàng.",
+              "explanation": "Giảng viên đã nhóm các microservice thành nhiều loại. Khách hàng/người dùng, sản phẩm, giỏ hàng, chiết khấu và đơn hàng được xếp vào nhóm 'microservice chính' (main microservices).",
+              "needsReview": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "folder": "M:\\ID_PTS\\ASP.NET\\microservices\\03",
+      "lessons": [
+        {
+          "video": "01. Why .NET.mp4",
+          "completedAt": "2026-11-15T09:56:19.301Z",
+          "facts": [
+            {
+              "question": "Sự tiến hóa quan trọng nhất của nền tảng .NET kể từ khi ra đời là gì?",
+              "answer": "Từ một framework tập trung vào Windows sang dự án mã nguồn mở, đa nền tảng.",
+              "explanation": "Bài giảng nhấn mạnh .NET đã chuyển mình từ một framework đóng, tập trung vào Windows trở thành một dự án mã nguồn mở và đa nền tảng.",
+              "needsReview": false
+            },
+            {
+              "question": "Tại sao cách tiếp cận 'nền tảng thống nhất' của .NET lại giúp giảm chi phí phát triển phần mềm?",
+              "answer": "Vì nó cho phép tái sử dụng kỹ năng và mã code trên nhiều loại ứng dụng khác nhau.",
+              "explanation": "Cách tiếp cận thống nhất cho phép nhà phát triển sử dụng lại kỹ năng và mã nguồn trên nhiều nền tảng (web, di động, desktop, IoT), giúp tăng tốc độ và giảm chi phí.",
+              "needsReview": false
+            },
+            {
+              "question": "Dựa trên điểm chuẩn Techempower được nhắc đến trong bài, .NET 8 thể hiện ưu thế vượt trội ở khía cạnh nào?",
+              "answer": "Tốc độ xử lý các tác vụ như tuần tự hóa JSON và truy cập cơ sở dữ liệu.",
+              "explanation": "Điểm chuẩn Techempower so sánh các framework web và cho thấy .NET 8 dẫn đầu về tốc độ trong các tác vụ như tuần tự hóa JSON và truy cập cơ sở dữ liệu.",
+              "needsReview": true
+            }
+          ]
+        },
+        {
+          "video": "02. Cloud-Native Development with .Net 8.mp4",
+          "completedAt": "2026-11-15T10:07:34.156Z",
+          "facts": [
+            {
+              "question": "Theo bài giảng, đâu là 4 trụ cột nền tảng của kiến trúc cloud-native mà .NET 8 hỗ trợ triển khai?",
+              "answer": "Khả năng quan sát, khả năng phục hồi, khả năng mở rộng và khả năng quản lý.",
+              "explanation": "Bài giảng xác định rõ 4 trụ cột chính của cloud-native trong .NET 8 là khả năng quan sát (observability), khả năng phục hồi (resilience), khả năng mở rộng (scalability) và khả năng quản lý (manageability).",
+              "needsReview": true
+            },
+            {
+              "question": "Trong .NET 8, công cụ nào được sử dụng để tích hợp với Prometheus và Grafana nhằm giám sát hiệu suất và hành vi ứng dụng?",
+              "answer": "Open Telemetry.",
+              "explanation": ".NET 8 tích hợp với Open Telemetry để thu thập dữ liệu, cho phép kết nối với các công cụ như Prometheus và Grafana để tạo bảng điều khiển giám sát.",
+              "needsReview": false
+            },
+            {
+              "question": "Tại sao việc sử dụng các gói NuGet kiểm thử (testing) trong phát triển cloud-native với .NET 8 lại được coi là bắt buộc?",
+              "answer": "Để mô phỏng các kịch bản thực tế và phát hiện vấn đề trước khi đưa vào sản xuất.",
+              "explanation": "Kiểm thử là bắt buộc trong phát triển cloud-native với .NET 8 vì nó giúp tạo các bộ kiểm thử đáng tin cậy, mô phỏng kịch bản thực tế để phát hiện lỗi sớm trước khi ảnh hưởng đến môi trường sản xuất.",
+              "needsReview": false
+            }
+          ]
+        },
+        {
+          "video": "03. .NET loves Containers and Microservices.mp4",
+          "completedAt": "2026-11-15T10:13:40.315Z",
+          "facts": [
+            {
+              "question": "Trong .NET 8, tại sao việc sử dụng các container 'chiselled' (được đẽo gọt) lại được coi là một cải tiến quan trọng cho các ứng dụng cloud-native?",
+              "answer": "Vì chúng là phiên bản tinh gọn của Ubuntu, giúp giảm kích thước image và thu hẹp bề mặt tấn công.",
+              "explanation": "Container chiselled là các phiên bản tinh gọn của Ubuntu, chỉ giữ lại các gói cần thiết, giúp giảm kích thước image và tăng cường bảo mật bằng cách thu hẹp bề mặt tấn công.",
+              "needsReview": false
+            },
+            {
+              "question": "Việc chuyển đổi cổng mặc định của ứng dụng ASP.NET Core sang 8080 trong .NET 8 có ý nghĩa gì trong môi trường container?",
+              "answer": "Để phù hợp với thực tiễn tốt nhất khi chạy ứng dụng dưới quyền người dùng non-root trong các nền tảng như Kubernetes.",
+              "explanation": "Việc chuyển sang cổng 8080 đi kèm với việc chạy ứng dụng dưới quyền non-root, giúp tuân thủ các thực tiễn bảo mật tốt nhất và dễ dàng tích hợp với các nền tảng điều phối như Kubernetes.",
+              "needsReview": false
+            },
+            {
+              "question": "Kỹ thuật Native AOT trong .NET 8 mang lại lợi ích trực tiếp nào cho các ứng dụng được container hóa?",
+              "answer": "Giảm đáng kể kích thước runtime và cải thiện hiệu suất khởi động của ứng dụng.",
+              "explanation": "Native AOT (biên dịch trước thời hạn) giúp biên dịch ứng dụng thành mã native, từ đó giảm kích thước runtime và giúp ứng dụng khởi động nhanh hơn, rất quan trọng cho môi trường cloud-native.",
+              "needsReview": false
+            }
+          ]
+        },
+        {
+          "video": "04. What is new .NET 8.mp4",
+          "completedAt": "2026-11-15T10:16:51.923Z",
+          "facts": [
+            {
+              "question": ".NET Aspire được giới thiệu trong .NET 8 nhằm mục đích chính là gì?",
+              "answer": "Xây dựng các ứng dụng phân tán sẵn sàng cho sản xuất và có khả năng quan sát.",
+              "explanation": ".NET Aspire là một stack có chủ kiến được thiết kế để hỗ trợ xây dựng các ứng dụng phân tán, sẵn sàng cho sản xuất và có khả năng quan sát thông qua các gói NuGet.",
+              "needsReview": true
+            },
+            {
+              "question": "Cải tiến nào trong cơ chế Garbage Collection (GC) của .NET 8 đặc biệt quan trọng đối với các dịch vụ đám mây?",
+              "answer": "Khả năng điều chỉnh giới hạn bộ nhớ ngay lập tức (on-the-fly).",
+              "explanation": "Trong .NET 8, cơ chế Garbage Collection cho phép điều chỉnh giới hạn bộ nhớ ngay lập tức, hỗ trợ đắc lực cho việc mở rộng quy mô động trong các kịch bản dịch vụ đám mây.",
+              "needsReview": true
+            },
+            {
+              "question": "Tính năng mới nào trong phần Networking của .NET 8 giúp nâng cao tính riêng tư và bảo mật khi giao tiếp qua proxy?",
+              "answer": "Hỗ trợ proxy HTTPS.",
+              "explanation": ".NET 8 bổ sung hỗ trợ cho proxy HTTPS, đảm bảo giao tiếp được mã hóa ngay cả trong các kịch bản sử dụng proxy, giúp tăng cường bảo mật.",
+              "needsReview": true
+            }
+          ]
+        },
+        {
+          "video": "05. What is new .C# 12  Primary Constructors, Collection Expressions, Inline Arrays.mp4",
+          "completedAt": "2026-11-16T13:54:27.403Z",
+          "facts": [
+            {
+              "question": "Trong C# 12, phạm vi hoạt động của các tham số trong Primary Constructors khi áp dụng cho class là gì?",
+              "answer": "Khả dụng trong toàn bộ phạm vi thân lớp (class body).",
+              "explanation": "C# 12 mở rộng Primary Constructors từ kiểu record sang class, cho phép các tham số được sử dụng trực tiếp trong toàn bộ phạm vi thân lớp.",
+              "needsReview": false
+            },
+            {
+              "question": "Tính năng Collection Expressions trong C# 12 mang lại cải tiến gì so với các phiên bản trước?",
+              "answer": "Cho phép tạo collection bằng cú pháp dấu ngoặc vuông [] ngắn gọn.",
+              "explanation": "Collection Expressions cung cấp cú pháp ngắn gọn hơn bằng cách sử dụng dấu ngoặc vuông [] để khởi tạo các giá trị collection thông dụng.",
+              "needsReview": false
+            },
+            {
+              "question": "Mục đích chính của việc sử dụng Inline Arrays trong C# 12 là gì?",
+              "answer": "Tối ưu hóa bố cục bộ nhớ và cải thiện hiệu suất runtime bằng mảng kích thước cố định.",
+              "explanation": "Inline arrays cho phép tạo mảng kích thước cố định trong struct, giúp tối ưu hóa bố cục bộ nhớ và cải thiện hiệu suất runtime.",
+              "needsReview": false
+            }
+          ]
+        },
+        {
+          "video": "06. C# Top-level statements, Global usings, Pattern Matching.mp4",
+          "completedAt": "2026-11-16T14:11:30.284Z",
+          "facts": [
+            {
+              "question": "Trong C#, tính năng 'Top-level statements' mang lại thay đổi gì cho cấu trúc của một tệp chương trình?",
+              "answer": "Cho phép viết mã trực tiếp ở cấp cao nhất mà không cần bọc trong phương thức Main.",
+              "explanation": "Top-level statements đơn giản hóa điểm vào của ứng dụng bằng cách cho phép viết mã trực tiếp mà không cần khai báo phương thức Main thủ công.",
+              "needsReview": false
+            },
+            {
+              "question": "Lợi ích chính của việc sử dụng 'Global Usings' trong các dự án C# lớn là gì?",
+              "answer": "Giảm sự lộn xộn bằng cách khai báo namespace toàn cục tại một nơi thay vì lặp lại trong mọi tệp.",
+              "explanation": "Global Usings giúp khai báo các namespace khả dụng cho toàn bộ dự án tại một vị trí duy nhất, giúp giảm lặp lại và cải thiện khả năng bảo trì.",
+              "needsReview": false
+            },
+            {
+              "question": "Trong khớp mẫu (pattern matching) của C#, ký hiệu dấu gạch dưới (_) trong biểu thức switch có ý nghĩa gì?",
+              "answer": "Là mẫu loại bỏ (discard pattern) để xử lý các giá trị không khớp với các trường hợp trước đó.",
+              "explanation": "Dấu gạch dưới (_) là mẫu loại bỏ (discard pattern) trong biểu thức switch, dùng để bắt bất kỳ giá trị nào không được xử lý rõ ràng bởi các trường hợp khác.",
+              "needsReview": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "folder": "M:\\ID_PTS\\ASP.NET\\microservices\\04",
+      "lessons": [
+        {
+          "video": "01. ASP.NET 8 for Microservice Development.mp4",
+          "completedAt": "2026-11-16T14:30:58.276Z",
+          "facts": [
+            {
+              "question": "Trong bối cảnh phát triển microservices, ASP.NET Core được đánh giá cao nhờ đặc điểm nào về kiến trúc pipeline xử lý yêu cầu?",
+              "answer": "Pipeline xử lý yêu cầu HTTP nhẹ, hiệu suất cao và theo mô-đun.",
+              "explanation": "ASP.NET Core được thiết kế với pipeline xử lý yêu cầu HTTP nhẹ, hiệu suất cao và theo mô-đun, giúp nó linh hoạt và phù hợp để chạy trên nhiều môi trường như Kestrel, Docker, Nginx.",
+              "needsReview": false
+            },
+            {
+              "question": "Công nghệ nào trong ASP.NET Core cho phép nhà phát triển sử dụng C# trực tiếp trong trình duyệt thay vì chỉ dùng JavaScript?",
+              "answer": "Blazor",
+              "explanation": "Blazor là công nghệ cho phép sử dụng C# trong trình duyệt cùng với JavaScript, hỗ trợ phát triển ứng dụng web hiện đại trên nhiều nền tảng.",
+              "needsReview": true
+            },
+            {
+              "question": "Tại sao ASP.NET 8 được coi là lựa chọn tối ưu cho việc xây dựng các microservices hiện đại trên đám mây?",
+              "answer": "Vì nó hỗ trợ các mẫu kiến trúc hiện đại như thiết kế hướng sự kiện (event-driven) và tối ưu cho đám mây.",
+              "explanation": "ASP.NET 8 được tối ưu hóa cho triển khai đám mây và hỗ trợ các mẫu kiến trúc hiện đại như thiết kế hướng sự kiện, giúp xây dựng các microservices tinh vi và có khả năng mở rộng.",
+              "needsReview": false
+            }
+          ]
+        },
+        {
+          "video": "02. Minimal APIs in ASP.NET Core.mp4",
+          "completedAt": "2026-11-16T14:51:18.942Z",
+          "facts": [
+            {
+              "question": "Mục đích chính của Minimal APIs trong ASP.NET Core là gì?",
+              "answer": "Cung cấp cách tiếp cận đơn giản để xây dựng API Http nhanh và hiệu quả.",
+              "explanation": "API tối giản cung cấp một cách tiếp cận đơn giản để xây dựng các API Http nhanh và hiệu quả với mã lệnh và cấu hình tối thiểu, bỏ qua các giàn dựng truyền thống.",
+              "needsReview": false
+            },
+            {
+              "question": "Theo video, điểm khác biệt chính của Minimal APIs so với kiến trúc ASP.NET Core truyền thống là gì?",
+              "answer": "Giảm thiểu nhu cầu về giàn dựng truyền thống và không cần các controller.",
+              "explanation": "API tối giản cho phép tạo các endpoint Rest đầy đủ chức năng, giảm thiểu nhu cầu về các giàn dựng truyền thống và tránh các controller không cần thiết.",
+              "needsReview": false
+            },
+            {
+              "question": "Minimal APIs có hỗ trợ định tuyến động (dynamic routing) không và ví dụ trong bài giảng sử dụng tham số nào?",
+              "answer": "Có hỗ trợ, ví dụ sử dụng tham số route là ID người dùng và ID sách.",
+              "explanation": "Video giải thích API tối giản hỗ trợ định tuyến động và lấy ví dụ cụ thể về việc sử dụng các tham số route như ID người dùng và ID sách để xử lý nghiệp vụ nội bộ.",
+              "needsReview": false
+            }
+          ]
+        },
+        {
+          "video": "03. Create ASP.NET Core Web API for Single Microservice.mp4",
+          "completedAt": "2026-11-16T14:55:23.078Z",
+          "facts": [
+            {
+              "question": "Trong cấu hình mặc định của dự án ASP.NET Core Web API trên .NET 8, tại sao các tùy chọn như 'Use controllers' thường không được chọn?",
+              "answer": "Vì mặc định dự án được thiết lập để sử dụng Minimal APIs và các tính năng C# 12.",
+              "explanation": "Dự án mặc định trong .NET 8 ưu tiên Minimal APIs và các câu lệnh cấp cao nhất (top-level statements) của C# 12, thay vì sử dụng cấu trúc Controller truyền thống.",
+              "needsReview": false
+            },
+            {
+              "question": "Trong tệp Program.cs của một dự án ASP.NET Core, bước 'Configure the HTTP request pipeline' có vai trò gì?",
+              "answer": "Xác định cách ứng dụng xử lý các yêu cầu HTTP đến.",
+              "explanation": "Phần 'Configure the HTTP request pipeline' trong Program.cs được dùng để định nghĩa cách ứng dụng tiếp nhận và xử lý các yêu cầu HTTP từ client.",
+              "needsReview": false
+            },
+            {
+              "question": "Khi chạy ứng dụng ASP.NET Core Web API, lệnh 'app.Run()' thực hiện chức năng gì?",
+              "answer": "Khởi động ứng dụng và bắt đầu lắng nghe các yêu cầu đến.",
+              "explanation": "Lệnh app.Run() là bước cuối cùng trong tệp Program.cs, có nhiệm vụ khởi động ứng dụng và bắt đầu lắng nghe các yêu cầu HTTP tại các cổng đã cấu hình.",
+              "needsReview": false
+            }
+          ]
+        },
+        {
+          "video": "04. Clear Project for Single Microservices Setting Up a Minimal ASP.NET Web API.mp4",
+          "completedAt": "2026-11-16T15:01:59.731Z",
+          "facts": [
+            {
+              "question": "Trong quy trình thiết lập một ASP.NET Core Web API tối giản, việc chia cấu hình thành hai giai đoạn chính 'trước khi xây dựng' và 'sau khi xây dựng' ứng dụng có ý nghĩa gì?",
+              "answer": "Giai đoạn trước dùng để cấu hình Dependency Injection, giai đoạn sau dùng để cấu hình HTTP request pipeline.",
+              "explanation": "Bài giảng xác định rõ hai giai đoạn: trước khi xây dựng ứng dụng (sử dụng AddService để thiết lập Dependency Injection) và sau khi xây dựng ứng dụng (sử dụng các phương thức Use để cấu hình middleware và pipeline).",
+              "needsReview": false
+            },
+            {
+              "question": "Tại sao trong bài giảng, tác giả khuyên nên sử dụng mẫu dự án 'ASP.NET Core Empty' thay vì mẫu 'Web API' mặc định cho các microservices?",
+              "answer": "Vì mẫu Web API mặc định chứa nhiều mã mẫu (boilerplate) không cần thiết như dự báo thời tiết cần phải xóa bỏ.",
+              "explanation": "Tác giả giải thích rằng mẫu Web API mặc định đi kèm với mã mẫu (boilerplate) như dự báo thời tiết, việc sử dụng dự án rỗng giúp tránh việc phải xóa mã thừa và bắt đầu với cấu hình tối giản ngay từ đầu.",
+              "needsReview": false
+            },
+            {
+              "question": "Trong tệp Program.cs, vai trò của phương thức 'CreateBuilder' trong việc khởi tạo ứng dụng là gì?",
+              "answer": "Khởi tạo đối tượng WebApplicationBuilder với các cấu hình, ghi nhật ký và phụ thuộc dịch vụ mặc định.",
+              "explanation": "Phương thức CreateBuilder khởi tạo một thể hiện của WebApplicationBuilder, đây là bước đầu tiên để thiết lập cấu hình, ghi nhật ký và các phụ thuộc dịch vụ cho ứng dụng.",
+              "needsReview": false
+            }
+          ]
+        },
+        {
+          "video": "05. Todo Service Create Minimal API with ASP.NET Core for Single Microservice.mp4",
+          "completedAt": "2026-11-16T15:13:12.901Z",
+          "facts": [
+            {
+              "question": "Trong bài học, template dự án nào được khuyến nghị sử dụng để tạo ứng dụng Todo Minimal API nhằm tránh phải xóa mã boilerplate không cần thiết?",
+              "answer": "ASP.NET Core Empty Project",
+              "explanation": "Bài học khuyến nghị dùng template ASP.NET Core Empty Project thay vì Web API vì template Web API có sẵn mã boilerplate weather forecast phải xóa thủ công, còn Empty Project cho phép bắt đầu với cấu trúc tối giản phù hợp cho microservice.",
+              "needsReview": false
+            },
+            {
+              "question": "Gói NuGet nào được cài đặt trong dự án Todo API để cung cấp cơ sở dữ liệu trong bộ nhớ?",
+              "answer": "Microsoft.EntityFrameworkCore.InMemory",
+              "explanation": "Gói Microsoft.EntityFrameworkCore.InMemory được cài đặt để sử dụng cơ sở dữ liệu trong bộ nhớ (in-memory database), phù hợp cho mục đích phát triển và demo mà không cần thiết lập database thực.",
+              "needsReview": false
+            },
+            {
+              "question": "Lớp TodoDb trong dự án Todo API kế thừa từ lớp nào và nhận tham số gì trong constructor?",
+              "answer": "Kế thừa từ DbContext, nhận DbContextOptions",
+              "explanation": "Lớp TodoDb kế thừa từ DbContext (của Entity Framework Core) và constructor của nó nhận DbContextOptions, sau đó truyền cho lớp cơ sở thông qua base(). Điều này là bắt buộc để Entity Framework Core có thể cấu hình và quản lý DbContext.",
+              "needsReview": false
+            },
+            {
+              "question": "Trong Program.cs của dự án Todo Minimal API, các endpoint CRUD được định nghĩa bằng cách sử dụng phương thức nào của đối tượng app?",
+              "answer": "app.MapGet(), app.MapPost(), app.MapPut(), app.MapDelete()",
+              "explanation": "Các endpoint CRUD được định nghĩa bằng các phương thức app.MapGet(), app.MapPost(), app.MapPut() và app.MapDelete(), mỗi phương thức tương ứng với một HTTP verb và ánh xạ tới một đường dẫn endpoint cụ thể.",
+              "needsReview": false
+            }
+          ]
+        },
+        {
+          "video": "06. TEST - Todo Service Create Minimal API w ASP.NET Core for Single Microservice.mp4",
+          "completedAt": "2026-11-16T15:16:25.205Z",
+          "facts": [
+            {
+              "question": "Trong quá trình kiểm thử Todo API bằng Postman, tại sao khi gửi yêu cầu HTTP POST, chúng ta cần cung cấp dữ liệu dưới dạng JSON với các thuộc tính 'name' và 'isComplete'?",
+              "answer": "Vì ứng dụng mong đợi model TodoItem khớp với các thuộc tính này để lưu trữ vào cơ sở dữ liệu.",
+              "explanation": "Ứng dụng được thiết kế để ánh xạ dữ liệu từ yêu cầu HTTP POST vào model TodoItem, do đó dữ liệu gửi đi cần chứa các thuộc tính tương ứng với model này.",
+              "needsReview": false
+            },
+            {
+              "question": "Khi thực hiện cập nhật một mục Todo bằng phương thức HTTP PUT trong Postman, trạng thái phản hồi (status code) nào cho biết việc cập nhật đã thành công?",
+              "answer": "204 No Content",
+              "explanation": "Trong bài giảng, khi gửi yêu cầu PUT để cập nhật mục Todo, hệ thống trả về trạng thái 204, biểu thị rằng yêu cầu đã được xử lý thành công nhưng không có nội dung trả về trong phản hồi.",
+              "needsReview": false
+            },
+            {
+              "question": "Để lấy một mục Todo cụ thể từ danh sách thông qua ID, chúng ta cần thực hiện thao tác nào trên URL trong Postman?",
+              "answer": "Sử dụng tham số truy vấn (query parameter) hoặc thêm ID trực tiếp vào đường dẫn endpoint.",
+              "explanation": "Để truy xuất một mục cụ thể, bài giảng hướng dẫn thêm ID vào đường dẫn endpoint hoặc sử dụng tham số truy vấn để lọc mục cần lấy từ cơ sở dữ liệu.",
+              "needsReview": false
+            }
+          ]
+        },
+        {
+          "video": "07. Containerize Microservices with Docker Containers, Images, and Registries.mp4",
+          "completedAt": "2026-11-16T15:20:36.499Z",
+          "facts": [
+            {
+              "question": "Trong quy trình container hóa microservices, mối quan hệ giữa Docker Image và Docker Container được mô tả như thế nào?",
+              "answer": "Image là biểu diễn tĩnh của ứng dụng cùng các phụ thuộc, còn Container là một thực thể được khởi tạo từ Image để chạy trên máy chủ.",
+              "explanation": "Theo bài giảng, Docker Image là một biểu diễn tĩnh (static representation) của ứng dụng và cấu hình, trong khi Container là thực thể được khởi tạo từ Image đó để thực thi trên máy chủ Docker.",
+              "needsReview": false
+            },
+            {
+              "question": "Để đóng gói một dịch vụ vi mô (như Todo API đã thiết lập ở bài trước) vào Docker, quy trình thực hiện đúng theo thứ tự các bước là gì?",
+              "answer": "Viết Dockerfile -> Xây dựng Docker Image từ Dockerfile -> Khởi chạy Docker Container từ Image đó.",
+              "explanation": "Quy trình container hóa gồm: Bước 1 là viết Dockerfile (tệp cấu hình), Bước 2 là build Dockerfile để tạo ra Image, và Bước 3 là chạy Image đó để tạo ra Container.",
+              "needsReview": false
+            },
+            {
+              "question": "Khi cần điều phối (orchestration) một ứng dụng gồm nhiều microservices chạy trong các container khác nhau, Docker Compose sử dụng tệp cấu hình và lệnh nào?",
+              "answer": "Sử dụng tệp YAML để cấu hình các dịch vụ và lệnh 'docker compose up' để khởi động toàn bộ.",
+              "explanation": "Docker Compose là công cụ định nghĩa ứng dụng đa container bằng tệp YAML. Chỉ với một lệnh duy nhất là 'docker compose up', chúng ta có thể khởi động tất cả các dịch vụ trong cấu hình.",
+              "needsReview": false
+            }
+          ]
+        },
+        {
+          "video": "08. Containerize Todo Asp.Net Web API Microservice and Run Docker Profile.mp4",
+          "completedAt": "2026-11-16T15:23:41.037Z",
+          "facts": [
+            {
+              "question": "Tệp tin nào trong dự án ASP.NET Core được sử dụng để cấu hình các profile chạy và hành vi của máy chủ phát triển trong Visual Studio?",
+              "answer": "launchSettings.json",
+              "explanation": "Tệp launchSettings.json nằm trong thư mục Properties, được sử dụng để định nghĩa các profile chạy (như Http, Https, Docker) và cấu hình các biến môi trường hoặc URL khởi động trong giai đoạn phát triển.",
+              "needsReview": false
+            },
+            {
+              "question": "Khi thêm hỗ trợ Docker vào dự án Web API trong Visual Studio, tệp Dockerfile được tạo ra có đặc điểm gì về quy trình xây dựng?",
+              "answer": "Sử dụng quy trình build đa giai đoạn (multi-stage build) để tối ưu hóa việc publish ứng dụng.",
+              "explanation": "Dockerfile được Visual Studio tạo ra sử dụng quy trình build đa giai đoạn (multi-stage build), bắt đầu từ base image, sau đó sao chép, publish ứng dụng và thiết lập Entrypoint để chạy trong môi trường Docker.",
+              "needsReview": false
+            },
+            {
+              "question": "Sau khi khởi chạy ứng dụng trong Docker container từ Visual Studio, làm thế nào để xác định cổng (port) mà Docker đã gán cho ứng dụng để thực hiện kiểm thử qua Postman?",
+              "answer": "Kiểm tra trong Docker Desktop để lấy cổng được gán ngẫu nhiên hoặc ánh xạ.",
+              "explanation": "Khi chạy Docker từ Visual Studio, Docker thường gán một cổng ngẫu nhiên trên máy chủ (ví dụ: 32768) ánh xạ tới cổng nội bộ của container, người dùng cần kiểm tra Docker Desktop để biết chính xác cổng này.",
+              "needsReview": true
+            },
+            {
+              "question": "Tính năng mạnh mẽ nào của Visual Studio được nhắc đến khi làm việc với các container Docker trong quá trình phát triển microservice?",
+              "answer": "Khả năng gỡ lỗi (debug) trực tiếp mã nguồn bên trong container từ máy tính cục bộ.",
+              "explanation": "Visual Studio cho phép lập trình viên đặt breakpoint và gỡ lỗi (debug) các yêu cầu HTTP đang chạy bên trong container Docker ngay từ môi trường phát triển cục bộ.",
+              "needsReview": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "folder": "M:\\ID_PTS\\ASP.NET\\microservices\\05",
+      "lessons": [
+        {
+          "video": "01. Introduction - Catalog.API with Vertical Slice Architecture and CQRS.mp4",
+          "completedAt": "2026-11-16T15:28:02.683Z",
+          "facts": [
+            {
+              "question": "Trong kiến trúc của Catalog API, thư viện Marten đóng vai trò gì khi kết hợp với PostgreSQL?",
+              "answer": "Biến PostgreSQL thành một DocumentDB có hỗ trợ giao dịch (transactional) cho .NET.",
+              "explanation": "Marten được sử dụng để biến PostgreSQL thành một dotnet transactional DocumentDB, cho phép lưu trữ và truy vấn dữ liệu dưới dạng tài liệu.",
+              "needsReview": false
+            },
+            {
+              "question": "Kiến trúc Vertical Slice trong Catalog API được triển khai như thế nào để tối ưu hóa cấu trúc dự án?",
+              "answer": "Sử dụng các thư mục tính năng (feature folders) và gom các lớp liên quan vào một tệp C# duy nhất.",
+              "explanation": "Vertical slice tập trung vào các tính năng, sử dụng thư mục tính năng và gom các lớp liên quan vào một tệp C# duy nhất thay vì chia theo lớp kỹ thuật.",
+              "needsReview": false
+            },
+            {
+              "question": "Trong quy trình phát triển microservice Catalog API, thư viện nào được sử dụng để định nghĩa các endpoint API tối giản (Minimal APIs)?",
+              "answer": "Carter",
+              "explanation": "Carter được sử dụng để định nghĩa các endpoint API tối giản, giúp tổ chức mã nguồn cho các endpoint trong kiến trúc Minimal API.",
+              "needsReview": false
+            }
+          ]
+        },
+        {
+          "video": "02. Create New Github Repository For Our Microservice Project.mp4",
+          "completedAt": "2026-11-16T15:32:09.852Z",
+          "facts": [
+            {
+              "question": "Tại sao việc tạo kho lưu trữ (repository) trên GitHub lại được khuyến khích trong quá trình phát triển microservices của khóa học này?",
+              "answer": "Để giảng viên có thể dễ dàng kiểm tra và hỗ trợ khi học viên gặp vấn đề.",
+              "explanation": "Việc tạo kho lưu trữ giúp giảng viên theo dõi tiến độ và dễ dàng kiểm tra mã nguồn để hỗ trợ học viên khi họ gặp khó khăn trong quá trình phát triển.",
+              "needsReview": false
+            },
+            {
+              "question": "Khi tạo một kho lưu trữ mới trên GitHub cho dự án Visual Studio, cấu hình nào được khuyến nghị để quản lý các tệp tin không cần thiết?",
+              "answer": "Chọn tệp .gitignore cho Visual Studio.",
+              "explanation": "Bài giảng hướng dẫn chọn tệp .gitignore dành riêng cho Visual Studio để loại bỏ các tệp tin tạm hoặc không cần thiết khỏi hệ thống quản lý phiên bản.",
+              "needsReview": false
+            },
+            {
+              "question": "Quy trình cơ bản để tạo một kho lưu trữ mới trên GitHub theo hướng dẫn trong bài là gì?",
+              "answer": "Vào Repositories -> Nhấn New -> Đặt tên -> Chọn .gitignore cho Visual Studio -> Tạo.",
+              "explanation": "Quy trình chuẩn được nêu là điều hướng đến phần Repositories, nhấn nút New, đặt tên, chọn tệp .gitignore cho Visual Studio và nhấn nút tạo kho lưu trữ.",
+              "needsReview": false
+            }
+          ]
+        },
+        {
+          "video": "03. Clone Github Repository and Create New Solution with Visual Studio.mp4",
+          "completedAt": "2026-11-16T15:35:04.704Z",
+          "facts": [
+            {
+              "question": "Để bắt đầu phát triển microservice trong Visual Studio 2022 sau khi đã tạo kho lưu trữ trên GitHub, bước đầu tiên cần thực hiện là gì?",
+              "answer": "Sử dụng tùy chọn 'Clone a repository' và dán URL từ GitHub.",
+              "explanation": "Theo bài giảng, quy trình bắt đầu bằng việc mở Visual Studio 2022, chọn 'Clone a repository' và dán URL từ GitHub để tải kho lưu trữ về môi trường cục bộ.",
+              "needsReview": false
+            },
+            {
+              "question": "Tại sao giảng viên lại khuyến nghị đổi tên thư mục chứa solution trống thành 'source' sau khi tạo trong Visual Studio?",
+              "answer": "Để tránh xung đột tên thư mục và tách biệt mã nguồn với các tệp triển khai khác.",
+              "explanation": "Việc đổi tên thành 'source' giúp tổ chức cấu trúc thư mục rõ ràng, tránh nhầm lẫn giữa thư mục gốc của repository và thư mục chứa mã nguồn, đồng thời tách biệt mã nguồn với các tệp triển khai như Kubernetes YAML.",
+              "needsReview": false
+            },
+            {
+              "question": "Sau khi tạo và cấu trúc lại 'Blank Solution' trong Visual Studio, bước cuối cùng để đồng bộ hóa thay đổi với GitHub là gì?",
+              "answer": "Sử dụng tính năng 'Git Changes' để commit và đồng bộ (sync) các thay đổi.",
+              "explanation": "Sau khi tạo solution và tổ chức lại thư mục, người dùng cần sử dụng tab 'Git Changes' trong Visual Studio để commit các thay đổi và đồng bộ chúng với kho lưu trữ GitHub.",
+              "needsReview": false
+            }
+          ]
+        },
+        {
+          "video": "04. Create Asp.Net Web Api for Catalog.API Microservice.mp4",
+          "completedAt": "2026-11-16T15:38:32.866Z",
+          "facts": [
+            {
+              "question": "Tại sao giảng viên lại ưu tiên chọn mẫu dự án 'ASP.NET Core Empty' thay vì mẫu 'Web API' thông thường khi khởi tạo Catalog.API?",
+              "answer": "Để tránh các mã boilerplate (mã mẫu) dư thừa và có thể tự sắp xếp mã nguồn sạch sẽ ngay từ đầu.",
+              "explanation": "Mẫu dự án trống (Empty Project) giúp loại bỏ các mã mặc định không cần thiết, cho phép nhà phát triển kiểm soát hoàn toàn cấu trúc dự án ngay từ đầu, phù hợp với việc triển khai kiến trúc Vertical Slice đã đề cập ở bài trước.",
+              "needsReview": false
+            },
+            {
+              "question": "Trong tệp Program.cs của Catalog.API, quy trình cấu hình ứng dụng được chia thành hai phần chính nào?",
+              "answer": "Phần 1: Đăng ký các dịch vụ vào DI container (trước Build); Phần 2: Cấu hình HTTP request pipeline (sau Build).",
+              "explanation": "Cấu trúc chuẩn của Program.cs trong ASP.NET Core gồm hai giai đoạn: trước khi gọi app.Build() để đăng ký các dịch vụ (Dependency Injection) và sau đó để cấu hình cách ứng dụng xử lý các yêu cầu HTTP (Middleware/Pipeline).",
+              "needsReview": false
+            },
+            {
+              "question": "Khi tạo dự án Catalog.API trong Visual Studio, bước nào là quan trọng để đảm bảo cấu trúc thư mục vật lý khớp với cấu trúc Solution Folder (Services/Catalog)?",
+              "answer": "Phải chỉnh sửa thủ công đường dẫn 'Location' bằng cách thêm '/services/catalog' vào sau thư mục source.",
+              "explanation": "Solution Folders trong Visual Studio chỉ là các thư mục ảo. Để cấu trúc thư mục trên đĩa cứng (vật lý) đồng nhất, người dùng cần thay đổi đường dẫn lưu trữ (Location) khi tạo dự án bằng cách thêm các thư mục con tương ứng.",
+              "needsReview": false
+            }
+          ]
+        },
+        {
+          "video": "05. Set Port Numbers for Catalog.API Microservice - Modify Launch Settings.mp4",
+          "completedAt": "2026-11-16T15:42:09.804Z",
+          "facts": [
+            {
+              "question": "Trong ASP.NET Core, tệp 'launchSettings.json' nằm trong thư mục Properties có vai trò gì đối với microservice?",
+              "answer": "Xác định cách ứng dụng chạy trong môi trường phát triển, bao gồm URL, số cổng và biến môi trường.",
+              "explanation": "Tệp launchSettings.json xác định các hồ sơ chạy (profiles) giúp cấu hình URL, số cổng và các biến môi trường cần thiết khi ứng dụng khởi chạy trong môi trường phát triển.",
+              "needsReview": false
+            },
+            {
+              "question": "Khi cấu hình Catalog.API cho môi trường cục bộ, các cổng nào được chỉ định cho HTTP và HTTPS theo hướng dẫn trong bài?",
+              "answer": "HTTP 5000 và HTTPS 5050.",
+              "explanation": "Theo kiến trúc được thiết lập trong bài, microservice danh mục (Catalog.API) được cấu hình để chạy trên cổng 5000 cho HTTP và 5050 cho HTTPS trong môi trường cục bộ.",
+              "needsReview": true
+            },
+            {
+              "question": "Tại sao cần phân biệt giữa số cổng nội bộ (internal) và số cổng bên ngoài (external) khi chạy microservice trong Docker?",
+              "answer": "Vì Docker yêu cầu cổng nội bộ luôn là 80, trong khi cổng bên ngoài cho phép truy cập từ môi trường host vào container.",
+              "explanation": "Trong Docker, ứng dụng lắng nghe trên các cổng nội bộ (thường là 80/8080), nhưng cần ánh xạ (map) ra các cổng bên ngoài để các dịch vụ khác hoặc người dùng có thể truy cập vào container từ môi trường host.",
+              "needsReview": false
+            }
+          ]
+        },
+        {
+          "video": "08. Vertical Slice Architecture.mp4",
+          "completedAt": "2026-11-16T15:52:43.779Z",
+          "facts": [
+            {
+              "question": "Sự khác biệt cơ bản giữa kiến trúc lát cắt dọc (Vertical Slice Architecture) và kiến trúc phân lớp (Layered Architecture) truyền thống là gì?",
+              "answer": "Kiến trúc lát cắt dọc tổ chức mã theo tính năng, trong khi kiến trúc phân lớp chia theo các lớp kỹ thuật ngang.",
+              "explanation": "Kiến trúc lát cắt dọc tổ chức mã xung quanh các tính năng cụ thể (cắt ngang qua tất cả các lớp), trái ngược với kiến trúc phân lớp truyền thống vốn chia ứng dụng theo các lớp kỹ thuật nằm ngang như lớp trình bày, logic nghiệp vụ và dữ liệu.",
+              "needsReview": false
+            },
+            {
+              "question": "Đặc điểm nào sau đây mô tả đúng tính chất của một 'lát cắt' (slice) trong kiến trúc lát cắt dọc?",
+              "answer": "Mỗi lát cắt là một đường dẫn dọc hoàn chỉnh, tự chứa và độc lập với các lát cắt khác.",
+              "explanation": "Trong kiến trúc lát cắt dọc, mỗi lát cắt đại diện cho một đường dẫn dọc hoàn chỉnh xuyên suốt ngăn xếp ứng dụng (từ UI đến DB) và được thiết kế để tự chứa, độc lập nhằm giảm thiểu sự phụ thuộc.",
+              "needsReview": false
+            },
+            {
+              "question": "Thách thức tiềm ẩn khi áp dụng kiến trúc lát cắt dọc trong phát triển phần mềm là gì?",
+              "answer": "Tình trạng trùng lặp mã (code duplication) trên các lát cắt đối với các chức năng chung.",
+              "explanation": "Một trong những thách thức chính của kiến trúc lát cắt dọc là khả năng xảy ra trùng lặp mã giữa các lát cắt, đặc biệt là đối với các chức năng chung, do mỗi lát cắt được thiết kế để tự chứa.",
+              "needsReview": false
+            }
+          ]
+        },
+        {
+          "video": "09. Vertical Slice versus Clean Architecture.mp4",
+          "completedAt": "2026-11-16T15:58:34.337Z",
+          "facts": [
+            {
+              "question": "Sự khác biệt cốt lõi trong cách tổ chức mã nguồn giữa kiến trúc lát cắt dọc (Vertical Slice) và kiến trúc sạch (Clean Architecture) là gì?",
+              "answer": "Lát cắt dọc tập trung vào tính năng, kiến trúc sạch tập trung vào sự phân tách mối quan tâm và quy tắc phụ thuộc.",
+              "explanation": "Kiến trúc lát cắt dọc tổ chức mã xoay quanh các tính năng, trong khi kiến trúc sạch ưu tiên phân tách các mối quan tâm và quy tắc phụ thuộc để bảo vệ logic nghiệp vụ cốt lõi.",
+              "needsReview": false
+            },
+            {
+              "question": "Tại sao kiến trúc lát cắt dọc lại được coi là lựa chọn phù hợp cho các microservice như Catalog.API trong dự án?",
+              "answer": "Vì nó cho phép phát triển và triển khai nhanh chóng các tính năng độc lập mà không ảnh hưởng đến các phần khác.",
+              "explanation": "Kiến trúc lát cắt dọc cho phép mỗi tính năng (như thêm sản phẩm) được phát triển như một lát cắt riêng biệt, giúp cập nhật nhanh chóng mà không ảnh hưởng đến các phần khác của microservice.",
+              "needsReview": false
+            },
+            {
+              "question": "Trong bối cảnh dự án, khi nào nên ưu tiên sử dụng kiến trúc sạch (Clean Architecture) thay vì kiến trúc lát cắt dọc?",
+              "answer": "Khi làm việc với các ứng dụng quy mô lớn, cần bảo trì dài hạn và cách ly logic nghiệp vụ khỏi các thay đổi bên ngoài.",
+              "explanation": "Kiến trúc sạch lý tưởng cho các ứng dụng quy mô lớn, nơi việc bảo trì dài hạn và sự ổn định của logic nghiệp vụ trước các thay đổi bên ngoài là ưu tiên hàng đầu.",
+              "needsReview": false
+            }
+          ]
+        },
+        {
+          "video": "10. CQRS Design Pattern.mp4",
+          "completedAt": "2026-11-16T16:04:09.396Z",
+          "facts": [
+            {
+              "question": "Mẫu thiết kế CQRS (Command Query Responsibility Segregation) giải quyết vấn đề cốt lõi nào trong kiến trúc microservice quy mô lớn?",
+              "answer": "Tránh các truy vấn phức tạp và loại bỏ các phép kết hợp (join) không hiệu quả gây tắc nghẽn cơ sở dữ liệu.",
+              "explanation": "CQRS tách biệt thao tác đọc và ghi để tránh việc một cơ sở dữ liệu duy nhất phải xử lý đồng thời các phép kết hợp phức tạp và các thao tác CRUD, giúp giảm thiểu tình trạng khóa cơ sở dữ liệu và độ trễ.",
+              "needsReview": false
+            },
+            {
+              "question": "Trong mô hình CQRS, sự khác biệt về vai trò giữa 'Lệnh' (Commands) và 'Truy vấn' (Queries) là gì?",
+              "answer": "Lệnh thay đổi trạng thái dữ liệu trong ứng dụng, Truy vấn xử lý các phép kết hợp và trả về kết quả mà không thay đổi trạng thái.",
+              "explanation": "Theo bài giảng, Lệnh chịu trách nhiệm thay đổi trạng thái dữ liệu (thực hiện logic nghiệp vụ), trong khi Truy vấn chỉ xử lý việc đọc và trả về dữ liệu mà không làm thay đổi trạng thái của hệ thống.",
+              "needsReview": false
+            },
+            {
+              "question": "Khi triển khai CQRS với hai cơ sở dữ liệu riêng biệt, chiến lược lưu trữ dữ liệu nào thường được áp dụng cho phía Đọc và phía Ghi?",
+              "answer": "Phía Đọc dùng NoSQL với dữ liệu phi chuẩn hóa, phía Ghi dùng DB quan hệ với chuẩn hóa đầy đủ.",
+              "explanation": "Bài giảng đề xuất sử dụng NoSQL (phi chuẩn hóa) cho cơ sở dữ liệu đọc để tối ưu tốc độ truy vấn và cơ sở dữ liệu quan hệ (chuẩn hóa) cho cơ sở dữ liệu ghi để đảm bảo tính nhất quán dữ liệu mạnh.",
+              "needsReview": false
+            }
+          ]
+        },
+        {
+          "video": "12. CQRS Design Pattern With MediatR Library (Logical CQRS Implementation).mp4",
+          "completedAt": "2026-11-16T16:27:05.882Z",
+          "facts": [
+            {
+              "question": "Trong thư viện MediatR, vai trò của giao diện IRequest là gì và nó liên quan đến lệnh (Command) và truy vấn (Query) như thế nào?",
+              "answer": "IRequest được dùng để định nghĩa một yêu cầu có thể là lệnh hoặc truy vấn, cả hai đều có thể mô hình hóa dưới dạng thông điệp với kiểu trả về được chỉ định qua tham số generic",
+              "explanation": "IRequest là giao diện trung tâm trong MediatR, dùng để định nghĩa yêu cầu có thể là lệnh hoặc truy vấn. Kiểu trả về được chỉ định dưới dạng tham số generic. Các giao diện tùy chỉnh ICommand và IQuery có thể kế thừa từ IRequest để làm rõ sự phân tách trong CQRS.",
+              "needsReview": false
+            },
+            {
+              "question": "Trong kiến trúc sử dụng MediatR với ASP.NET Core, luồng xử lý yêu cầu HTTP diễn ra theo thứ tự nào?",
+              "answer": "Client gửi yêu cầu HTTP -> Controller/Minimal API nhận yêu cầu -> Tạo đối tượng Command/Query -> Gửi đến Mediator -> Mediator định tuyến đến Handler phù hợp",
+              "explanation": "Luồng xử lý đúng là: Client gửi yêu cầu HTTP, Controller hoặc Minimal API đóng vai trò điểm vào nhận yêu cầu, tạo đối tượng Command hoặc Query, ủy quyền cho Mediator, và Mediator định tuyến đến Handler phù hợp để xử lý mà không ghép đôi trực tiếp sender với receiver.",
+              "needsReview": false
+            },
+            {
+              "question": "Pipeline Behavior trong MediatR được dùng để giải quyết vấn đề gì và trong khóa học này, hai hành vi pipeline nào được sử dụng?",
+              "answer": "Pipeline Behavior dùng để triển khai các mối quan tâm xuyên suốt; hai hành vi được dùng là ghi nhật ký (logging) và xác thực (validation)",
+              "explanation": "Pipeline Behavior trong MediatR cho phép chèn logic trước và sau khi Handler thực tế được gọi, phù hợp để triển khai các mối quan tâm xuyên suốt. Trong khóa học, hai hành vi được sử dụng là Logging Behavior (ghi nhật ký chi tiết yêu cầu) và Validation Behavior (xác thực yêu cầu trước khi đến Handler).",
+              "needsReview": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "folder": "M:\\ID_PTS\\ASP.NET\\microservices\\06",
+      "lessons": [
+        {
+          "video": "01. Introduction - Develop Catalog.API Infrastructure, Handler and Endpoint Classes.mp4",
+          "completedAt": "2026-11-16T16:32:11.544Z",
+          "facts": [
+            {
+              "question": "Trong dự án Catalog.API, công nghệ nào được sử dụng để quản lý và chạy cơ sở dữ liệu PostgreSQL cho môi trường phát triển?",
+              "answer": "Docker compose với môi trường đa container",
+              "explanation": "Bài giảng nêu rõ việc thiết lập và chạy cơ sở dữ liệu PostgreSQL được thực hiện thông qua các tệp Docker compose trong môi trường Docker đa container.",
+              "needsReview": false
+            },
+            {
+              "question": "Để phát triển các lớp điểm cuối (endpoint classes) trong kiến trúc lát cắt dọc của Catalog.API, bài giảng sử dụng công nghệ nào?",
+              "answer": "Minimal API và thư viện Carter",
+              "explanation": "Bài giảng xác nhận việc phát triển các lớp điểm cuối được thực hiện bằng cách sử dụng Minimal API kết hợp với thư viện Carter.",
+              "needsReview": false
+            },
+            {
+              "question": "Loại cơ sở dữ liệu nào được sử dụng để lưu trữ dữ liệu trong Catalog.API theo mô tả của bài giảng?",
+              "answer": "Martinet Transactional DocumentDB trên PostgreSQL",
+              "explanation": "Bài giảng chỉ rõ việc sử dụng Martinet Transactional DocumentDB hoạt động trên nền tảng cơ sở dữ liệu PostgreSQL.",
+              "needsReview": false
+            }
+          ]
+        },
+        {
+          "video": "02. Infrastructure - Data Concerns for Catalog API - Marten .NET Transactional DB.mp4",
+          "completedAt": "2026-11-16T16:35:53.151Z",
+          "facts": [
+            {
+              "question": "Trong kiến trúc microservices bản địa đám mây (cloud-native), các 'dịch vụ hỗ trợ' (backing services) như cơ sở dữ liệu hay hệ thống tin nhắn được định nghĩa như thế nào?",
+              "answer": "Là các tài nguyên đính kèm bên ngoài có thể hoán đổi mà không cần thay đổi logic lõi",
+              "explanation": "Các dịch vụ hỗ trợ (backing services) được coi là tài nguyên đính kèm, nằm bên ngoài microservice và có thể được thay thế hoặc hoán đổi mà không làm ảnh hưởng đến logic nghiệp vụ cốt lõi của dịch vụ.",
+              "needsReview": false
+            },
+            {
+              "question": "Tại sao Catalog.API lại sử dụng PostgreSQL để quản lý dữ liệu sản phẩm thay vì một cơ sở dữ liệu NoSQL thuần túy?",
+              "answer": "Để tận dụng khả năng lưu trữ JSON của PostgreSQL nhằm có được sự linh hoạt của NoSQL và tính nhất quán mạnh của SQL",
+              "explanation": "PostgreSQL cho phép sử dụng khả năng lưu trữ đối tượng JSON để hoạt động như một cơ sở dữ liệu tài liệu (NoSQL) trong khi vẫn giữ được tính nhất quán mạnh (strong consistency) của cơ sở dữ liệu quan hệ.",
+              "needsReview": false
+            },
+            {
+              "question": "Dựa trên kiến thức về hạ tầng Catalog.API, thư viện Marten đóng vai trò gì khi kết hợp với PostgreSQL?",
+              "answer": "Là thư viện ORM biến PostgreSQL thành cơ sở dữ liệu tài liệu giao dịch (transactional document DB) cho .NET",
+              "explanation": "Marten là một thư viện ORM mạnh mẽ giúp biến PostgreSQL thành một cơ sở dữ liệu tài liệu giao dịch cho .NET bằng cách tận dụng các khả năng xử lý JSON của PostgreSQL.",
+              "needsReview": false
+            }
+          ]
+        },
+        {
+          "video": "03. Opening Sessions in Marten as Document DB.mp4",
+          "completedAt": "2026-11-16T16:44:16.941Z",
+          "facts": [
+            {
+              "question": "Trong Marten, sự khác biệt chính giữa 'Query Session' và 'Document Session' là gì?",
+              "answer": "Query Session tối ưu cho các kịch bản chỉ đọc, trong khi Document Session hỗ trợ cả đọc và ghi.",
+              "explanation": "Query Session được thiết kế tối ưu cho các kịch bản chỉ đọc, trong khi Document Session cung cấp khả năng thực hiện cả thao tác đọc và ghi dữ liệu.",
+              "needsReview": false
+            },
+            {
+              "question": "Cơ chế 'Dirty Checking' trong Marten hoạt động như thế nào để phát hiện thay đổi trên tài liệu?",
+              "answer": "Giữ lại JSON gốc từ PostgreSQL và sử dụng Newtonsoft.json để so sánh từng node khi lưu.",
+              "explanation": "Dirty checking hoạt động bằng cách lưu trữ JSON gốc khi tài liệu được tải, sau đó so sánh với JSON hiện tại bằng thư viện Newtonsoft.json để xác định các thay đổi trước khi lưu.",
+              "needsReview": true
+            },
+            {
+              "question": "Loại session nào trong Marten được khuyến nghị sử dụng cho các giao dịch nhỏ có hỗn hợp đọc và ghi mà không cần theo dõi thay đổi (dirty checking)?",
+              "answer": "Lightweight Document Session",
+              "explanation": "Lightweight Document Session là lựa chọn tối ưu cho các giao dịch nhỏ, hỗ trợ cả đọc và ghi nhưng không tốn tài nguyên để theo dõi thay đổi (dirty checking).",
+              "needsReview": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "folder": "M:\\ID_PTS\\ASP.NET\\microservices\\07",
+      "lessons": [
+        {
+          "video": "01. Introduction - Develop Catalog.API Cross-cutting Concerns.mp4",
+          "completedAt": "2026-11-17T03:14:51.000Z",
+          "facts": [
+            {
+              "question": "Trong bài giảng về phát triển Catalog.API, những thành phần nào được liệt kê là các 'mối quan tâm xuyên suốt' (cross-cutting concerns) cần được triển khai?",
+              "answer": "Mediator pipeline, Fluent Validation, Logging, Xử lý ngoại lệ toàn cục và Health checks.",
+              "explanation": "Bài giảng xác định các mối quan tâm xuyên suốt bao gồm hành vi pipeline mediator, fluent validation, logging, xử lý ngoại lệ toàn cục, health checks và thiết lập cơ sở dữ liệu.",
+              "needsReview": false
+            },
+            {
+              "question": "Việc sử dụng 'Health checks' trong Catalog.API được đề cập trong bài giảng nhằm mục đích gì?",
+              "answer": "Để giám sát trạng thái của microservices và kết nối với cơ sở dữ liệu.",
+              "explanation": "Health checks được triển khai để kiểm tra và giám sát trạng thái hoạt động của microservices, đặc biệt là khả năng kết nối với cơ sở dữ liệu PostgreSQL.",
+              "needsReview": false
+            },
+            {
+              "question": "Quy trình phát triển Catalog.API kết thúc bằng bước nào để đảm bảo tính sẵn sàng trong môi trường microservices?",
+              "answer": "Container hóa và điều phối microservices bằng Docker và Docker compose.",
+              "explanation": "Bài giảng nêu rõ bước cuối cùng trong quy trình phát triển là container hóa và điều phối các microservices API bằng Docker và Docker compose.",
+              "needsReview": false
+            }
+          ]
+        },
+        {
+          "video": "02. MediatR Pipeline Behaviours and Fluent Validation Library.mp4",
+          "completedAt": "2026-11-17T10:53:33.910Z",
+          "facts": [
+            {
+              "question": "Trong kiến trúc Mediator, hành vi đường ống (pipeline behavior) đóng vai trò gì đối với các 'mối quan tâm xuyên suốt' (cross-cutting concerns)?",
+              "answer": "Bao bọc quá trình xử lý yêu cầu, cho phép thực thi logic trước và sau khi handler hoạt động.",
+              "explanation": "Hành vi đường ống hoạt động như middleware, bao bọc handler để thực thi các mối quan tâm xuyên suốt như xác thực, ghi log mà không làm rối mã nguồn chính.",
+              "needsReview": false
+            },
+            {
+              "question": "Khi tích hợp Fluent Validation vào Mediator pipeline, quy trình xác thực dữ liệu thường diễn ra như thế nào?",
+              "answer": "Xác thực diễn ra trong một hành vi đường ống (pipeline behavior) trước khi yêu cầu đến handler thực tế.",
+              "explanation": "Việc tích hợp Fluent Validation vào pipeline cho phép xác thực các yêu cầu ngay trước khi chúng chạm tới handler, đảm bảo logic nghiệp vụ chỉ xử lý dữ liệu hợp lệ.",
+              "needsReview": false
+            },
+            {
+              "question": "Phương thức nào trong giao diện IPipelineBehavior được sử dụng để thực thi logic và chuyển tiếp yêu cầu đến thành phần tiếp theo trong chuỗi?",
+              "answer": "Handle",
+              "explanation": "Phương thức Handle là nơi triển khai logic của hành vi đường ống, cho phép thực thi mã trước và sau khi gọi delegate tiếp theo (Next) trong chuỗi.",
+              "needsReview": false
+            }
+          ]
+        },
+        {
+          "video": "03. Add Cross-cutting Concerns into BuildingBlocks Class Library for all services.mp4",
+          "completedAt": "2026-11-17T11:06:50.284Z",
+          "facts": [
+            {
+              "question": "Tại sao cần đóng gói các mối quan tâm xuyên suốt (cross-cutting concerns) như xác thực, ghi log vào thư viện lớp Building Blocks thay vì đặt trực tiếp trong từng microservice?",
+              "answer": "Để quản lý tập trung và tái sử dụng mã nguồn cho tất cả các microservice mà không làm thay đổi logic nghiệp vụ.",
+              "explanation": "Việc đóng gói các mối quan tâm xuyên suốt vào thư viện Building Blocks giúp quản lý tập trung, đảm bảo tính tái sử dụng và giữ cho logic nghiệp vụ của từng microservice được tách biệt.",
+              "needsReview": false
+            },
+            {
+              "question": "Khi triển khai Fluent Validation trong thư viện Building Blocks, gói NuGet cụ thể nào cần được cài đặt để hỗ trợ tích hợp với ASP.NET Core Dependency Injection?",
+              "answer": "FluentValidation.DependencyInjectionExtensions",
+              "explanation": "Bài giảng hướng dẫn cài đặt gói 'FluentValidation.DependencyInjectionExtensions' để cung cấp các phương thức mở rộng cần thiết cho Dependency Injection trong các dự án ASP.NET Web API.",
+              "needsReview": false
+            },
+            {
+              "question": "Làm thế nào để các microservice (như Catalog.API) có thể sử dụng các tính năng đã cài đặt trong thư viện Building Blocks?",
+              "answer": "Thông qua việc thêm tham chiếu dự án (project reference) từ microservice đến thư viện Building Blocks.",
+              "explanation": "Các microservice sử dụng tính năng từ Building Blocks bằng cách thêm tham chiếu dự án (project reference), giúp các gói NuGet và logic trong thư viện trở nên khả dụng cho microservice.",
+              "needsReview": false
+            }
+          ]
+        },
+        {
+          "video": "04. Cross-cutting Concerns Validate with AbstractValidator using Fluent Validation.mp4",
+          "completedAt": "2026-11-17T11:11:24.078Z",
+          "facts": [
+            {
+              "question": "Để định nghĩa các quy tắc xác thực cho một lệnh (command) trong Fluent Validation, lớp validator cần kế thừa từ lớp nào?",
+              "answer": "AbstractValidator",
+              "explanation": "Trong Fluent Validation, các lớp validator được định nghĩa bằng cách kế thừa từ lớp trừu tượng AbstractValidator và chỉ định kiểu dữ liệu của lệnh cần xác thực.",
+              "needsReview": false
+            },
+            {
+              "question": "Phương thức nào trong Fluent Validation được sử dụng để định nghĩa các quy tắc xác thực cho từng thuộc tính của đối tượng?",
+              "answer": "RuleFor",
+              "explanation": "Phương thức RuleFor được sử dụng bên trong constructor của validator để thiết lập các quy tắc xác thực cụ thể cho các thuộc tính của đối tượng lệnh.",
+              "needsReview": false
+            },
+            {
+              "question": "Việc đăng ký các validator vào container Dependency Injection trong ASP.NET Core được thực hiện thông qua phương thức nào?",
+              "answer": "AddValidatorsFromAssembly",
+              "explanation": "Phương thức AddValidatorsFromAssembly được sử dụng trong Program.cs để quét và tự động đăng ký tất cả các validator có trong assembly vào hệ thống Dependency Injection.",
+              "needsReview": false
+            },
+            {
+              "question": "Tại sao việc gọi thủ công validator.ValidateAsync bên trong mỗi phương thức Handle của trình xử lý lệnh (command handler) lại không được khuyến khích?",
+              "answer": "Vì nó dẫn đến việc lặp lại mã nguồn (code duplication) không cần thiết.",
+              "explanation": "Việc viết thủ công các khối xác thực trong mỗi phương thức Handle gây ra sự lặp lại mã nguồn, bài giảng hướng tới việc sử dụng Mediator Pipeline để xử lý tập trung.",
+              "needsReview": false
+            }
+          ]
+        },
+        {
+          "video": "05. Validation Pipeline Behaviour with MediatR using Fluent Validation Library.mp4",
+          "completedAt": "2026-11-17T15:05:21.609Z",
+          "facts": [
+            {
+              "question": "Trong việc triển khai Validation Pipeline Behavior, tại sao chúng ta lại sử dụng IEnumerable<IValidator<TRequest>> trong constructor?",
+              "answer": "Để thu thập và chạy tất cả các validator đã được đăng ký cho kiểu yêu cầu cụ thể tại một nơi duy nhất.",
+              "explanation": "Việc tiêm IEnumerable<IValidator<TRequest>> cho phép hành vi pipeline thu thập tất cả các validator liên quan đến yêu cầu đó và thực thi chúng tập trung, thay vì gọi thủ công trong từng handler.",
+              "needsReview": false
+            },
+            {
+              "question": "Trong phương thức Handle của ValidationBehavior, tại sao việc gọi 'await next()' lại đóng vai trò quan trọng?",
+              "answer": "Để tiếp tục vòng đời yêu cầu, chuyển hướng đến hành vi tiếp theo hoặc handler thực tế.",
+              "explanation": "Việc gọi 'next()' là bắt buộc trong mô hình middleware của Mediator để đảm bảo yêu cầu được chuyển tiếp đến các bước tiếp theo trong pipeline hoặc đến handler thực tế sau khi đã qua bước xác thực.",
+              "needsReview": false
+            },
+            {
+              "question": "Dựa trên bài giảng, hành vi xác thực (ValidationBehavior) được cấu hình để chỉ áp dụng cho các yêu cầu thuộc loại nào?",
+              "answer": "Chỉ áp dụng cho các yêu cầu kế thừa từ ICommand (ví dụ: tạo, cập nhật, xóa).",
+              "explanation": "Bài giảng chỉ định sử dụng từ khóa var để lọc và chỉ áp dụng ValidationBehavior cho các yêu cầu thuộc ICommand, giúp tách biệt logic xác thực khỏi các thao tác truy vấn (IQuery).",
+              "needsReview": false
+            },
+            {
+              "question": "Để đăng ký ValidationBehavior vào hệ thống Dependency Injection trong ASP.NET Core, phương thức nào được sử dụng trong cấu hình Mediator?",
+              "answer": "AddOpenBehavior",
+              "explanation": "Phương thức AddOpenBehavior được sử dụng khi cấu hình Mediator để thêm các hành vi pipeline (như ValidationBehavior) vào quy trình xử lý yêu cầu của ứng dụng.",
+              "needsReview": false
+            }
+          ]
+        },
+        {
+          "video": "06. Remove Manual Validator and Test Validation Pipeline Behaviour with MediatR.mp4",
+          "completedAt": "2026-11-17T15:14:37.481Z",
+          "facts": [
+            {
+              "question": "Tại sao việc loại bỏ validator khỏi constructor của Command Handler lại giúp cải thiện mã nguồn?",
+              "answer": "Vì nó loại bỏ sự lặp lại mã nguồn và giúp Handler tập trung vào logic nghiệp vụ cốt lõi.",
+              "explanation": "Việc loại bỏ validator thủ công giúp Handler không bị phân tâm bởi các logic xác thực, tuân thủ nguyên tắc tách biệt trách nhiệm và giảm thiểu mã trùng lặp.",
+              "needsReview": false
+            },
+            {
+              "question": "Trong bài giảng, tại sao cần thay đổi định nghĩa giao diện ICommand từ TRequest sang TResponse?",
+              "answer": "Để đảm bảo ValidationBehavior áp dụng đúng cho các yêu cầu lệnh.",
+              "explanation": "Việc thay đổi này là cần thiết để ValidationBehavior có thể nhận diện và áp dụng các quy tắc xác thực chính xác cho các yêu cầu thuộc loại ICommand.",
+              "needsReview": false
+            },
+            {
+              "question": "Khi một yêu cầu HTTP POST gửi dữ liệu không hợp lệ, điều gì xảy ra trong quy trình xử lý của Mediator?",
+              "answer": "ValidationBehavior chặn yêu cầu, ném ra ngoại lệ xác thực và không gọi đến Handler.",
+              "explanation": "ValidationBehavior đóng vai trò là middleware, nó kiểm tra các quy tắc xác thực trước khi yêu cầu đến được Handler, nếu lỗi, nó sẽ ném ngoại lệ và dừng quy trình.",
+              "needsReview": false
+            }
+          ]
+        },
+        {
+          "video": "07. Develop CRUD Command Validators with Fluent Validation Pipeline Behaviour.mp4",
+          "completedAt": "2026-11-17T15:22:04.713Z",
+          "facts": [
+            {
+              "question": "Khi triển khai lớp xác thực cho UpdateProductCommand, vị trí đặt lớp validator này trong file mã nguồn thường được khuyến nghị là ở đâu?",
+              "answer": "Giữa phần định nghĩa kết quả và lớp trình xử lý lệnh (Command Handler).",
+              "explanation": "Theo bài giảng, để duy trì cấu trúc nhất quán, lớp validator được đặt giữa phần định nghĩa kết quả và lớp trình xử lý lệnh (Command Handler).",
+              "needsReview": false
+            },
+            {
+              "question": "Trong Fluent Validation, phương thức nào được sử dụng để định nghĩa các quy tắc kiểm tra cho các thuộc tính như ID, tên hoặc giá của một lệnh?",
+              "answer": "RuleFor",
+              "explanation": "Phương thức RuleFor được sử dụng bên trong constructor của validator để thiết lập các quy tắc xác thực cụ thể cho từng thuộc tính của đối tượng lệnh.",
+              "needsReview": false
+            },
+            {
+              "question": "Điều gì xảy ra khi một yêu cầu HTTP DELETE gửi đến API mà không cung cấp ID sản phẩm, dựa trên cơ chế Validation Pipeline đã thiết lập?",
+              "answer": "ValidationBehavior chặn yêu cầu và trả về phản hồi lỗi cho client mà không gọi đến Handler.",
+              "explanation": "ValidationBehavior đóng vai trò là middleware, nó kiểm tra các quy tắc xác thực trước khi yêu cầu đến được Handler; nếu dữ liệu không hợp lệ, nó sẽ chặn yêu cầu và trả về lỗi.",
+              "needsReview": false
+            }
+          ]
+        },
+        {
+          "video": "08. Global Handling Exceptions in ASP.NET Core with app.UseExceptionHandler.mp4",
+          "completedAt": "2026-11-17T15:28:31.540Z",
+          "facts": [
+            {
+              "question": "Tại sao cần triển khai cơ chế Global Exception Handling trong ASP.NET Core thay vì để ứng dụng trả về thông báo ngoại lệ thô?",
+              "answer": "Để định dạng phản hồi lỗi nhất quán, dễ đọc và hỗ trợ gỡ lỗi tốt hơn.",
+              "explanation": "Việc sử dụng Global Exception Handling giúp chuẩn hóa định dạng phản hồi lỗi (thường là JSON), giúp client dễ hiểu hơn và hỗ trợ nhà phát triển trong việc gỡ lỗi.",
+              "needsReview": false
+            },
+            {
+              "question": "Trong phương thức app.UseExceptionHandler, đối tượng nào thường được sử dụng để định dạng phản hồi lỗi một cách có cấu trúc?",
+              "answer": "ProblemDetails",
+              "explanation": "Đối tượng ProblemDetails được sử dụng để định dạng phản hồi lỗi, bao gồm thông báo ngoại lệ và stacktrace, giúp phản hồi trở nên có cấu trúc và dễ đọc.",
+              "needsReview": false
+            },
+            {
+              "question": "Khi cấu hình Global Exception Handling bằng hàm lambda trong Program.cs, thao tác nào là quan trọng bên cạnh việc trả về phản hồi lỗi cho client?",
+              "answer": "Ghi log ngoại lệ để phục vụ việc phân tích và gỡ lỗi sâu hơn.",
+              "explanation": "Bên cạnh việc chuẩn bị phản hồi lỗi cho người dùng, việc ghi log ngoại lệ là bước quan trọng để nhà phát triển có thể phân tích và gỡ lỗi hệ thống sau này.",
+              "needsReview": false
+            }
+          ]
+        },
+        {
+          "video": "09. BuildingBlocks Handling Exceptions Generic Way w app.UseExceptionHandler.mp4",
+          "completedAt": "2026-11-17T15:39:51.400Z",
+          "facts": [
+            {
+              "question": "Mục đích chính của tiếp cận Building Blocks trong việc xử lý ngoại lệ trên các microservice là gì?",
+              "answer": "Đóng gói các chức năng chung để duy trì cách tiếp cận nhất quán và giảm trùng lặp mã trên các microservice",
+              "explanation": "Tiếp cận Building Blocks đóng gói tất cả chức năng chung như xử lý ngoại lệ vào một nơi, giúp duy trì cách tiếp cận nhất quán và giảm sự trùng lặp mã trên toàn bộ hệ thống microservice.",
+              "needsReview": false
+            },
+            {
+              "question": "Trong dự án Building Blocks, ba loại ngoại lệ chung nào được tạo ra và chúng đều kế thừa từ lớp nào?",
+              "answer": "NotFoundException, InternalServerException, BadRequestException – kế thừa từ System.Exception",
+              "explanation": "Ba ngoại lệ chung được tạo là NotFoundException (không tìm thấy), InternalServerException (lỗi máy chủ nội bộ) và BadRequestException (yêu cầu không hợp lệ), tất cả đều kế thừa từ System.Exception và thêm thông tin ngữ cảnh cụ thể.",
+              "needsReview": false
+            },
+            {
+              "question": "Lớp ProductNotFoundException trong Catalog microservice được tái cấu trúc theo hướng nào sau khi có Building Blocks?",
+              "answer": "Kế thừa từ NotFoundException của Building Blocks và truyền tên thực thể (product) cùng khóa (ID) vào constructor của lớp cơ sở",
+              "explanation": "Sau tái cấu trúc, ProductNotFoundException kế thừa từ NotFoundException của Building Blocks thay vì System.Exception trực tiếp, và truyền tên thực thể là 'product' cùng với ID vào constructor của lớp cơ sở, cung cấp thông điệp ngoại lệ có ngữ cảnh cụ thể hơn.",
+              "needsReview": false
+            }
+          ]
+        },
+        {
+          "video": "10. Global Exception Handling with IExceptionHandler interface in Asp.net Core.mp4",
+          "completedAt": "2026-11-17T15:48:15.977Z",
+          "facts": [
+            {
+              "question": "Tại sao cần cài đặt gói FluentValidation vào dự án Building Blocks khi triển khai IExceptionHandler?",
+              "answer": "Để truy cập các thư viện ASP.NET Core cần thiết cho việc triển khai giao diện IExceptionHandler.",
+              "explanation": "Dự án Building Blocks không phải là dự án ASP.NET Web API nên không có sẵn các thư viện ASP.NET Core. Việc cài đặt FluentValidation giúp truy cập các API cần thiết để triển khai IExceptionHandler.",
+              "needsReview": false
+            },
+            {
+              "question": "Phương thức nào trong giao diện IExceptionHandler cần được triển khai để xử lý ngoại lệ tùy chỉnh?",
+              "answer": "TryHandleAsync",
+              "explanation": "Phương thức TryHandleAsync là thành viên của giao diện IExceptionHandler, được sử dụng để chặn ngoại lệ và xác định phản hồi phù hợp.",
+              "needsReview": false
+            },
+            {
+              "question": "Trong CustomExceptionHandler, đối tượng nào được sử dụng để định dạng phản hồi lỗi trả về cho client?",
+              "answer": "ProblemDetails",
+              "explanation": "Đối tượng ProblemDetails được sử dụng để đóng gói thông tin lỗi, bao gồm tiêu đề, mã trạng thái và chi tiết ngoại lệ, giúp phản hồi có cấu trúc JSON nhất quán.",
+              "needsReview": false
+            },
+            {
+              "question": "Khi triển khai logic trong TryHandleAsync, kỹ thuật nào được sử dụng để xác định loại ngoại lệ và thiết lập mã trạng thái HTTP tương ứng?",
+              "answer": "Pattern Matching",
+              "explanation": "Kỹ thuật khớp mẫu (pattern matching) của C# được sử dụng để kiểm tra loại ngoại lệ đến và thực hiện các hành động xử lý khác nhau dựa trên loại đó.",
+              "needsReview": false
+            }
+          ]
+        },
+        {
+          "video": "11. Register Custom Exception Handling into Asp.net with AddExceptionHandler method.mp4",
+          "completedAt": "2026-11-17T15:53:25.281Z",
+          "facts": [
+            {
+              "question": "Để đăng ký CustomExceptionHandler vào hệ thống ASP.NET Core, cần thực hiện các thao tác nào trong Program.cs?",
+              "answer": "Sử dụng builder.Services.AddExceptionHandler và app.UseExceptionHandler()",
+              "explanation": "Việc đăng ký yêu cầu hai bước: thêm dịch vụ vào Dependency Injection thông qua AddExceptionHandler và cấu hình HTTP pipeline bằng app.UseExceptionHandler().",
+              "needsReview": false
+            },
+            {
+              "question": "Tại sao việc sử dụng phương thức app.UseExceptionHandler() với tham số rỗng lại quan trọng trong cấu hình pipeline?",
+              "answer": "Để chỉ định rằng ứng dụng sẽ sử dụng trình xử lý ngoại lệ đã được cấu hình tùy chỉnh",
+              "explanation": "Tham số rỗng trong app.UseExceptionHandler() báo hiệu cho pipeline rằng ứng dụng sẽ dựa vào các trình xử lý ngoại lệ đã được đăng ký tùy chỉnh trước đó.",
+              "needsReview": true
+            },
+            {
+              "question": "Trong quá trình xử lý ValidationException tại TryHandleAsync, thông tin nào thường được bổ sung vào ProblemDetails để hỗ trợ client?",
+              "answer": "ID theo dõi (Trace ID) và các lỗi validation cụ thể",
+              "explanation": "Khi xử lý ngoại lệ validation, hệ thống bổ sung Trace ID và các chi tiết lỗi validation vào đối tượng ProblemDetails để phản hồi JSON trở nên hữu ích và dễ quản lý hơn.",
+              "needsReview": false
+            }
+          ]
+        },
+        {
+          "video": "12. Logging Behavior in MediatR Pipeline for Cross-cutting concerns.mp4",
+          "completedAt": "2026-11-17T16:00:17.898Z",
+          "facts": [
+            {
+              "question": "Tại sao việc sử dụng MediatR Pipeline Behavior lại được ưu tiên hơn việc ghi nhật ký (logging) trực tiếp trong từng Handler như CreateProductHandler hay DeleteProductHandler?",
+              "answer": "Để tập trung hóa các 'cross-cutting concerns', tránh lặp lại mã và đảm bảo định dạng nhật ký nhất quán.",
+              "explanation": "Việc sử dụng Pipeline Behavior giúp xử lý các 'cross-cutting concerns' (mối quan tâm xuyên suốt) như logging tại một nơi duy nhất. Điều này giúp mã nguồn sạch hơn, tránh lặp lại logic ghi nhật ký ở mọi Handler và dễ dàng bảo trì định dạng nhật ký.",
+              "needsReview": false
+            },
+            {
+              "question": "Trong lớp LoggingBehavior triển khai từ IPipelineBehavior, tham số 'next' (RequestHandlerDelegate) đóng vai trò gì và logic giám sát hiệu suất được thực hiện như thế nào?",
+              "answer": "next dùng để gọi Handler tiếp theo hoặc thao tác xử lý thực tế; hệ thống đo thời gian thực thi và cảnh báo nếu vượt quá 3 giây.",
+              "explanation": "Trong MediatR Pipeline, 'next' là một delegate để tiếp tục chuỗi pipeline hoặc gọi Handler thực tế. Bài học hướng dẫn sử dụng một bộ đếm thời gian (timer) quanh lệnh gọi 'next' để đo thời gian xử lý, nếu vượt quá 3 giây sẽ ghi cảnh báo hiệu suất.",
+              "needsReview": false
+            },
+            {
+              "question": "Để áp dụng LoggingBehavior cho tất cả các yêu cầu MediatR một cách toàn cục, bạn cần thực hiện đăng ký như thế nào trong Program.cs, so với cách đăng ký CustomExceptionHandler đã học?",
+              "answer": "Sử dụng phương thức AddOpenBehavior(typeof(LoggingBehavior<,>)) bên trong cấu hình AddMediatR.",
+              "explanation": "Khác với IExceptionHandler (được đăng ký qua AddExceptionHandler và UseExceptionHandler), các MediatR behaviors được đăng ký thông qua phương thức AddOpenBehavior trong khối cấu hình AddMediatR để tự động áp dụng cho mọi cặp Request/Response.",
+              "needsReview": false
+            }
+          ]
+        },
+        {
+          "video": "18. Health Check for Catalog Microservices with PostgresDB.mp4",
+          "completedAt": "2026-11-17T16:05:26.609Z",
+          "facts": [
+            {
+              "question": "Tại sao việc triển khai Health Checks trong microservices lại quan trọng đối với các công cụ điều phối (orchestrators) và bộ cân bằng tải (load balancers)?",
+              "answer": "Để cho phép các công cụ này phản ứng bằng cách khởi động lại container hoặc chuyển hướng lưu lượng truy cập khỏi các phiên bản lỗi.",
+              "explanation": "Health checks cung cấp trạng thái ứng dụng để orchestrators có thể khởi động lại container hoặc load balancers có thể điều hướng lưu lượng truy cập, đảm bảo tính sẵn sàng của hệ thống.",
+              "needsReview": false
+            },
+            {
+              "question": "Để tích hợp kiểm tra sức khỏe cho cơ sở dữ liệu PostgreSQL vào ASP.NET Core, bước nào sau đây là bắt buộc trong quá trình cấu hình?",
+              "answer": "Cài đặt gói NuGet AspNetCore.HealthChecks.Pgsql và sử dụng AddNpgSql trong cấu hình dịch vụ.",
+              "explanation": "Để kiểm tra PostgreSQL, cần cài đặt gói NuGet chuyên dụng (AspNetCore.HealthChecks.Pgsql) và đăng ký nó vào pipeline thông qua AddNpgSql trong Dependency Injection.",
+              "needsReview": false
+            },
+            {
+              "question": "Việc sử dụng UI client khi cấu hình Health Checks trong ASP.NET Core mang lại lợi ích gì so với phản hồi thô (raw response)?",
+              "answer": "Cho phép tùy chỉnh định dạng phản hồi sang JSON dễ đọc và hiển thị chi tiết trạng thái của các dịch vụ hỗ trợ.",
+              "explanation": "UI client giúp định dạng phản hồi kiểm tra sức khỏe dưới dạng JSON rõ ràng, giúp việc giám sát các dịch vụ hỗ trợ như PostgreSQL trở nên dễ dàng hơn.",
+              "needsReview": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "folder": "M:\\ID_PTS\\ASP.NET\\microservices\\09",
+      "lessons": [
+        {
+          "video": "01. Distributed Caching with Redis in Basket Microservices.mp4",
+          "completedAt": "2026-11-17T16:16:50.260Z",
+          "facts": [
+            {
+              "question": "Tại sao Redis được coi là giải pháp tối ưu cho bộ nhớ đệm phân tán trong kiến trúc microservices?",
+              "answer": "Vì nó cung cấp khả năng lưu trữ trong bộ nhớ (in-memory) giúp truy cập dữ liệu nhanh và hỗ trợ chia sẻ trạng thái",
+              "explanation": "Redis là kho lưu trữ khóa-giá trị trong bộ nhớ, giúp tăng hiệu suất truy xuất dữ liệu và cho phép các microservices chia sẻ trạng thái trong môi trường phân tán.",
+              "needsReview": false
+            },
+            {
+              "question": "Trong bài giảng, việc tích hợp Redis vào Basket Microservice mang lại lợi ích chính nào cho hệ thống?",
+              "answer": "Giảm tải cho cơ sở dữ liệu và tăng tốc độ truy xuất dữ liệu giỏ hàng",
+              "explanation": "Việc sử dụng Redis làm bộ nhớ đệm giúp giảm tải cho cơ sở dữ liệu chính và tăng tốc độ truy xuất dữ liệu giỏ hàng người dùng.",
+              "needsReview": false
+            },
+            {
+              "question": "Những mẫu thiết kế (design patterns) nào được đề cập để triển khai quản lý bộ nhớ đệm với Redis trong bài giảng?",
+              "answer": "Proxy pattern, Decorator pattern và Cache Aside pattern",
+              "explanation": "Bài giảng nêu rõ việc triển khai mẫu proxy, mẫu decorator (thông qua Caching Basket Repository) và mẫu cache aside để quản lý bộ nhớ đệm.",
+              "needsReview": false
+            }
+          ]
+        },
+        {
+          "video": "02. Cache-aside Pattern in Microservices  Cache Invalidation.mp4",
+          "completedAt": "2026-11-17T16:23:48.003Z",
+          "facts": [
+            {
+              "question": "Trong mẫu Cache-aside, quy trình xử lý khi xảy ra 'cache miss' (dữ liệu không có trong bộ nhớ đệm) được thực hiện như thế nào?",
+              "answer": "Hệ thống lấy dữ liệu từ cơ sở dữ liệu, lưu vào bộ nhớ đệm, sau đó trả về cho client.",
+              "explanation": "Theo quy trình Cache-aside, khi dữ liệu không có sẵn trong cache, ứng dụng phải truy xuất từ nguồn dữ liệu gốc (database), lưu kết quả đó vào cache để phục vụ cho các lần truy cập sau, rồi mới trả về kết quả.",
+              "needsReview": false
+            },
+            {
+              "question": "Tại sao mẫu Cache-aside lại được coi là chiến lược quan trọng trong kiến trúc microservices?",
+              "answer": "Vì nó giúp giảm tải cho cơ sở dữ liệu và cải thiện hiệu suất bằng cách phục vụ dữ liệu từ bộ nhớ đệm.",
+              "explanation": "Cache-aside giúp giảm số lượng lệnh gọi tốn kém đến cơ sở dữ liệu bằng cách lưu trữ dữ liệu thường dùng trong bộ nhớ đệm, từ đó tăng tốc độ phản hồi và giảm tải cho hệ thống lưu trữ chính.",
+              "needsReview": false
+            },
+            {
+              "question": "Nhược điểm nào sau đây là một thách thức thực tế khi triển khai mẫu Cache-aside trong hệ thống phân tán?",
+              "answer": "Yêu cầu vô hiệu hóa hoặc làm mới bộ nhớ đệm khi dữ liệu cơ sở dữ liệu thay đổi.",
+              "explanation": "Một trong những nhược điểm chính của Cache-aside là sự phức tạp trong việc duy trì tính nhất quán, cụ thể là việc phải vô hiệu hóa hoặc làm mới cache khi dữ liệu gốc thay đổi.",
+              "needsReview": false
+            }
+          ]
+        },
+        {
+          "video": "03. Proxy Pattern, Decorator Pattern and Scrutor Library.mp4",
+          "completedAt": "2026-11-17T16:27:27.620Z",
+          "facts": [
+            {
+              "question": "Mục đích chính của việc sử dụng mẫu Proxy trong thiết kế phần mềm là gì?",
+              "answer": "Cung cấp đối tượng giữ chỗ để kiểm soát quyền truy cập vào đối tượng gốc.",
+              "explanation": "Mẫu Proxy đóng vai trò trung gian, cung cấp một đối tượng giữ chỗ để kiểm soát quyền truy cập, thực hiện lazy loading hoặc ghi log cho đối tượng gốc.",
+              "needsReview": false
+            },
+            {
+              "question": "Trong ngữ cảnh triển khai mẫu Decorator, vai trò của thư viện Scrutor là gì?",
+              "answer": "Đơn giản hóa quy trình đăng ký và trang trí dịch vụ trong vùng chứa IOC.",
+              "explanation": "Thư viện Scrutor mở rộng vùng chứa IOC của ASP.NET Core, giúp việc đăng ký và áp dụng mẫu Decorator trở nên sạch sẽ và dễ quản lý hơn.",
+              "needsReview": false
+            },
+            {
+              "question": "Khi triển khai mẫu Decorator cho 'BasketRepository' bằng thư viện Scrutor, bước nào là bắt buộc để đảm bảo tính đúng đắn?",
+              "answer": "Lớp decorator và lớp cơ sở phải cùng triển khai một giao diện chung.",
+              "explanation": "Để áp dụng Decorator, lớp decorator và lớp cơ sở (như BasketRepository) phải cùng triển khai một giao diện (như IBasketRepository) để đảm bảo tính thay thế.",
+              "needsReview": false
+            }
+          ]
+        },
+        {
+          "video": "04. Develop CachedBasketRepository with Proxy Pattern, Decorator Pattern and Scrutor.mp4",
+          "completedAt": "2026-11-17T16:31:33.787Z",
+          "facts": [
+            {
+              "question": "Trong việc phát triển CachedBasketRepository, tại sao lớp này được coi là triển khai cả mẫu Proxy và Decorator?",
+              "answer": "Vì nó đóng vai trò trung gian chuyển tiếp lệnh gọi (Proxy) và mở rộng chức năng bằng logic lưu đệm (Decorator).",
+              "explanation": "CachedBasketRepository đóng vai trò Proxy khi chuyển tiếp các lệnh gọi đến repository gốc và là Decorator khi thêm logic lưu đệm (caching) vào các phương thức hiện có.",
+              "needsReview": false
+            },
+            {
+              "question": "Khi triển khai CachedBasketRepository, làm thế nào để lớp này có thể truy cập và thực thi các phương thức của BasketRepository gốc?",
+              "answer": "Thông qua việc tiêm (inject) một thể hiện của IBasketRepository vào lớp CachedBasketRepository.",
+              "explanation": "Lớp CachedBasketRepository thực hiện tiêm (inject) đối tượng repository gốc thông qua constructor để có thể gọi các phương thức như get, store, và delete basket.",
+              "needsReview": false
+            },
+            {
+              "question": "Mục tiêu chính của việc tích hợp Redis vào lớp CachedBasketRepository là gì?",
+              "answer": "Để thêm logic lưu đệm vào các thao tác get, store và delete nhằm tối ưu hóa truy xuất dữ liệu.",
+              "explanation": "Việc tích hợp Redis vào lớp decorator (CachedBasketRepository) nhằm mục đích thêm logic lưu đệm, giúp tối ưu hóa hiệu suất truy xuất và thao tác dữ liệu giỏ hàng.",
+              "needsReview": false
+            }
+          ]
+        },
+        {
+          "video": "05. Develop CachedBasketRepository with Proxy Pattern, Decorator Pattern and Scrutor.mp4",
+          "completedAt": "2026-11-17T16:35:15.969Z",
+          "facts": [
+            {
+              "question": "Trong bài giảng, thư viện nào được cài đặt để hỗ trợ việc sử dụng bộ nhớ đệm phân tán Redis trong ứng dụng ASP.NET Core?",
+              "answer": "Microsoft.Extensions.Caching.StackExchange.Redis",
+              "explanation": "Để tích hợp Redis vào ứng dụng ASP.NET Core nhằm thực hiện bộ nhớ đệm phân tán, gói NuGet được sử dụng là Microsoft.Extensions.Caching.StackExchange.Redis.",
+              "needsReview": true
+            },
+            {
+              "question": "Khi triển khai phương thức GetBasket trong CachedBasketRepository, quy trình xử lý dữ liệu được thực hiện theo thứ tự nào?",
+              "answer": "Kiểm tra bộ nhớ đệm, nếu không có mới truy vấn cơ sở dữ liệu và cập nhật lại bộ nhớ đệm.",
+              "explanation": "Quy trình chuẩn là kiểm tra bộ nhớ đệm trước (cache hit), nếu không tìm thấy (cache miss) thì mới gọi cơ sở dữ liệu và lưu kết quả vào bộ nhớ đệm để phục vụ các lần truy cập sau.",
+              "needsReview": false
+            },
+            {
+              "question": "Tại sao lớp CachedBasketRepository cần tiêm (inject) cả IDistributedCache và IBasketRepository vào constructor?",
+              "answer": "Để thực hiện mẫu Decorator bằng cách bao bọc repository gốc và thêm logic lưu đệm thông qua cache.",
+              "explanation": "CachedBasketRepository đóng vai trò là một Decorator, nó bao bọc repository gốc (IBasketRepository) để thêm logic lưu đệm (IDistributedCache) mà không làm thay đổi giao diện của đối tượng gốc.",
+              "needsReview": false
+            },
+            {
+              "question": "Trong thao tác xóa giỏ hàng (DeleteBasket), CachedBasketRepository cần thực hiện những bước nào để đảm bảo tính nhất quán?",
+              "answer": "Xóa dữ liệu trong cơ sở dữ liệu trước, sau đó xóa khóa tương ứng trong bộ nhớ đệm.",
+              "explanation": "Để đảm bảo tính nhất quán giữa cache và database, khi xóa giỏ hàng, hệ thống cần thực hiện xóa ở database trước, sau đó xóa khóa tương ứng trong bộ nhớ đệm bằng phương thức RemoveAsync.",
+              "needsReview": false
+            }
+          ]
+        },
+        {
+          "video": "06. Register Decorated CachedBasketRepository and StackExchangeRedis with Scrutor.mp4",
+          "completedAt": "2026-11-17T16:38:03.005Z",
+          "facts": [
+            {
+              "question": "Tại sao việc đăng ký trực tiếp nhiều triển khai của IBasketRepository trong Program.cs lại gây ra vấn đề?",
+              "answer": "Vì hệ thống chỉ lấy lần đăng ký cuối cùng và bỏ qua các lần đăng ký trước đó.",
+              "explanation": "Khi đăng ký nhiều triển khai cho cùng một interface trong DI container, hệ thống sẽ ghi đè và chỉ giữ lại lần đăng ký cuối cùng, gây lỗi logic khi cần sử dụng cả lớp gốc và lớp trang trí.",
+              "needsReview": true
+            },
+            {
+              "question": "Phương thức mở rộng nào của thư viện Scrutor được sử dụng để trang trí CachedBasketRepository một cách tao nhã thay vì thực hiện thủ công?",
+              "answer": "Decorate",
+              "explanation": "Thư viện Scrutor cung cấp phương thức mở rộng Decorate cho IServiceCollection, giúp việc áp dụng mẫu Decorator trở nên đơn giản và dễ quản lý hơn so với việc khởi tạo thủ công.",
+              "needsReview": false
+            },
+            {
+              "question": "Để tích hợp Redis làm bộ nhớ đệm phân tán trong ứng dụng, phương thức nào cần được gọi trong Program.cs?",
+              "answer": "builder.Services.AddStackExchangeRedisCache()",
+              "explanation": "Để cấu hình Redis làm bộ nhớ đệm phân tán (distributed cache), phương thức AddStackExchangeRedisCache được sử dụng để đăng ký dịch vụ với các tùy chọn kết nối cần thiết.",
+              "needsReview": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "folder": "M:\\ID_PTS\\ASP.NET\\microservices\\10",
+      "lessons": [
+        {
+          "video": "01. Microservices Communication Types Synchronous or Asynchronous Communication.mp4",
+          "completedAt": "2026-11-17T16:44:01.028Z",
+          "facts": [
+            {
+              "question": "Trong giao tiếp đồng bộ giữa các microservices, hành vi nào của client được coi là đặc trưng nhất?",
+              "answer": "Client chặn luồng thực thi và chờ đợi phản hồi từ dịch vụ.",
+              "explanation": "Trong giao tiếp đồng bộ, client gửi yêu cầu qua HTTP/gRPC và phải chặn luồng xử lý của nó để chờ phản hồi từ máy chủ trước khi tiếp tục nhiệm vụ.",
+              "needsReview": true
+            },
+            {
+              "question": "Giao thức nào thường được sử dụng trong giao tiếp bất đồng bộ để gửi tin nhắn thông qua các hệ thống như RabbitMQ hoặc Kafka?",
+              "answer": "AMQP",
+              "explanation": "AMQP (Advanced Message Queuing Protocol) là giao thức phổ biến nhất cho giao tiếp bất đồng bộ, cho phép gửi tin nhắn qua các message broker mà không cần chờ phản hồi ngay lập tức.",
+              "needsReview": false
+            },
+            {
+              "question": "Điểm khác biệt cốt lõi giữa giao tiếp đồng bộ và bất đồng bộ trong microservices là gì?",
+              "answer": "Giao tiếp đồng bộ yêu cầu phản hồi ngay lập tức, còn bất đồng bộ thì không.",
+              "explanation": "Sự khác biệt chính nằm ở việc client có chờ phản hồi hay không: giao tiếp đồng bộ yêu cầu phản hồi ngay lập tức (chặn luồng), trong khi bất đồng bộ không yêu cầu phản hồi tức thì.",
+              "needsReview": false
+            }
+          ]
+        },
+        {
+          "video": "02. Microservices Synchronous Communications and Best Practices.mp4",
+          "completedAt": "2026-11-17T16:48:41.779Z",
+          "facts": [
+            {
+              "question": "Trong giao tiếp đồng bộ giữa các microservices, giao thức nào thường được sử dụng để client gửi yêu cầu và chờ phản hồi từ dịch vụ?",
+              "answer": "HTTP hoặc HTTPS",
+              "explanation": "Giao tiếp đồng bộ trong microservices chủ yếu dựa trên giao thức HTTP hoặc HTTPS, nơi client gửi yêu cầu và chờ đợi phản hồi từ server.",
+              "needsReview": false
+            },
+            {
+              "question": "Dựa trên kiến thức về giao tiếp đồng bộ, loại API nào được đề cập là phù hợp nhất khi microservices cần cung cấp dữ liệu linh hoạt và có cấu trúc?",
+              "answer": "GraphQL API",
+              "explanation": "GraphQL API được thiết kế đặc biệt để cho phép client truy vấn dữ liệu linh hoạt và có cấu trúc theo nhu cầu cụ thể thay vì các endpoint cố định.",
+              "needsReview": true
+            },
+            {
+              "question": "Khi cần giao tiếp hai chiều thời gian thực giữa các microservices hoặc giữa client và dịch vụ, loại API nào là lựa chọn tối ưu?",
+              "answer": "WebSocket APIs",
+              "explanation": "WebSocket APIs cung cấp kênh giao tiếp hai chiều (full-duplex) thời gian thực, khác với mô hình yêu cầu-phản hồi truyền thống của REST hay gRPC.",
+              "needsReview": false
+            }
+          ]
+        },
+        {
+          "video": "03. gRPC High Performance Remote Procedure Calls.mp4",
+          "completedAt": "2026-11-17T16:56:17.637Z",
+          "facts": [
+            {
+              "question": "Giao thức truyền tải nào được gRPC sử dụng để truyền tải các thông điệp nhị phân nhằm đạt hiệu năng cao trong hệ thống phân tán?",
+              "answer": "HTTP/2",
+              "explanation": "gRPC được thiết kế để tối ưu hóa hiệu năng bằng cách sử dụng giao thức HTTP/2, cho phép truyền tải dữ liệu dưới dạng thông điệp nhị phân thay vì văn bản thuần túy.",
+              "needsReview": false
+            },
+            {
+              "question": "Trong kiến trúc microservices, vai trò chính của Protocol Buffers (protobuf) trong gRPC là gì?",
+              "answer": "Định nghĩa hợp đồng dịch vụ độc lập với ngôn ngữ lập trình",
+              "explanation": "Protocol Buffers (protobuf) được sử dụng để định nghĩa các hợp đồng dịch vụ (service contracts), cho phép các dịch vụ giao tiếp với nhau bất kể ngôn ngữ lập trình nào được sử dụng.",
+              "needsReview": false
+            },
+            {
+              "question": "Liên hệ với kiến thức về giao tiếp đồng bộ (đã học ở bài 01), tại sao gRPC lại được coi là framework lý tưởng cho giao tiếp giữa các microservices?",
+              "answer": "Vì nó tự động tạo mã nguồn từ hợp đồng protobuf, giúp đơn giản hóa việc triển khai giao tiếp đồng bộ hiệu năng cao",
+              "explanation": "Khác với giao tiếp đồng bộ truyền thống, gRPC đơn giản hóa việc tạo tương tác dịch vụ bằng cách tự động tạo mã (bindings) từ file protobuf, kết hợp với hiệu năng cao của HTTP/2.",
+              "needsReview": false
+            }
+          ]
+        },
+        {
+          "video": "04. How gRPC works.mp4",
+          "completedAt": "2026-11-17T17:00:51.004Z",
+          "facts": [
+            {
+              "question": "Trong mô hình gRPC, trải nghiệm của lập trình viên khi gọi một phương thức trên server từ xa được mô tả như thế nào?",
+              "answer": "Giống như gọi một đối tượng cục bộ trong cùng một ứng dụng",
+              "explanation": "gRPC cho phép client gọi các phương thức trên server từ xa một cách trực tiếp, tạo cảm giác như đang gọi một đối tượng cục bộ, giúp đơn giản hóa việc xây dựng hệ thống phân tán.",
+              "needsReview": true
+            },
+            {
+              "question": "Để thiết lập giao tiếp giữa client và server trong gRPC, vai trò của việc định nghĩa dịch vụ (service definition) là gì?",
+              "answer": "Xác định các phương thức, tham số và kiểu trả về có thể gọi từ xa",
+              "explanation": "gRPC dựa trên việc định nghĩa dịch vụ để chỉ rõ các phương thức, tham số và kiểu trả về, từ đó cả client và server có thể hiểu và giao tiếp với nhau.",
+              "needsReview": false
+            },
+            {
+              "question": "Liên hệ với kiến thức về giao tiếp đồng bộ (đã học ở bài 01 và 03), tại sao gRPC lại hỗ trợ tốt việc xây dựng các dịch vụ phân tán đa ngôn ngữ?",
+              "answer": "Vì gRPC cho phép client và server được viết bằng bất kỳ ngôn ngữ nào mà nó hỗ trợ",
+              "explanation": "gRPC hỗ trợ tính đa ngôn ngữ, cho phép các thành phần trong hệ thống phân tán giao tiếp với nhau bất kể chúng được viết bằng ngôn ngữ lập trình nào.",
+              "needsReview": false
+            }
+          ]
+        },
+        {
+          "video": "05. gRPC Usage in Microservices Communication.mp4",
+          "completedAt": "2026-11-17T17:05:21.229Z",
+          "facts": [
+            {
+              "question": "Trong ví dụ về microservice giỏ hàng, tại sao gRPC lại được ưu tiên sử dụng cho các lệnh gọi backend thay vì RESTful API?",
+              "answer": "Vì gRPC là lựa chọn tối ưu cho giao tiếp đồng bộ trực tiếp cần phản hồi ngay lập tức",
+              "explanation": "Bài giảng nhấn mạnh gRPC là lựa chọn chính cho giao tiếp đồng bộ trực tiếp giữa các microservice backend khi cần phản hồi ngay lập tức, dựa trên hiệu suất cao của HTTP/2.",
+              "needsReview": false
+            },
+            {
+              "question": "Liên hệ với kiến thức về giao tiếp đồng bộ (đã học ở bài 01), trong mô hình microservice giỏ hàng, vai trò của gRPC client được thực hiện bởi thành phần nào?",
+              "answer": "Microservice giỏ hàng",
+              "explanation": "Trong ví dụ, microservice giỏ hàng đóng vai trò là gRPC client để gọi đến các microservice backend (sản phẩm và chiết khấu) nhằm lấy thông tin cần thiết trước khi xử lý yêu cầu.",
+              "needsReview": false
+            },
+            {
+              "question": "Yêu cầu kỹ thuật bắt buộc nào đối với các endpoint gRPC để đảm bảo giao tiếp thành công giữa các microservice trong hệ thống?",
+              "answer": "Phải được cấu hình cho giao thức HTTP/2",
+              "explanation": "Bài giảng khẳng định các endpoint gRPC phải được cấu hình cho giao thức HTTP/2, đây là yêu cầu bắt buộc để gRPC hoạt động hiệu quả.",
+              "needsReview": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "folder": "M:\\ID_PTS\\ASP.NET\\microservices\\12",
+      "lessons": [
+        {
+          "video": "01. Introduction - Consuming Discount Grpc Service From Basket Microservice.mp4",
+          "completedAt": "2026-11-18T07:42:56.899Z",
+          "facts": [
+            {
+              "question": "Trong quy trình tích hợp dịch vụ gRPC giảm giá vào microservice giỏ hàng, thành phần nào đóng vai trò là gRPC client?",
+              "answer": "Microservice giỏ hàng",
+              "explanation": "Microservice giỏ hàng đóng vai trò là gRPC client để gọi đến dịch vụ gRPC giảm giá nhằm tính toán giá cuối cùng khi khách hàng thêm mặt hàng.",
+              "needsReview": false
+            },
+            {
+              "question": "Liên hệ với kiến thức về giao tiếp đồng bộ (đã học ở bài 01), bước nào sau đây là bắt buộc để cấu hình gRPC client trong microservice giỏ hàng?",
+              "answer": "Đăng ký dịch vụ gRPC trong Program.cs với thông tin điểm cuối",
+              "explanation": "Để tiêu thụ dịch vụ, cần sửa đổi Program.cs trong microservice giỏ hàng để đăng ký gRPC client và cấu hình các chi tiết điểm cuối (endpoint) cần thiết.",
+              "needsReview": false
+            },
+            {
+              "question": "Tại sao cần cập nhật Docker Compose sau khi tích hợp gRPC client vào microservice giỏ hàng?",
+              "answer": "Để đảm bảo microservice giỏ hàng có thể giao tiếp với dịch vụ gRPC giảm giá trong môi trường được điều phối",
+              "explanation": "Việc cập nhật Docker Compose là bước cuối cùng để đảm bảo các microservice có thể kết nối và giao tiếp với nhau trong môi trường container được điều phối.",
+              "needsReview": false
+            }
+          ]
+        },
+        {
+          "video": "02. Consuming Discount Grpc Service From Basket Microservice When Adding Cart Item.mp4",
+          "completedAt": "2026-11-18T10:02:00.939Z",
+          "facts": [
+            {
+              "question": "Trong quy trình tích hợp gRPC vào microservice giỏ hàng, tại sao cần sử dụng tính năng 'Manage Connected Services' trong Visual Studio?",
+              "answer": "Để tự động tạo lớp client gRPC và cấu hình các gói NuGet cần thiết từ file proto",
+              "explanation": "Tính năng Manage Connected Services giúp tự động hóa việc thêm các gói NuGet cần thiết và tạo các lớp client gRPC dựa trên file định nghĩa proto, giúp microservice giỏ hàng giao tiếp được với dịch vụ gRPC.",
+              "needsReview": false
+            },
+            {
+              "question": "Khi cấu hình service reference cho gRPC trong dự án basket API, tại sao cần chọn loại lớp là 'client'?",
+              "answer": "Vì microservice giỏ hàng cần gọi các phương thức gRPC từ dịch vụ chiết khấu",
+              "explanation": "Trong mô hình này, microservice giỏ hàng đóng vai trò là client, cần gọi các phương thức từ dịch vụ chiết khấu (discount gRPC), do đó cần tạo lớp client để thực hiện các lệnh gọi từ xa.",
+              "needsReview": false
+            },
+            {
+              "question": "Sau khi thêm service reference và build dự án basket API, lớp nào được tạo ra trong thư mục obj để hỗ trợ giao tiếp với dịch vụ chiết khấu?",
+              "answer": "DiscountProtoServiceClient",
+              "explanation": "Sau khi build dự án, Visual Studio tự động tạo lớp DiscountProtoServiceClient trong thư mục obj, đây là lớp client dùng để gọi các phương thức gRPC từ dịch vụ chiết khấu.",
+              "needsReview": false
+            }
+          ]
+        },
+        {
+          "video": "03. Consuming Discount Grpc Service From Basket API Microservice When Adding Cart -2.mp4",
+          "completedAt": "2026-11-18T10:13:53.365Z",
+          "facts": [
+            {
+              "question": "Trong lớp StoreBasketHandler, đối tượng nào được tiêm vào constructor để thực hiện giao tiếp với dịch vụ chiết khấu?",
+              "answer": "DiscountProtoServiceClient",
+              "explanation": "Để gọi các phương thức gRPC từ dịch vụ chiết khấu, chúng ta cần tiêm đối tượng client (DiscountProtoServiceClient) đã được tạo tự động vào constructor của handler.",
+              "needsReview": false
+            },
+            {
+              "question": "Khi xử lý giỏ hàng, phương thức nào được sử dụng để gọi dịch vụ gRPC nhằm lấy thông tin giảm giá cho từng sản phẩm?",
+              "answer": "GetDiscountAsync",
+              "explanation": "Phương thức GetDiscountAsync được gọi trên đối tượng client gRPC để gửi yêu cầu GetDiscountRequest và nhận lại thông tin coupon cho sản phẩm.",
+              "needsReview": false
+            },
+            {
+              "question": "Tại sao việc trích xuất logic tính toán giảm giá vào phương thức DeductDiscount lại được thực hiện trong quá trình phát triển?",
+              "answer": "Để cải thiện khả năng đọc và bảo trì mã nguồn",
+              "explanation": "Việc trích xuất logic vào phương thức DeductDiscount giúp làm sạch phương thức handle, giúp mã nguồn dễ đọc và dễ bảo trì hơn.",
+              "needsReview": false
+            }
+          ]
+        },
+        {
+          "video": "04. Register Discount Grpc Client and Discount Grpc Service into the Basket.API.mp4",
+          "completedAt": "2026-11-18T10:33:00.623Z",
+          "facts": [
+            {
+              "question": "Trong quá trình cấu hình Basket.API, tại sao việc tổ chức lại Program.cs bằng cách nhóm các dịch vụ (ứng dụng, dữ liệu, gRPC, cắt ngang) lại được khuyến khích?",
+              "answer": "Để cải thiện khả năng đọc và khả năng bảo trì của chương trình",
+              "explanation": "Việc nhóm các dịch vụ theo chức năng trong Program.cs giúp mã nguồn trở nên gọn gàng, dễ quản lý và bảo trì hơn trong các dự án microservices phức tạp.",
+              "needsReview": false
+            },
+            {
+              "question": "Phương thức nào được sử dụng trong Program.cs để đăng ký gRPC client cho dịch vụ giảm giá vào container Dependency Injection?",
+              "answer": "builder.Services.AddGrpcClient<T>()",
+              "explanation": "Phương thức AddGrpcClient được sử dụng để đăng ký một gRPC client, cho phép tiêm (inject) client này vào các lớp xử lý (handler) thông qua Dependency Injection.",
+              "needsReview": true
+            },
+            {
+              "question": "Khi cấu hình gRPC client trong tệp appsettings.json, thông tin nào là bắt buộc để client có thể kết nối tới dịch vụ gRPC giảm giá?",
+              "answer": "Địa chỉ URL của dịch vụ gRPC (DiscountUrl)",
+              "explanation": "Để kết nối thành công, client cần biết địa chỉ (endpoint) của dịch vụ gRPC, được cấu hình thông qua DiscountUrl trong tệp appsettings.json.",
+              "needsReview": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "folder": "M:\\ID_PTS\\ASP.NET\\microservices\\13",
+      "lessons": [
+        {
+          "video": "05. SOLID, KISS, YAGNI, SoC, DIP - Common Principles.mp4",
+          "completedAt": "2026-11-18T13:56:09.251Z",
+          "facts": [
+            {
+              "question": "Trong nguyên tắc Đảo ngược phụ thuộc (Dependency Inversion Principle), các mô-đun cấp cao và cấp thấp nên phụ thuộc vào yếu tố nào thay vì phụ thuộc trực tiếp vào nhau?",
+              "answer": "Phụ thuộc vào các phần trừu tượng hoặc giao diện (abstractions or interfaces)",
+              "explanation": "Nguyên tắc Đảo ngược phụ thuộc yêu cầu các mô-đun cấp cao không nên phụ thuộc vào mô-đun cấp thấp, cả hai nên phụ thuộc vào các phần trừu tượng để giảm sự ghép nối.",
+              "needsReview": true
+            },
+            {
+              "question": "Nguyên tắc 'Đóng - Mở' (Open-Closed Principle) trong thiết kế hệ thống được định nghĩa như thế nào?",
+              "answer": "Hệ thống phải mở cho việc mở rộng nhưng đóng cho việc sửa đổi",
+              "explanation": "Nguyên tắc Đóng - Mở phát biểu rằng các thực thể phần mềm nên mở cho việc mở rộng nhưng đóng cho việc sửa đổi, giúp hệ thống linh hoạt mà không cần thay đổi kiến trúc cũ.",
+              "needsReview": false
+            },
+            {
+              "question": "Mục tiêu chính của nguyên tắc 'Tách biệt mối quan tâm' (Separation of Concerns - SoC) là gì?",
+              "answer": "Cô lập ứng dụng thành các phần riêng biệt để quản lý sự phức tạp",
+              "explanation": "Tách biệt mối quan tâm (SoC) giúp quản lý sự phức tạp bằng cách phân vùng hệ thống thành các phần riêng biệt với trách nhiệm duy nhất, giúp tăng tính gắn kết và giảm ghép nối.",
+              "needsReview": false
+            }
+          ]
+        },
+        {
+          "video": "06. Apply DDD, CQRS and Clean Architecture patterns in Ordering microservice.mp4",
+          "completedAt": "2026-11-18T14:24:09.578Z",
+          "facts": [
+            {
+              "question": "Trong microservice đặt hàng, lớp nào được xem là trái tim của hệ thống, chứa logic nghiệp vụ, các thực thể miền như đơn hàng, mặt hàng đơn hàng, tổng hợp và đối tượng giá trị?",
+              "answer": "Lớp miền (Domain layer)",
+              "explanation": "Lớp miền được mô tả là trái tim của microservice, tập trung mô hình hóa miền kinh doanh, đóng gói logic nghiệp vụ trong các thực thể miền, đối tượng giá trị và tổng hợp.",
+              "needsReview": true
+            },
+            {
+              "question": "Trong quá trình áp dụng kiến trúc sạch cho microservice đặt hàng, lớp trường hợp sử dụng ứng dụng (application use case layer) sử dụng công cụ gì để xử lý các lệnh (commands) và truy vấn (queries)?",
+              "answer": "Mediator",
+              "explanation": "Bài giảng nêu rõ rằng trong lớp trường hợp sử dụng ứng dụng, chúng ta triển khai các nghiệp vụ sử dụng mediator để xử lý lệnh và truy vấn như tạo đơn hàng, cập nhật đơn hàng hoặc lấy đơn hàng theo ID.",
+              "needsReview": false
+            },
+            {
+              "question": "Lớp cơ sở hạ tầng (Infrastructure layer) trong kiến trúc nội bộ của microservice đặt hàng chịu trách nhiệm tích hợp với những thành phần nào sau đây?",
+              "answer": "Cơ sở dữ liệu, các hệ thống bên ngoài, triển khai mẫu kho lưu trữ và Entity Framework",
+              "explanation": "Lớp cơ sở hạ tầng tích hợp với cơ sở dữ liệu, hệ thống bên ngoài, triển khai mẫu kho lưu trữ, đồng thời chứa Entity Framework, core context, migrations và cấu hình dữ liệu.",
+              "needsReview": true
+            }
+          ]
+        },
+        {
+          "video": "07. Domain Driven Design - DDD.mp4",
+          "completedAt": "2026-11-18T14:49:24.018Z",
+          "facts": [
+            {
+              "question": "Thiết kế định hướng miền (DDD) được chia thành hai loại chính nào để giải quyết các vấn đề phức tạp?",
+              "answer": "Thiết kế chiến lược và thiết kế chiến thuật",
+              "explanation": "DDD được chia thành thiết kế chiến lược (tập trung vào mô hình hóa miền nghiệp vụ) và thiết kế chiến thuật (tập trung vào chi tiết triển khai và các mẫu thiết kế).",
+              "needsReview": true
+            },
+            {
+              "question": "Khái niệm nào trong DDD đóng vai trò là 'ngôn ngữ chung' giữa nhà phát triển và chuyên gia miền để đảm bảo sự nhất quán trong thảo luận và mã nguồn?",
+              "answer": "Ngôn ngữ phổ quát (Ubiquitous Language)",
+              "explanation": "Ngôn ngữ phổ quát là ngôn ngữ chung được sử dụng bởi cả nhà phát triển và chuyên gia miền để đảm bảo sự rõ ràng, nhất quán và tránh hiểu lầm trong dự án.",
+              "needsReview": false
+            },
+            {
+              "question": "Trong thiết kế chiến lược của DDD, khái niệm nào đại diện cho một ranh giới logic giúp chia nhỏ miền phức tạp thành các phần độc lập và tự nhất quán?",
+              "answer": "Ngữ cảnh giới hạn (Bounded Context)",
+              "explanation": "Ngữ cảnh giới hạn là ranh giới logic giúp quản lý sự phức tạp bằng cách chia miền thành các phần nhỏ hơn, tự nhất quán và độc lập nhất có thể.",
+              "needsReview": false
+            }
+          ]
+        },
+        {
+          "video": "08. Clean Architecture.mp4",
+          "completedAt": "2026-11-18T15:05:16.940Z",
+          "facts": [
+            {
+              "question": "Mục tiêu cốt lõi của việc áp dụng Clean Architecture trong thiết kế phần mềm là gì?",
+              "answer": "Tách biệt mối quan tâm để tạo ra hệ thống độc lập với framework, UI và cơ sở dữ liệu",
+              "explanation": "Clean Architecture tập trung vào việc tách biệt mối quan tâm (SoC), giúp hệ thống không bị ràng buộc chặt chẽ với các thành phần bên ngoài như framework, giao diện người dùng hay cơ sở dữ liệu.",
+              "needsReview": false
+            },
+            {
+              "question": "Trong các lớp của Clean Architecture, lớp nào chứa các quy tắc nghiệp vụ toàn doanh nghiệp và đóng vai trò là cốt lõi của hệ thống?",
+              "answer": "Lớp thực thể (Domain layer)",
+              "explanation": "Lớp thực thể (Domain layer) là lớp trong cùng, chứa các quy tắc nghiệp vụ toàn doanh nghiệp và các thực thể, đóng vai trò là trái tim của hệ thống.",
+              "needsReview": false
+            },
+            {
+              "question": "Lớp nào trong Clean Architecture chịu trách nhiệm chuyển đổi dữ liệu giữa các thực thể miền và các hệ thống bên ngoài như cơ sở dữ liệu?",
+              "answer": "Lớp bộ chuyển đổi giao diện (Interface Adapters)",
+              "explanation": "Lớp bộ chuyển đổi giao diện (Interface Adapters) thực hiện việc chuyển đổi dữ liệu từ định dạng phù hợp với các thực thể sang định dạng phù hợp với các hệ thống bên ngoài.",
+              "needsReview": true
+            }
+          ]
+        },
+        {
+          "video": "09. Clean Architecture with Domain Driven Design(DDD).mp4",
+          "completedAt": "2026-11-18T15:48:23.181Z",
+          "facts": [
+            {
+              "question": "Quy tắc phụ thuộc (Dependency Rule) trong Clean Architecture quy định hướng của các phụ thuộc như thế nào?",
+              "answer": "Các phụ thuộc mã nguồn chỉ có thể chỉ hướng vào trong, lớp bên trong không biết gì về lớp bên ngoài",
+              "explanation": "Quy tắc phụ thuộc trong Clean Architecture quy định rằng các phụ thuộc mã nguồn chỉ có thể chỉ hướng vào trong. Lớp bên trong (domain, application) không biết gì về lớp bên ngoài, còn các lớp ngoài chứa triển khai cụ thể.",
+              "needsReview": false
+            },
+            {
+              "question": "Trong Clean Architecture kết hợp DDD, hai phân chia chính của kiến trúc là gì và mỗi phần bao gồm những lớp nào?",
+              "answer": "Core Layers và Peripheral Layers; core gồm Domain và Application, peripheral gồm Infrastructure, Persistence và Presentation",
+              "explanation": "Hai phân chia chính là Core Layers (lớp lõi) gồm Domain và Application, và Peripheral Layers (lớp ngoại vi) gồm Infrastructure, Persistence và Presentation. Core chứa logic nghiệp vụ thuần túy, Peripheral chứa các triển khai cụ thể.",
+              "needsReview": false
+            },
+            {
+              "question": "Vai trò của lớp Application trong Clean Architecture kết hợp DDD là gì?",
+              "answer": "Khai báo các giao diện và trừu tượng đại diện cho các thành phần hạ tầng, triển khai logic nghiệp vụ và các use case thông qua dependency injection",
+              "explanation": "Lớp Application khai báo các giao diện và trừu tượng cho các thành phần hạ tầng, lưu trữ và trình bày. Việc triển khai thực tế không nằm ở đây mà được cung cấp qua DI. Lớp này triển khai logic nghiệp vụ và các use case.",
+              "needsReview": false
+            },
+            {
+              "question": "Trong Clean Architecture, lớp Presentation đóng vai trò gì và tại sao nó được xếp vào nhóm Peripheral Layer?",
+              "answer": "Presentation là lớp ngoại vi vì nó tập hợp tất cả thành phần từ các lớp lõi, tiêm triển khai phù hợp và xử lý các thao tác UI",
+              "explanation": "Lớp Presentation (tầng API) là lớp ngoại vi vì nó tập hợp tất cả thành phần từ Application, Infrastructure và Domain, tiêm chúng với triển khai phù hợp và xử lý các thao tác giao diện người dùng. Nó phụ thuộc vào các lớp bên trong nhưng không bị phụ thuộc ngược lại.",
+              "needsReview": false
+            }
+          ]
+        },
+        {
+          "video": "10. Code Structure on DDD and Clean Architecture Layers in Ordering Microservices.mp4",
+          "completedAt": "2026-11-18T16:18:58.360Z",
+          "facts": [
+            {
+              "question": "Trong cấu trúc mã nguồn của Ordering Microservice, bốn thư viện/dự án nào được tạo ra để tuân thủ Clean Architecture và DDD?",
+              "answer": "Domain, Application, Infrastructure, API",
+              "explanation": "Ordering Microservice được tổ chức thành 4 lớp chính: Ordering.Domain, Ordering.Application, Ordering.Infrastructure và Ordering.API để phân tách các lớp lõi và lớp ngoại vi.",
+              "needsReview": false
+            },
+            {
+              "question": "Dựa trên nguyên tắc Clean Architecture đã học (nhắc lại từ bài 09), lớp nào trong Ordering Microservice thuộc nhóm 'Peripheral Layers' và sẽ tham chiếu đến các lớp lõi?",
+              "answer": "Ordering.Infrastructure và Ordering.API",
+              "explanation": "Theo quy tắc phụ thuộc, các lớp ngoại vi (Peripheral Layers) như Infrastructure và API sẽ phụ thuộc và tham chiếu vào các lớp lõi (Core Layers) là Domain và Application.",
+              "needsReview": false
+            },
+            {
+              "question": "Thành phần nào sau đây thuộc về lớp 'Ordering.Infrastructure' trong cấu trúc microservice được mô tả?",
+              "answer": "Entity Framework Core, seeding và migration",
+              "explanation": "Lớp Ordering.Infrastructure chịu trách nhiệm về các thao tác liên quan đến dữ liệu, bao gồm Entity Framework Core, seeding và migration dữ liệu.",
+              "needsReview": false
+            }
+          ]
+        },
+        {
+          "video": "11. Create Clean Architecture Layers Domain, Application, Infrastructure and API.mp4",
+          "completedAt": "2026-11-18T16:33:44.869Z",
+          "facts": [
+            {
+              "question": "Trong bài học, lớp Ordering.Domain được tạo dưới dạng loại dự án nào và chứa những thành phần gì?",
+              "answer": "Class Library, chứa domain model, value object và domain service đóng gói logic và quy tắc nghiệp vụ",
+              "explanation": "Ordering.Domain được tạo dưới dạng Class Library, chứa domain model, value object và domain service. Đây là nơi đóng gói toàn bộ logic và quy tắc nghiệp vụ của microservice đặt hàng mà không phụ thuộc vào bất kỳ infrastructure nào.",
+              "needsReview": false
+            },
+            {
+              "question": "Tại sao Ordering.Domain và Ordering.Application được gọi chung là 'Core Layers' trong Clean Architecture?",
+              "answer": "Vì chúng bao phủ các yêu cầu nghiệp vụ mà không phụ thuộc vào bất kỳ infrastructure nào",
+              "explanation": "Ordering.Domain và Ordering.Application được gọi là Core Layers vì chúng bao phủ toàn bộ yêu cầu nghiệp vụ mà không có phụ thuộc vào bất kỳ thành phần infrastructure nào, đảm bảo tính độc lập và thuần túy của logic nghiệp vụ.",
+              "needsReview": false
+            },
+            {
+              "question": "Lớp Ordering.Infrastructure trong Clean Architecture chịu trách nhiệm cho điều gì?",
+              "answer": "Chứa phần triển khai của các interface được định nghĩa trong Domain và Application, bao gồm repository implementation và tương tác với các thành phần bên ngoài như database, hệ thống tệp, email",
+              "explanation": "Ordering.Infrastructure chứa phần triển khai cụ thể của các interface được định nghĩa trong Domain và Application. Đây là nơi có code tương tác với các thành phần bên ngoài như truy cập database, hệ thống tệp, gửi email và web service.",
+              "needsReview": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "folder": "M:\\ID_PTS\\ASP.NET\\microservices\\14",
+      "lessons": [
+        {
+          "video": "01. Tactical Domain-Driven Design Entities, Value Objects, Aggregates, Agg. Roots.mp4",
+          "completedAt": "2026-11-18T16:46:51.318Z",
+          "facts": [
+            {
+              "question": "Trong thiết kế hướng domain chiến thuật (Tactical DDD), sự khác biệt cơ bản giữa 'Thực thể' (Entity) và 'Đối tượng giá trị' (Value Object) là gì?",
+              "answer": "Thực thể có định danh duy nhất và vòng đời riêng, trong khi đối tượng giá trị không có định danh và thường là bất biến",
+              "explanation": "Theo bài giảng, thực thể được xác định bởi định danh (identity) và có vòng đời riêng, trong khi đối tượng giá trị mô tả đặc điểm, không có định danh và thường là bất biến.",
+              "needsReview": false
+            },
+            {
+              "question": "Vai trò của 'Gốc tổng hợp' (Aggregate Root) trong một 'Tổng hợp' (Aggregate) là gì?",
+              "answer": "Là thực thể chính đóng vai trò cổng vào, đảm bảo tính nhất quán và thực thi các quy tắc nghiệp vụ cho toàn bộ tổng hợp",
+              "explanation": "Gốc tổng hợp là thực thể chính trong một tổng hợp, thông qua đó các đối tượng bên ngoài tương tác, giúp duy trì tính nhất quán và các bất biến của tổng hợp.",
+              "needsReview": false
+            },
+            {
+              "question": "Tại sao việc áp dụng các mẫu thiết kế chiến thuật (Entity, Value Object, Aggregate) lại quan trọng khi phát triển lớp Domain trong Clean Architecture?",
+              "answer": "Để tạo ra một mô hình domain phong phú, đóng gói logic và quy tắc nghiệp vụ mà không phụ thuộc vào hạ tầng",
+              "explanation": "Các mẫu thiết kế chiến thuật giúp tạo ra mô hình domain phong phú, đóng gói logic nghiệp vụ một cách độc lập, phù hợp với nguyên tắc không phụ thuộc hạ tầng của Clean Architecture.",
+              "needsReview": false
+            }
+          ]
+        },
+        {
+          "video": "02. Develop DDD Abstractions (Entity, Aggregate, DomainEvent) in Ordering.Domain.mp4",
+          "completedAt": "2026-11-19T02:14:22.711Z",
+          "facts": [
+            {
+              "question": "Trong bài giảng, tại sao cần tạo interface IEntity<T> kế thừa từ IEntity trong lớp Ordering.Domain?",
+              "answer": "Để định nghĩa các thuộc tính kiểm toán chung và cho phép linh hoạt kiểu dữ liệu của định danh Id",
+              "explanation": "IEntity chứa các thuộc tính kiểm toán (audit) chung, trong khi IEntity<T> bổ sung định danh Id kiểu T, giúp các thực thể có thể sử dụng các kiểu định danh khác nhau (int, string, Guid).",
+              "needsReview": false
+            },
+            {
+              "question": "Interface IDomainEvent trong bài giảng kế thừa từ interface nào của thư viện MediatR để hỗ trợ phát đi sự kiện?",
+              "answer": "INotification",
+              "explanation": "IDomainEvent kế thừa từ INotification của thư viện MediatR, cho phép các sự kiện miền được phát đi và xử lý bởi các trình xử lý (handlers) tương ứng.",
+              "needsReview": false
+            },
+            {
+              "question": "Vai trò của IAggregateRoot trong việc quản lý sự kiện miền (Domain Events) là gì?",
+              "answer": "Quản lý danh sách các sự kiện miền thông qua thuộc tính DomainEvents và phương thức ClearDomainEvents",
+              "explanation": "IAggregateRoot cung cấp cơ chế lưu trữ danh sách các sự kiện miền (DomainEvents) và phương thức để xóa chúng sau khi đã xử lý, đảm bảo tính nhất quán của tổng hợp.",
+              "needsReview": false
+            },
+            {
+              "question": "Lớp trừu tượng Aggregate<T> trong Ordering.Domain kế thừa từ lớp nào và triển khai interface nào?",
+              "answer": "Kế thừa từ Entity<T> và triển khai IAggregateRoot<T>",
+              "explanation": "Lớp Aggregate<T> là lớp cơ sở kế thừa từ Entity<T> (để có định danh và kiểm toán) và triển khai IAggregateRoot<T> (để quản lý sự kiện miền).",
+              "needsReview": false
+            },
+            {
+              "question": "Tại sao việc sử dụng phương thức AddDomainEvent trong Aggregate lại quan trọng trong thiết kế DDD?",
+              "answer": "Để lưu trữ các sự kiện vào danh sách private trước khi chúng được phát đi bởi Mediator",
+              "explanation": "Phương thức AddDomainEvent giúp thêm sự kiện vào danh sách private bên trong Aggregate, đảm bảo các sự kiện được ghi lại trong phạm vi của tổng hợp trước khi được xử lý.",
+              "needsReview": false
+            }
+          ]
+        },
+        {
+          "video": "03. Domain Modeling with Tactical DDD for Ordering Microservices.mp4",
+          "completedAt": "2026-11-20T11:58:28.403Z",
+          "facts": [
+            {
+              "question": "Trong mô hình miền của microservice đặt hàng, thành phần nào đóng vai trò là 'Gốc tổng hợp' (Aggregate Root) điều phối toàn bộ quy trình đặt hàng?",
+              "answer": "Đơn hàng",
+              "explanation": "Đơn hàng (Order) là tổng hợp chính trong microservice đặt hàng, đóng vai trò điều phối quy trình và đảm bảo tính nhất quán cho các mục đơn hàng bên trong nó.",
+              "needsReview": false
+            },
+            {
+              "question": "Dựa trên bài giảng, tại sao 'Địa chỉ' và 'Chi tiết thanh toán' được định nghĩa là các Đối tượng giá trị (Value Objects) trong tổng hợp Đơn hàng?",
+              "answer": "Vì chúng đóng gói các thuộc tính và ràng buộc nghiệp vụ mà không cần định danh riêng",
+              "explanation": "Đối tượng giá trị (Value Object) không có định danh riêng, chúng được dùng để đóng gói các thuộc tính và ràng buộc nghiệp vụ liên quan đến một thực thể, ví dụ như địa chỉ giao hàng.",
+              "needsReview": false
+            },
+            {
+              "question": "Sự kiện miền 'Đơn hàng được tạo' (Order Created) đóng vai trò gì trong kiến trúc microservice đặt hàng?",
+              "answer": "Kích hoạt các quy trình không đồng bộ như kiểm tra kho hoặc thông báo",
+              "explanation": "Sự kiện miền cho phép kiến trúc phản ứng và tách rời, giúp các microservice khác (như kho hoặc thông báo) phản hồi lại khi một đơn hàng mới được tạo thành công.",
+              "needsReview": false
+            }
+          ]
+        },
+        {
+          "video": "04. Develop Domain Modeling with DDD for Ordering Microservices.mp4",
+          "completedAt": "2026-11-20T12:18:44.185Z",
+          "facts": [
+            {
+              "question": "Tại sao trong bài giảng, các đối tượng giá trị (Value Objects) như Address và Payment lại được định nghĩa bằng kiểu 'record' trong C#?",
+              "answer": "Để đảm bảo tính bất biến và so sánh dựa trên giá trị thay vì định danh",
+              "explanation": "Kiểu record trong C# được sử dụng cho Value Objects vì nó hỗ trợ tính bất biến (immutability) và cơ chế so sánh giá trị (value-based equality) thay vì so sánh tham chiếu hay định danh.",
+              "needsReview": false
+            },
+            {
+              "question": "Trong lớp Order (Aggregate Root), tại sao danh sách OrderItems lại được trả về dưới dạng IReadOnlyList?",
+              "answer": "Để bảo vệ tính đóng gói và ngăn chặn thay đổi danh sách từ bên ngoài",
+              "explanation": "Việc sử dụng IReadOnlyList giúp bảo vệ tính đóng gói của Aggregate, đảm bảo các thay đổi đối với danh sách OrderItems phải thông qua các phương thức của Aggregate Root.",
+              "needsReview": false
+            },
+            {
+              "question": "Trong mô hình miền của microservice đặt hàng, thuộc tính TotalPrice của Order được xử lý như thế nào?",
+              "answer": "Được tính toán tự động bằng cách tổng hợp Price * Quantity từ danh sách OrderItems",
+              "explanation": "TotalPrice là một giá trị dẫn xuất, được tính toán tự động bằng cách tổng hợp giá trị từ danh sách các OrderItems bên trong Aggregate.",
+              "needsReview": false
+            },
+            {
+              "question": "Việc sao chép dữ liệu của Customer và Product vào microservice đặt hàng mang lại lợi ích gì, nhưng đi kèm với thách thức nào?",
+              "answer": "Giảm giao tiếp giữa các dịch vụ nhưng yêu cầu tính nhất quán cuối cùng",
+              "explanation": "Sao chép dữ liệu giúp giảm sự phụ thuộc (giao tiếp) giữa các microservice, nhưng đòi hỏi phải quản lý tính nhất quán cuối cùng (eventual consistency) giữa các dịch vụ.",
+              "needsReview": true
+            },
+            {
+              "question": "Lớp Order trong dự án Ordering.Domain kế thừa từ lớp trừu tượng nào và sử dụng kiểu dữ liệu gì cho định danh (Id)?",
+              "answer": "Aggregate với kiểu Guid",
+              "explanation": "Order đóng vai trò là Aggregate Root, kế thừa từ lớp trừu tượng Aggregate và sử dụng Guid làm kiểu dữ liệu cho định danh (TId).",
+              "needsReview": false
+            }
+          ]
+        },
+        {
+          "video": "05. Primitive Obsession and Strongly typed IDs in DDD.mp4",
+          "completedAt": "2026-11-20T12:27:16.513Z",
+          "facts": [
+            {
+              "question": "Trong Domain-Driven Design, 'Primitive Obsession' được mô tả là vấn đề gì?",
+              "answer": "Sử dụng các kiểu dữ liệu nguyên thủy như string, int, Guid cho các khái niệm miền gây ra sự mơ hồ và dễ nhầm lẫn",
+              "explanation": "Primitive Obsession xảy ra khi các kiểu dữ liệu nguyên thủy được dùng để đại diện cho các khái niệm miền, dẫn đến việc dễ nhầm lẫn giữa các định danh (ID) có cùng kiểu dữ liệu.",
+              "needsReview": false
+            },
+            {
+              "question": "Lợi ích chính của việc áp dụng 'Strongly Typed IDs' trong thiết kế mô hình miền là gì?",
+              "answer": "Đảm bảo an toàn kiểu (type safety), tăng tính dễ đọc và hỗ trợ tái cấu trúc code",
+              "explanation": "Strongly Typed IDs giúp ngăn chặn lỗi truyền nhầm ID tại thời điểm biên dịch, làm rõ ý nghĩa của tham số trong constructor và giúp việc refactoring trở nên dễ dàng hơn.",
+              "needsReview": false
+            },
+            {
+              "question": "Tại sao việc sử dụng Guid cho cả OrderId và ProductId trong constructor của OrderItem lại được coi là một ví dụ của Primitive Obsession?",
+              "answer": "Vì trình biên dịch không thể phân biệt được hai tham số nếu chúng cùng kiểu Guid, dẫn đến nguy cơ truyền nhầm giá trị",
+              "explanation": "Khi các ID khác nhau cùng sử dụng một kiểu dữ liệu nguyên thủy (như Guid), lập trình viên có thể vô tình truyền nhầm ProductId vào vị trí của OrderId mà trình biên dịch không phát hiện ra.",
+              "needsReview": false
+            }
+          ]
+        },
+        {
+          "video": "06. Develop Strongly typed IDs for Order Entities.mp4",
+          "completedAt": "2026-11-20T12:33:14.874Z",
+          "facts": [
+            {
+              "question": "Trong quá trình chuyển đổi sang Strongly Typed IDs, tại sao các lớp như CustomerID, OrderId và OrderItemId lại được định nghĩa là 'record types' trong thư mục Value Objects?",
+              "answer": "Để đóng gói giá trị nguyên thủy và cung cấp kiểu dữ liệu rõ ràng, an toàn cho miền",
+              "explanation": "Việc sử dụng record types làm Value Objects giúp đóng gói các giá trị nguyên thủy (như Guid hoặc string), tạo ra các kiểu dữ liệu cụ thể cho miền, từ đó tăng tính an toàn kiểu và khả năng đọc hiểu code.",
+              "needsReview": false
+            },
+            {
+              "question": "Khi áp dụng Strongly Typed IDs cho các thực thể như Order và OrderItem, việc thay đổi khai báo lớp cơ sở (ví dụ: từ Aggregate<Guid> sang Aggregate<OrderId>) mang lại lợi ích gì?",
+              "answer": "Đảm bảo mỗi thực thể chỉ định rõ ràng loại ID cụ thể, giảm thiểu rủi ro truyền nhầm kiểu dữ liệu",
+              "explanation": "Việc thay thế kiểu generic (TId) bằng các kiểu ID cụ thể (như OrderId) trong khai báo lớp cơ sở giúp ràng buộc chặt chẽ loại ID mà thực thể sử dụng, ngăn chặn lỗi logic khi truyền nhầm các ID khác kiểu.",
+              "needsReview": false
+            },
+            {
+              "question": "Dựa trên bài giảng, khi tạo một OrderItem mới, việc sử dụng OrderItemId thay vì Guid nguyên thủy giúp giải quyết vấn đề gì đã được nhắc đến ở các bài trước?",
+              "answer": "Vấn đề Primitive Obsession, nơi các ID cùng kiểu Guid dễ bị truyền nhầm lẫn",
+              "explanation": "Sử dụng Strongly Typed IDs như OrderItemId giúp khắc phục Primitive Obsession, đảm bảo trình biên dịch có thể phân biệt được các loại ID khác nhau ngay cả khi chúng cùng chứa giá trị Guid bên trong.",
+              "needsReview": false
+            }
+          ]
+        },
+        {
+          "video": "07. Anemic-domain vs Rich-domain Model Entities Entities in DDD.mp4",
+          "completedAt": "2026-11-20T12:44:29.850Z",
+          "facts": [
+            {
+              "question": "Đặc điểm chính để nhận diện một 'Anemic Domain Model' (mô hình miền nghèo nàn) trong thiết kế hướng miền là gì?",
+              "answer": "Thực thể chỉ là cấu trúc dữ liệu với các phương thức getter và setter, thiếu logic miền",
+              "explanation": "Anemic Domain Model được đặc trưng bởi các thực thể chỉ chứa dữ liệu (getter/setter) mà không có logic nghiệp vụ, khiến logic bị phân tán ra các lớp dịch vụ bên ngoài.",
+              "needsReview": false
+            },
+            {
+              "question": "Tại sao việc đóng gói các phương thức như AddOrderItem và RemoveOrderItem bên trong thực thể Order lại quan trọng trong Rich Domain Model?",
+              "answer": "Để đảm bảo các thao tác tuân thủ quy tắc nghiệp vụ và duy trì tính bất biến của tập hợp",
+              "explanation": "Việc đóng gói logic vào thực thể giúp đảm bảo rằng mọi thay đổi đối với tập hợp (như thêm/xóa mục) đều tuân thủ các quy tắc nghiệp vụ và bất biến của miền, thay vì để bên ngoài tự do chỉnh sửa.",
+              "needsReview": false
+            },
+            {
+              "question": "So sánh giữa Anemic Domain Model và Rich Domain Model theo thời gian, nhận định nào sau đây là đúng?",
+              "answer": "Anemic Model ban đầu dễ triển khai nhưng sẽ trở nên phức tạp và khó bảo trì khi logic nghiệp vụ tăng lên",
+              "explanation": "Anemic Model có vẻ dễ bắt đầu vì ít nỗ lực, nhưng khi logic nghiệp vụ phân tán khắp nơi, nó trở nên khó bảo trì hơn so với Rich Model, vốn tập trung logic vào thực thể ngay từ đầu.",
+              "needsReview": false
+            }
+          ]
+        },
+        {
+          "video": "08. Develop DDD Rich-domain model Entity for Order Entities in Order.Domain Layer.mp4",
+          "completedAt": "2026-11-20T12:56:23.524Z",
+          "facts": [
+            {
+              "question": "Trong Rich Domain Model, tại sao việc sử dụng phương thức tĩnh 'create' trong thực thể thay vì hàm tạo công khai (public constructor) lại được khuyến khích?",
+              "answer": "Để đóng gói logic tạo, thực hiện xác thực miền và đảm bảo tính toàn vẹn của thực thể",
+              "explanation": "Phương thức tĩnh 'create' đóng vai trò là một factory method giúp đóng gói logic khởi tạo, thực hiện các xác thực miền cần thiết trước khi trả về một thực thể hợp lệ, đảm bảo tính toàn vẹn ngay từ khi tạo mới.",
+              "needsReview": true
+            },
+            {
+              "question": "Sự khác biệt về quy ước đặt tên phương thức khởi tạo giữa 'Entity' và 'Value Object' trong bài giảng là gì?",
+              "answer": "Entity dùng 'create', Value Object dùng 'of'",
+              "explanation": "Bài giảng quy ước sử dụng phương thức tĩnh 'create' cho các thực thể (Entity) và phương thức tĩnh 'of' cho các đối tượng giá trị (Value Object) để tách biệt trách nhiệm tạo phiên bản.",
+              "needsReview": false
+            },
+            {
+              "question": "Vai trò của 'Domain Exception' trong việc phát triển mô hình miền phong phú là gì?",
+              "answer": "Đại diện cho các lỗi nghiệp vụ cụ thể xảy ra trong lớp miền, giúp làm phong phú ngữ cảnh lỗi",
+              "explanation": "Domain Exception là các ngoại lệ tùy chỉnh được tạo ra để đại diện cho các lỗi nghiệp vụ cụ thể trong lớp miền, giúp cung cấp ngữ cảnh rõ ràng hơn về các vi phạm quy tắc miền so với các ngoại lệ chung chung.",
+              "needsReview": false
+            }
+          ]
+        },
+        {
+          "video": "09. Develop ValueObjects (Address, Payment) DDD Rich-domain model Entity.mp4",
+          "completedAt": "2026-11-20T13:11:21.004Z",
+          "facts": [
+            {
+              "question": "Trong DDD Rich-domain model, tại sao các Value Object như OrderId, Address, Payment lại sử dụng hàm tạo riêng tư (private constructor) kết hợp với phương thức tĩnh 'Of'?",
+              "answer": "Để đóng gói logic khởi tạo và áp dụng các quy tắc xác thực domain ngay tại điểm tạo đối tượng",
+              "explanation": "Phương thức tĩnh 'Of' kết hợp hàm tạo riêng tư là pattern giúp đóng gói toàn bộ logic xác thực và quy tắc domain bên trong Value Object, ngăn bên ngoài tạo đối tượng ở trạng thái không hợp lệ.",
+              "needsReview": false
+            },
+            {
+              "question": "Trong Value Object Address, tại sao cần định nghĩa thêm một hàm tạo protected (bảo vệ) bên cạnh hàm tạo private?",
+              "answer": "Để Entity Framework Core có thể khởi tạo đối tượng Address khi load dữ liệu từ database",
+              "explanation": "Entity Framework Core yêu cầu ít nhất một hàm tạo không có tham số (hoặc protected) để có thể materialization đối tượng khi truy vấn từ database. Đây là yêu cầu kỹ thuật của ORM, không liên quan đến logic domain.",
+              "needsReview": false
+            },
+            {
+              "question": "Trong Value Object OrderName, ràng buộc 'default length = 5' được áp dụng như thế nào trong phương thức 'Of'?",
+              "answer": "So sánh độ dài chuỗi đầu vào với hằng số và ném DomainException nếu không khớp",
+              "explanation": "Trong phương thức 'Of' của OrderName, sau khi kiểm tra null/empty, hệ thống so sánh độ dài chuỗi với hằng số DefaultLength (5) và ném ArgumentException nếu điều kiện không thỏa, đảm bảo tính bất biến của quy tắc domain.",
+              "needsReview": false
+            },
+            {
+              "question": "Trong Value Object Payment, ngoài việc kiểm tra null/empty cho các trường bắt buộc, còn có thêm quy tắc domain đặc biệt nào được áp dụng?",
+              "answer": "Kiểm tra độ dài CVV không được vượt quá 3 ký tự",
+              "explanation": "Bài giảng mô tả rõ: sau khi kiểm tra null/empty cho card name, card number và expiration, hệ thống thêm điều kiện kiểm tra length của CVV — nếu lớn hơn 3 thì ném ngoại lệ, phản ánh quy tắc nghiệp vụ thực tế của thẻ thanh toán.",
+              "needsReview": false
+            }
+          ]
+        },
+        {
+          "video": "10. Develop DDD Rich-domain model for Order Entities in Order.Domain Layer.mp4",
+          "completedAt": "2026-11-20T13:39:38.008Z",
+          "facts": [
+            {
+              "question": "Tại sao phương thức khởi tạo (constructor) của thực thể 'OrderItem' lại được đặt là 'internal' trong mô hình miền đơn hàng?",
+              "answer": "Để đảm bảo OrderItem chỉ có thể được tạo thông qua Aggregate Root là Order",
+              "explanation": "Trong DDD, Aggregate Root (Order) chịu trách nhiệm quản lý vòng đời và tính nhất quán của các thực thể con (OrderItem). Việc đặt constructor là internal ngăn chặn việc tạo OrderItem tùy tiện từ bên ngoài, buộc mọi thao tác phải thông qua Order.",
+              "needsReview": false
+            },
+            {
+              "question": "Trong phương thức tạo tĩnh (static create method) của thực thể 'Order', tại sao không cần thực hiện xác thực dữ liệu cho các tham số đầu vào?",
+              "answer": "Vì các tham số này đã được xác thực ngay tại thời điểm tạo các Value Object tương ứng",
+              "explanation": "Các tham số truyền vào phương thức tạo Order đều là các Value Object. Theo nguyên tắc DDD, các Value Object đã tự chịu trách nhiệm xác thực quy tắc miền ngay tại thời điểm khởi tạo, giúp thực thể không cần lặp lại logic này.",
+              "needsReview": false
+            },
+            {
+              "question": "Khi thực hiện phương thức 'Remove' một mục đơn hàng (OrderItem) trong 'Order Aggregate', quy trình xử lý chính là gì?",
+              "answer": "Tìm kiếm OrderItem dựa trên Product ID, nếu tồn tại thì xóa khỏi danh sách nội bộ",
+              "explanation": "Order Aggregate quản lý danh sách các OrderItem. Phương thức Remove tìm kiếm item theo Product ID trong danh sách nội bộ và thực hiện xóa nếu tìm thấy, đảm bảo tính nhất quán của Aggregate.",
+              "needsReview": false
+            },
+            {
+              "question": "Việc sử dụng 'AddDomainEvent' trong các phương thức tạo và cập nhật của Order Aggregate nhằm mục đích gì?",
+              "answer": "Để thông báo cho các thành phần khác trong hệ thống về các thay đổi trạng thái nghiệp vụ",
+              "explanation": "Domain Events được sử dụng để truyền tải thông tin về các thay đổi quan trọng trong miền (như đơn hàng được tạo hoặc cập nhật) tới các phần khác của hệ thống, giúp tách biệt các logic nghiệp vụ liên quan.",
+              "needsReview": false
+            }
+          ]
+        },
+        {
+          "video": "11. Domain Events in DDD and Domain vs Integration Events.mp4",
+          "completedAt": "2026-11-20T13:52:15.608Z",
+          "facts": [
+            {
+              "question": "Sự kiện miền (domain events) trong thiết kế hướng miền (DDD) được sử dụng chủ yếu nhằm mục đích gì?",
+              "answer": "Đạt được tính nhất quán giữa các tổng hợp (aggregates) trong cùng một miền hoặc ranh giới dịch vụ",
+              "explanation": "Dựa trên nội dung bài giảng, sự kiện miền là một kỹ thuật được sử dụng để đạt được tính nhất quán giữa các tổng hợp (aggregates) trong cùng một miền, đại diện cho điều gì đó đã xảy ra trong quá khứ và cần các phần khác trong cùng ranh giới dịch vụ phản ứng.",
+              "needsReview": false
+            },
+            {
+              "question": "Điểm khác biệt cốt lõi trong cách phân phối giữa sự kiện miền (domain events) và sự kiện tích hợp (integration events) là gì?",
+              "answer": "Sự kiện miền được công bố và tiêu thụ trong một miền duy nhất bằng bus tin nhắn trong bộ nhớ, còn sự kiện tích hợp dùng trình môi giới tin nhắn để truyền giữa các microservice khác nhau",
+              "explanation": "Bài giảng chỉ rõ sự kiện miền được công bố và tiêu thụ trong một miền duy nhất (trong quá trình, đồng bộ bằng bus tin nhắn trong bộ nhớ), trong khi sự kiện tích hợp được dùng giữa các ngữ cảnh giới hạn hoặc microservice khác nhau thông qua trình môi giới tin nhắn không đồng bộ.",
+              "needsReview": false
+            },
+            {
+              "question": "Trong ví dụ về microservice đặt hàng (E-shop) được trình bày, sau khi sự kiện miền 'đơn hàng đã tạo' được xử lý nội bộ, bước tiếp theo liên quan đến các hệ thống con khác như vận chuyển và kho hàng là gì?",
+              "answer": "Công bố một sự kiện tích hợp 'đơn hàng đã tạo' thông qua trình môi giới tin nhắn để các microservice khác tiêu thụ",
+              "explanation": "Bài giảng mô tả rằng sau khi sự kiện miền 'đơn hàng đã tạo' được xử lý trong miền, một sự kiện tích hợp tương ứng được công bố bằng trình môi giới tin nhắn để các microservice vận chuyển và kho hàng đăng ký và bắt đầu quy trình của mình.",
+              "needsReview": false
+            }
+          ]
+        },
+        {
+          "video": "12. Develop Order Created and Updated Domain Event in Ordering Microservices.mp4",
+          "completedAt": "2026-11-20T14:04:48.623Z",
+          "facts": [
+            {
+              "question": "Trong bài giảng về phát triển các sự kiện miền đơn hàng, kiểu dữ liệu nào được sử dụng để định nghĩa 'OrderCreatedEvent' và 'OrderUpdatedEvent'?",
+              "answer": "record",
+              "explanation": "Bài giảng hướng dẫn sử dụng kiểu 'record' (public record) để định nghĩa các sự kiện miền như OrderCreatedEvent và OrderUpdatedEvent trong thư mục events của lớp miền đơn hàng.",
+              "needsReview": false
+            },
+            {
+              "question": "Để các lớp sự kiện như 'OrderCreatedEvent' có thể được nhận diện và xử lý bởi các dịch vụ cơ sở hạ tầng, chúng cần kế thừa từ interface đánh dấu nào?",
+              "answer": "IDomainEvent",
+              "explanation": "Các lớp sự kiện miền trong bài được thiết kế kế thừa từ 'I domain event' (IDomainEvent), đây là một interface đánh dấu giúp các dịch vụ cơ sở hạ tầng xác định được các sự kiện miền.",
+              "needsReview": false
+            },
+            {
+              "question": "Sau khi tạo thư mục 'events' và định nghĩa các lớp sự kiện trong lớp miền đơn hàng (ordering domain), thao tác bổ sung nào được thực hiện để làm cho namespace mới này có sẵn cho từng mô-đun?",
+              "answer": "Thêm một global using cho ordering domain events",
+              "explanation": "Bài giảng nêu rõ sau khi tạo namespace mới cho các sự kiện, một global using (global using ordering domain events) được thêm vào để làm cho namespace này có sẵn cho từng mô-đun.",
+              "needsReview": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "folder": "M:\\ID_PTS\\ASP.NET\\microservices\\16",
+      "lessons": [
+        {
+          "video": "03. Event Sourcing Pattern.mp4",
+          "completedAt": "2026-11-20T14:27:00.446Z",
+          "facts": [
+            {
+              "question": "Mẫu kiến trúc truyền thống lưu trữ dữ liệu trong cơ sở dữ liệu bằng cách nào khi có sự thay đổi thông tin của thực thể?",
+              "answer": "Ghi đè giá trị mới lên trạng thái hiện tại của dữ liệu",
+              "explanation": "Mô hình truyền thống hoạt động bằng cách ghi đè trường hiện có (như trường email) khi có điều gì đó thay đổi để luôn biết trạng thái mới nhất.",
+              "needsReview": false
+            },
+            {
+              "question": "Trong mẫu Event Sourcing, cơ sở dữ liệu chuyên dụng dùng để lưu trữ tất cả các hành động hoặc thay đổi theo thứ tự tuần tự được gọi là gì?",
+              "answer": "Event store",
+              "explanation": "Mẫu event sourcing đề xuất lưu trữ mỗi hành động ảnh hưởng đến dữ liệu vào cơ sở dữ liệu gọi là event store với thứ tự tuần tự.",
+              "needsReview": false
+            },
+            {
+              "question": "Làm thế nào để tạo các materialized view thể hiện trạng thái cuối cùng của dữ liệu nhằm thực hiện các truy vấn từ danh sách sự kiện trong event store?",
+              "answer": "Thông qua mẫu publish-subscribe với việc phát hành sự kiện sử dụng message broker",
+              "explanation": "Thao tác chuyển đổi các event store thành cơ sở dữ liệu đọc bằng materialized view có thể được xử lý bằng mẫu publish-subscribe với việc phát hành sự kiện sử dụng hệ thống message broker.",
+              "needsReview": false
+            }
+          ]
+        },
+        {
+          "video": "04. CQRS with Event Sourcing Pattern.mp4",
+          "completedAt": "2026-11-20T14:52:09.469Z",
+          "facts": [
+            {
+              "question": "Trong kiến trúc CQRS kết hợp Event Sourcing, cơ sở dữ liệu ghi (write database) đóng vai trò gì đối với trạng thái của dữ liệu?",
+              "answer": "Chỉ lưu trữ các hành động sự kiện theo thứ tự tuần tự mà không lưu trạng thái",
+              "explanation": "Trong Event Sourcing, cơ sở dữ liệu ghi không lưu trạng thái hiện tại mà chỉ lưu trữ các hành động sự kiện (events) theo thứ tự tuần tự, đóng vai trò là nguồn chân lý (source of truth).",
+              "needsReview": true
+            },
+            {
+              "question": "Làm thế nào để hệ thống có thể tái tạo trạng thái của dữ liệu tại bất kỳ thời điểm nào trong mô hình Event Sourcing?",
+              "answer": "Phát lại (replay) các hành động sự kiện đã được lưu trữ trong Event Store",
+              "explanation": "Bằng cách lưu trữ lịch sử các hành động sự kiện, hệ thống có thể phát lại (replay) các sự kiện này để tái tạo trạng thái của dữ liệu tại bất kỳ thời điểm nào trong quá khứ.",
+              "needsReview": false
+            },
+            {
+              "question": "Mối quan hệ giữa Event Store và cơ sở dữ liệu đọc (read database) trong mẫu Materialized View là gì?",
+              "answer": "Event Store phát hành sự kiện thông qua message broker để chuyển đổi thành các khung nhìn phi chuẩn hóa",
+              "explanation": "Trong mẫu Materialized View, dữ liệu từ Event Store được chuyển đổi sang cơ sở dữ liệu đọc bằng cách tiêu thụ các sự kiện (thường qua message broker) để tạo ra các bảng phi chuẩn hóa phục vụ truy vấn.",
+              "needsReview": false
+            }
+          ]
+        },
+        {
+          "video": "05. Eventual Consistency Principle.mp4",
+          "completedAt": "2026-11-20T15:09:49.990Z",
+          "facts": [
+            {
+              "question": "Trong bối cảnh định lý CAP, nguyên lý nhất quán cuối cùng (Eventual Consistency) thường được ưu tiên cho các hệ thống có đặc điểm nào?",
+              "answer": "Ưu tiên tính sẵn sàng cao hơn tính nhất quán mạnh",
+              "explanation": "Nguyên lý nhất quán cuối cùng được sử dụng cho các hệ thống ưu tiên tính sẵn sàng (Availability) cao hơn tính nhất quán mạnh (Strong Consistency).",
+              "needsReview": true
+            },
+            {
+              "question": "Ví dụ nào sau đây được bài giảng sử dụng để minh họa cho tính nhất quán cuối cùng (Eventual Consistency)?",
+              "answer": "Bộ đếm lượt xem video trên YouTube",
+              "explanation": "Bài giảng lấy ví dụ về bộ đếm lượt xem video trên YouTube, nơi các con số có thể khác nhau trong các phiên truy cập khác nhau do độ trễ cập nhật.",
+              "needsReview": false
+            },
+            {
+              "question": "Trong kiến trúc Event Sourcing kết hợp CQRS, tại sao hệ thống lại ở trạng thái nhất quán cuối cùng trong quá trình chuyển đổi dữ liệu?",
+              "answer": "Vì cần thời gian để chuyển đổi sự kiện từ Event Store sang cơ sở dữ liệu đọc thông qua message broker",
+              "explanation": "Quá trình chuyển đổi từ Event Store sang cơ sở dữ liệu đọc (Materialized View) thông qua message broker tạo ra độ trễ, dẫn đến trạng thái nhất quán cuối cùng.",
               "needsReview": false
             }
           ]

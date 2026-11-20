@@ -1,10 +1,14 @@
 {
-  "folder": "M:\\ID_PTS\\ASP.NET\\microservices\\19",
-  "current": "18. Containerize and Orchestrate YarpApiGateway Microservices for Reverse Proxy.mp4",
-  "position": 280.092481,
+  "folder": "M:\\ID_PTS\\ASP.NET\\microservices\\09",
+  "current": "01. Distributed Caching with Redis in Basket Microservices.mp4",
+  "position": 0,
   "recentFolders": [
-    "M:\\ID_PTS\\ASP.NET\\microservices\\19",
-    "M:\\ID_PTS\\ASP.NET\\microservices\\18\\drive-download-20261031T140859Z-1-001"
+    "M:\\ID_PTS\\ASP.NET\\microservices\\09",
+    "M:\\ID_PTS\\ASP.NET\\microservices\\14",
+    "M:\\ID_PTS\\ASP.NET\\microservices\\16",
+    "M:\\ID_PTS\\ASP.NET\\microservices\\13",
+    "M:\\ID_PTS\\ASP.NET\\microservices\\12",
+    "M:\\ID_PTS\\ASP.NET\\microservices\\10"
   ],
   "pickedNotes": [
     "M:\\ID_PTS\\ASP.NET\\practices\\EShopMicroservices\\note-architext.txt"
@@ -13,6 +17,18 @@
   "contextId": "microservices-b65ff3",
   "folderContexts": {
     "m:\\id_pts\\asp.net\\microservices\\18": "microservices-b65ff3",
-    "m:\\id_pts\\asp.net\\microservices\\19": "microservices-b65ff3"
+    "m:\\id_pts\\asp.net\\microservices\\19": "microservices-b65ff3",
+    "m:\\id_pts\\asp.net\\microservices\\02": "microservices-b65ff3",
+    "m:\\id_pts\\asp.net\\microservices\\03": "microservices-b65ff3",
+    "m:\\id_pts\\asp.net\\microservices\\04": "microservices-b65ff3",
+    "m:\\id_pts\\asp.net\\microservices\\05": "microservices-b65ff3",
+    "m:\\id_pts\\asp.net\\microservices\\06": "microservices-b65ff3",
+    "m:\\id_pts\\asp.net\\microservices\\07": "microservices-b65ff3",
+    "m:\\id_pts\\asp.net\\microservices\\09": "microservices-b65ff3",
+    "m:\\id_pts\\asp.net\\microservices\\10": "microservices-b65ff3",
+    "m:\\id_pts\\asp.net\\microservices\\12": "microservices-b65ff3",
+    "m:\\id_pts\\asp.net\\microservices\\13": "microservices-b65ff3",
+    "m:\\id_pts\\asp.net\\microservices\\14": "microservices-b65ff3",
+    "m:\\id_pts\\asp.net\\microservices\\16": "microservices-b65ff3"
   }
 }

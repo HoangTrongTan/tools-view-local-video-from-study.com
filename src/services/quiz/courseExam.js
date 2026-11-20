@@ -1,23 +1,32 @@
 'use strict';
 
-/** Đề cuối khóa: tổng hợp kiến thức đã lưu của thư mục khóa học trong bộ kiến thức đang chọn. */
+/** Đề cuối khóa: tổng hợp toàn bộ kiến thức đã lưu trong bộ kiến thức đang chọn, chia trang để giảm tải AI. */
 
 const crypto = require('node:crypto');
 const { readyModel, generateJson } = require('../ai/provider');
 const { questionFormatRule, validateQuiz } = require('../ai/quizFormat');
 const lessonFacts = require('../knowledge/lessonFacts');
+const selection = require('../knowledge/selection');
 
-async function courseExamPlan(folder) {
-  const lessons = await lessonFacts.courseLessons(folder);
+const FACTS_PER_PAGE = 19;
+const hashFacts = items => crypto.createHash('sha256').update(JSON.stringify(items)).digest('hex').slice(0, 16);
+
+async function courseExamPlan() {
+  const contextId = await selection.activeContextId();
+  if (!contextId) throw new Error('Hãy chọn bộ kiến thức trước.');
+  const lessons = await lessonFacts.contextLessons();
   const facts = lessons.flatMap(lesson => lesson.facts.filter(fact => fact?.question && fact?.answer)
     .map(fact => ({ lesson: lesson.video, fact })));
-  if (!facts.length) throw new Error('Chưa có kiến thức đã lưu. Hãy chấm trắc nghiệm các bài học trước.');
-  const revision = crypto.createHash('sha256').update(JSON.stringify(facts)).digest('hex');
-  return { facts, revision, pages: Math.ceil(facts.length / 19) };
+  if (!facts.length) throw new Error('Bộ kiến thức này chưa có bài đã lưu. Hãy chấm trắc nghiệm các bài học trước.');
+  const pages = Math.ceil(facts.length / FACTS_PER_PAGE);
+  const pageRevisions = Array.from({ length: pages }, (_, page) =>
+    hashFacts(facts.slice(page * FACTS_PER_PAGE, (page + 1) * FACTS_PER_PAGE)));
+  const revision = hashFacts(pageRevisions);
+  return { contextId, lessonsCount: lessons.length, facts, revision, pages, pageRevisions };
 }
 
 async function createCourseExamPage(plan, page) {
-  const selected = plan.facts.slice(page * 19, (page + 1) * 19);
+  const selected = plan.facts.slice(page * FACTS_PER_PAGE, (page + 1) * FACTS_PER_PAGE);
   const model = await readyModel(() => {});
   const questions = [];
   for (let start = 0; start < selected.length; start += 5) {
